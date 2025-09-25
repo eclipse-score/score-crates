@@ -10,7 +10,11 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 # *******************************************************************************
-module(name = "score_crates")
+module(
+    name = "score_crates",
+    version = "0.0.2",
+    compatibility_level = 0,
+)
 
 bazel_dep(name = "platforms", version = "0.0.11")
 bazel_dep(name = "rules_rust", version = "0.61.0")
