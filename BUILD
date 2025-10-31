@@ -1,7 +1,7 @@
 # BUILD file to satisfy Bazel package requirements for extensions.bzl
 # This file contains auto-generated aliases from @crate_index
 # Generated aliases for crate_index entries
-# Generated on: Tue Oct  7 15:58:23 CEST 2025
+# Generated on: Fri Oct 31 07:23:03 AM CET 2025
 
 alias(
     name = "anyhow",
@@ -124,6 +124,36 @@ alias(
 )
 
 alias(
+    name = "prost_types",
+    actual = "@crate_index//:prost-types",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "protoc_gen_prost",
+    actual = "@crate_index//:protoc-gen-prost",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "protoc_gen_prost__protoc_gen_prost",
+    actual = "@crate_index//:protoc-gen-prost__protoc-gen-prost",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "protoc_gen_tonic",
+    actual = "@crate_index//:protoc-gen-tonic",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "protoc_gen_tonic__protoc_gen_tonic",
+    actual = "@crate_index//:protoc-gen-tonic__protoc-gen-tonic",
+    visibility = ["//visibility:public"],
+)
+
+alias(
     name = "rand",
     actual = "@crate_index//:rand",
     visibility = ["//visibility:public"],
@@ -168,6 +198,12 @@ alias(
 alias(
     name = "tokio_util",
     actual = "@crate_index//:tokio-util",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "tonic",
+    actual = "@crate_index//:tonic",
     visibility = ["//visibility:public"],
 )
 

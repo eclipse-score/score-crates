@@ -112,6 +112,30 @@ crate.spec(
     version = "0.14.1",
 )
 crate.spec(
+    package = "prost-types",
+    version = "0.14.1",
+)
+crate.spec(
+    package = "tonic",
+    version = "0.14.2",
+)
+crate.spec(
+    package = "protoc-gen-prost",
+    version = "0.4.0",
+)
+crate.annotation(
+    crate = "protoc-gen-prost",
+    gen_binaries = ["protoc-gen-prost"],
+)
+crate.spec(
+    package = "protoc-gen-tonic",
+    version = "0.4.1",
+)
+crate.annotation(
+    crate = "protoc-gen-tonic",
+    gen_binaries = ["protoc-gen-tonic"],
+)
+crate.spec(
     package = "rand",
     version = "0.9.2",
 )
