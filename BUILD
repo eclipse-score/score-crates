@@ -1,7 +1,7 @@
 # BUILD file to satisfy Bazel package requirements for extensions.bzl
 # This file contains auto-generated aliases from @crate_index
 # Generated aliases for crate_index entries
-# Generated on: Thu Nov  6 10:50:26 AM CET 2025
+# Generated on: Fri Oct 31 07:23:03 AM CET 2025
 
 alias(
     name = "anyhow",
@@ -168,12 +168,6 @@ alias(
 alias(
     name = "serde_json",
     actual = "@crate_index//:serde_json",
-    visibility = ["//visibility:public"],
-)
-
-alias(
-    name = "signal_hook",
-    actual = "@crate_index//:signal-hook",
     visibility = ["//visibility:public"],
 )
 
