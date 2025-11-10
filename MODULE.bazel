@@ -197,6 +197,11 @@ crate.spec(
     default_features = False,
     features = [
         "json",
+        "smallvec", 
+        "fmt", 
+        "ansi",
+        "tracing-log",
+        "std"
     ],
     package = "tracing-subscriber",
     version = "0.3.19",
