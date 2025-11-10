@@ -195,6 +195,9 @@ crate.spec(
 )
 crate.spec(
     default_features = False,
+    features = [
+        "json",
+    ],
     package = "tracing-subscriber",
     version = "0.3.19",
 )
