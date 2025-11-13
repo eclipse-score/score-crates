@@ -1,7 +1,7 @@
 # BUILD file to satisfy Bazel package requirements for extensions.bzl
 # This file contains auto-generated aliases from @crate_index
 # Generated aliases for crate_index entries
-# Generated on: Mon Nov 17 11:36:25 PM IST 2025
+# Generated on: Fri Nov 21 16:01:21 IST 2025
 
 alias(
     name = "anyhow",
@@ -130,6 +130,12 @@ alias(
 )
 
 alias(
+    name = "proc_macro2",
+    actual = "@crate_index//:proc-macro2",
+    visibility = ["//visibility:public"],
+)
+
+alias(
     name = "prost",
     actual = "@crate_index//:prost",
     visibility = ["//visibility:public"],
@@ -172,6 +178,12 @@ alias(
 )
 
 alias(
+    name = "quote",
+    actual = "@crate_index//:quote",
+    visibility = ["//visibility:public"],
+)
+
+alias(
     name = "rand",
     actual = "@crate_index//:rand",
     visibility = ["//visibility:public"],
@@ -198,6 +210,12 @@ alias(
 alias(
     name = "socket2",
     actual = "@crate_index//:socket2",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "syn",
+    actual = "@crate_index//:syn",
     visibility = ["//visibility:public"],
 )
 
