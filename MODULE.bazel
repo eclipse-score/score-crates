@@ -215,6 +215,19 @@ crate.spec(
     version = "3.4.4",
     features = ["termination"],
 )
+crate.spec(
+    package = "syn",
+    version = "2",
+    features = ["full"],
+)
+crate.spec(
+    package = "quote",
+    version = "1",
+)
+crate.spec(
+    package = "proc-macro2",
+    version = "1",
+)
 
 crate.from_specs(name = "crate_index")
 use_repo(crate, "crate_index")
