@@ -197,8 +197,8 @@ crate.spec(
     default_features = False,
     features = [
         "json",
-        "smallvec", 
-        "fmt", 
+        "smallvec",
+        "fmt",
         "ansi",
         "tracing-log",
         "std"
@@ -214,6 +214,14 @@ crate.spec(
     package = "ctrlc",
     version = "3.4.4",
     features = ["termination"],
+)
+crate.spec(
+    package = "paste",
+    version = "1.0.15",
+)
+crate.spec(
+    package = "arrayvec",
+    version = "0.7.6",
 )
 
 crate.from_specs(name = "crate_index")
