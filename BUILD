@@ -1,7 +1,7 @@
 # BUILD file to satisfy Bazel package requirements for extensions.bzl
 # This file contains auto-generated aliases from @crate_index
 # Generated aliases for crate_index entries
-# Generated on: Mon Nov 17 11:36:25 PM IST 2025
+# Generated on: Wed Nov 19 05:41:31 PM CET 2025
 
 alias(
     name = "anyhow",
@@ -90,6 +90,12 @@ alias(
 alias(
     name = "indicatif_log_bridge",
     actual = "@crate_index//:indicatif-log-bridge",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "ipc_channel",
+    actual = "@crate_index//:ipc-channel",
     visibility = ["//visibility:public"],
 )
 
