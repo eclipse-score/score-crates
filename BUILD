@@ -1,7 +1,7 @@
 # BUILD file to satisfy Bazel package requirements for extensions.bzl
 # This file contains auto-generated aliases from @crate_index
 # Generated aliases for crate_index entries
-# Generated on: Wed Nov 19 05:41:31 PM CET 2025
+# Generated on: Tue Nov 25 15:00:53 IST 2025
 
 alias(
     name = "anyhow",
@@ -82,6 +82,84 @@ alias(
 )
 
 alias(
+    name = "iceoryx2_bb_container_qnx8",
+    actual = "@crate_index//:iceoryx2-bb-container-qnx8",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "iceoryx2_bb_derive_macros_qnx8",
+    actual = "@crate_index//:iceoryx2-bb-derive-macros-qnx8",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "iceoryx2_bb_elementary_qnx8",
+    actual = "@crate_index//:iceoryx2-bb-elementary-qnx8",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "iceoryx2_bb_elementary_traits_qnx8",
+    actual = "@crate_index//:iceoryx2-bb-elementary-traits-qnx8",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "iceoryx2_bb_lock_free_qnx8",
+    actual = "@crate_index//:iceoryx2-bb-lock-free-qnx8",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "iceoryx2_bb_memory_qnx8",
+    actual = "@crate_index//:iceoryx2-bb-memory-qnx8",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "iceoryx2_bb_posix_qnx8",
+    actual = "@crate_index//:iceoryx2-bb-posix-qnx8",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "iceoryx2_bb_system_types_qnx8",
+    actual = "@crate_index//:iceoryx2-bb-system-types-qnx8",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "iceoryx2_bb_testing_qnx8",
+    actual = "@crate_index//:iceoryx2-bb-testing-qnx8",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "iceoryx2_bb_threadsafe_qnx8",
+    actual = "@crate_index//:iceoryx2-bb-threadsafe-qnx8",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "iceoryx2_cal_qnx8",
+    actual = "@crate_index//:iceoryx2-cal-qnx8",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "iceoryx2_pal_concurrency_sync_qnx8",
+    actual = "@crate_index//:iceoryx2-pal-concurrency-sync-qnx8",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "iceoryx2_qnx8",
+    actual = "@crate_index//:iceoryx2-qnx8",
+    visibility = ["//visibility:public"],
+)
+
+alias(
     name = "indicatif",
     actual = "@crate_index//:indicatif",
     visibility = ["//visibility:public"],
@@ -136,6 +214,12 @@ alias(
 )
 
 alias(
+    name = "proc_macro2",
+    actual = "@crate_index//:proc-macro2",
+    visibility = ["//visibility:public"],
+)
+
+alias(
     name = "prost",
     actual = "@crate_index//:prost",
     visibility = ["//visibility:public"],
@@ -178,6 +262,12 @@ alias(
 )
 
 alias(
+    name = "quote",
+    actual = "@crate_index//:quote",
+    visibility = ["//visibility:public"],
+)
+
+alias(
     name = "rand",
     actual = "@crate_index//:rand",
     visibility = ["//visibility:public"],
@@ -204,6 +294,12 @@ alias(
 alias(
     name = "socket2",
     actual = "@crate_index//:socket2",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "syn",
+    actual = "@crate_index//:syn",
     visibility = ["//visibility:public"],
 )
 
