@@ -1,7 +1,13 @@
 # BUILD file to satisfy Bazel package requirements for extensions.bzl
 # This file contains auto-generated aliases from @crate_index
 # Generated aliases for crate_index entries
-# Generated on: Tue Nov 25 15:00:53 IST 2025
+# Generated on: Thu Dec 11 12:29:29 PM CET 2025
+
+alias(
+    name = "adler32",
+    actual = "@crate_index//:adler32",
+    visibility = ["//visibility:public"],
+)
 
 alias(
     name = "anyhow",
@@ -208,6 +214,12 @@ alias(
 )
 
 alias(
+    name = "pico_args",
+    actual = "@crate_index//:pico-args",
+    visibility = ["//visibility:public"],
+)
+
+alias(
     name = "postcard",
     actual = "@crate_index//:postcard",
     visibility = ["//visibility:public"],
@@ -304,8 +316,20 @@ alias(
 )
 
 alias(
+    name = "tempfile",
+    actual = "@crate_index//:tempfile",
+    visibility = ["//visibility:public"],
+)
+
+alias(
     name = "time",
     actual = "@crate_index//:time",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "tinyjson",
+    actual = "@crate_index//:tinyjson",
     visibility = ["//visibility:public"],
 )
 
