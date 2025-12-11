@@ -12,7 +12,7 @@
 # *******************************************************************************
 module(
     name = "score_crates",
-    version = "0.0.5",
+    version = "0.0.6",
     compatibility_level = 0,
 )
 
@@ -315,6 +315,22 @@ crate.spec(
 crate.spec(
     package = "ipc-channel",
     version = "0.20.2",
+)
+crate.spec(
+    package = "tinyjson",
+    version = "2.5.1",
+)
+crate.spec(
+    package = "adler32",
+    version = "1.2.0",
+)
+crate.spec(
+    package = "pico-args",
+    version = "0.5.0",
+)
+crate.spec(
+    package = "tempfile",
+    version = "3.20.0",
 )
 crate.from_specs(
     name = "crate_index",
