@@ -72,22 +72,22 @@ crate.spec(
 crate.spec(
     git = "https://github.com/qorix-group/iceoryx2.git",
     package = "iceoryx2-qnx8",
-    rev = "bd16da32190d53d69c3e5504aab47df52ca8b5f8",
+    rev = "9f5622f554de48a7a296e1a5a71200b01e35a502",
 )
 crate.spec(
     git = "https://github.com/qorix-group/iceoryx2.git",
     package = "iceoryx2-bb-elementary-traits-qnx8",
-    rev = "bd16da32190d53d69c3e5504aab47df52ca8b5f8",
+    rev = "9f5622f554de48a7a296e1a5a71200b01e35a502",
 )
 crate.spec(
     git = "https://github.com/qorix-group/iceoryx2.git",
     package = "iceoryx2-bb-container-qnx8",
-    rev = "bd16da32190d53d69c3e5504aab47df52ca8b5f8",
+    rev = "9f5622f554de48a7a296e1a5a71200b01e35a502",
 )
 crate.spec(
     git = "https://github.com/qorix-group/iceoryx2.git",
     package = "iceoryx2-bb-derive-macros-qnx8",
-    rev = "bd16da32190d53d69c3e5504aab47df52ca8b5f8",
+    rev = "9f5622f554de48a7a296e1a5a71200b01e35a502",
 )
 crate.annotation(
     crate = "iceoryx2-bb-derive-macros-qnx8",
@@ -97,25 +97,25 @@ crate.annotation(
 crate.spec(
     git = "https://github.com/qorix-group/iceoryx2.git",
     package = "iceoryx2-bb-elementary-qnx8",
-    rev = "bd16da32190d53d69c3e5504aab47df52ca8b5f8",
+    rev = "9f5622f554de48a7a296e1a5a71200b01e35a502",
 )
 crate.spec(
     git = "https://github.com/qorix-group/iceoryx2.git",
     package = "iceoryx2-bb-lock-free-qnx8",
-    rev = "bd16da32190d53d69c3e5504aab47df52ca8b5f8",
+    rev = "9f5622f554de48a7a296e1a5a71200b01e35a502",
 )
 crate.spec(
     git = "https://github.com/qorix-group/iceoryx2.git",
     package = "iceoryx2-bb-memory-qnx8",
-    rev = "bd16da32190d53d69c3e5504aab47df52ca8b5f8",
+    rev = "9f5622f554de48a7a296e1a5a71200b01e35a502",
 )
 crate.spec(
     git = "https://github.com/qorix-group/iceoryx2.git",
     package = "iceoryx2-bb-posix-qnx8",
-    rev = "bd16da32190d53d69c3e5504aab47df52ca8b5f8",
+    rev = "9f5622f554de48a7a296e1a5a71200b01e35a502",
 )
 
-#iceoryx2 does not yet support QNX8 correctly
+#iceoryx2 does not yet support QNX8 correctly so we patch
 crate.annotation(
     crate = "iceoryx2-pal-posix-qnx8",
     patches = ["//patches:qnx8_iceoryx2.patch"],
@@ -124,27 +124,27 @@ crate.annotation(
 crate.spec(
     git = "https://github.com/qorix-group/iceoryx2.git",
     package = "iceoryx2-bb-system-types-qnx8",
-    rev = "bd16da32190d53d69c3e5504aab47df52ca8b5f8",
+    rev = "9f5622f554de48a7a296e1a5a71200b01e35a502",
 )
 crate.spec(
     git = "https://github.com/qorix-group/iceoryx2.git",
     package = "iceoryx2-bb-testing-qnx8",
-    rev = "bd16da32190d53d69c3e5504aab47df52ca8b5f8",
+    rev = "9f5622f554de48a7a296e1a5a71200b01e35a502",
 )
 crate.spec(
     git = "https://github.com/qorix-group/iceoryx2.git",
     package = "iceoryx2-bb-threadsafe-qnx8",
-    rev = "bd16da32190d53d69c3e5504aab47df52ca8b5f8",
+    rev = "9f5622f554de48a7a296e1a5a71200b01e35a502",
 )
 crate.spec(
     git = "https://github.com/qorix-group/iceoryx2.git",
     package = "iceoryx2-pal-concurrency-sync-qnx8",
-    rev = "bd16da32190d53d69c3e5504aab47df52ca8b5f8",
+    rev = "9f5622f554de48a7a296e1a5a71200b01e35a502",
 )
 crate.spec(
     git = "https://github.com/qorix-group/iceoryx2.git",
     package = "iceoryx2-cal-qnx8",
-    rev = "bd16da32190d53d69c3e5504aab47df52ca8b5f8",
+    rev = "9f5622f554de48a7a296e1a5a71200b01e35a502",
 )
 crate.spec(
     package = "indicatif",
@@ -353,7 +353,7 @@ crate.from_specs(
         "x86_64-pc-nto-qnx710",
         "x86_64-unknown-linux-gnu",
         "x86_64-unknown-none",
-        "aarch64-unknown-linux-gnu"
+        "aarch64-unknown-linux-gnu",
     ],
 )
 use_repo(crate, "crate_index")
