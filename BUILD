@@ -202,6 +202,12 @@ alias(
 )
 
 alias(
+    name = "loom",
+    actual = "@crate_index//:loom",
+    visibility = ["//visibility:public"],
+)
+
+alias(
     name = "mio",
     actual = "@crate_index//:mio",
     visibility = ["//visibility:public"],

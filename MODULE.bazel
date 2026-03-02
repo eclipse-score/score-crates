@@ -159,6 +159,11 @@ crate.spec(
     version = "0.4.27",
 )
 crate.spec(
+    features = ["checkpoint"],
+    package = "loom",
+    version = "0.7.2",
+)
+crate.spec(
     features = [
         "net",
         "os-poll",
