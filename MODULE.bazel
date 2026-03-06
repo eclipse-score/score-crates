@@ -175,6 +175,8 @@ crate.spec(
     features = [
         "fs",
         "mman",
+        "process",
+        "signal",
     ],
     package = "nix",
     version = "0.30.1",
