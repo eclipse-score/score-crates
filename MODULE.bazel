@@ -34,6 +34,10 @@ crate.spec(
     version = "4.5.4",
 )
 crate.spec(
+    package = "thiserror",
+    version = "2.0.18",
+)
+crate.spec(
     package = "anyhow",
     version = "1.0.99",
 )
