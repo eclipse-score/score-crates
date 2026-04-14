@@ -155,6 +155,10 @@ crate.spec(
     version = "0.18.0",
 )
 crate.spec(
+    package = "sem_safe",
+    version = "0.2.1",
+)
+crate.spec(
     package = "indicatif-log-bridge",
     version = "0.2.3",
 )
