@@ -3,6 +3,8 @@
 # Generated aliases for crate_index entries
 # Generated on: Tue Apr 14 12:21:15 PM CEST 2026
 
+exports_files(["MODULE.bazel.lock"])
+
 alias(
     name = "adler32",
     actual = "@crate_index//:adler32",
