@@ -1,190 +1,229 @@
-Pastey - Safety Qualification Results
-=====================================
+..
+   # *******************************************************************************
+   # Copyright (c) 2026 Contributors to the Eclipse Foundation
+   #
+   # See the NOTICE file(s) distributed with this work for additional
+   # information regarding copyright ownership.
+   #
+   # This program and the accompanying materials are made available under the
+   # terms of the Apache License Version 2.0 which is available at
+   # https://www.apache.org/licenses/LICENSE-2.0
+   #
+   # SPDX-License-Identifier: Apache-2.0
+   # *******************************************************************************
 
-Crate Information
------------------
+Pastey Crate Component Classification
+==========================================
 
-**Crate Name:** pastey
+.. document:: Pastey Crate Component Classification
+   :id: doc__PASTEY_CRATE_COMP_CLASS
+   :status: valid
+   :safety: ASIL_B
+   :security: NO
+   :realizes: wp__sw_component_class
+   :tags: pre-existing, software-component, classification, Rust, proc-macro
 
-**Type:** Procedural Macro (proc-macro)
 
-**Purpose:** A small-sized procedural macro providing identifier pasting and case modification capabilities with environment variable support.
+| Classification of Pastey Crate as a software component in the context of S-CORE.
+|
+| Repository: https://github.com/as1100k/pastey
+| Documentation: https://docs.rs/pastey/0.2.1/pastey/
+| Crate Version: 0.2.1
+| Additional documentation considered:
+| https://crates.io/crates/pastey
 
-**Description:** Pastey is a Rust procedural macro crate designed to provide convenient syntax for identifier construction. It supports various features including identifier pasting, case modifiers (uppercase, lowercase, snake_case, etc.), ``env!`` macro support, raw mode, and replace modifiers.
-
-**Repository:** https://github.com/as1100k/pastey
-
-**Documentation:** https://docs.rs/pastey/0.2.1/pastey/
-
-**Crate Version:** 0.2.1
-
-**Key Characteristics:**
-
-* Single public interface (one main macro function)
-* 917 lines of code (excluding tests and comments)
-* No unsafe code
-* Comprehensive test suite covering unit and integration tests
-* CI/CD with multi-version Rust testing (nightly, beta, stable, 1.54)
-* LLVM-based code coverage reporting
-
-**Qualification Date:** ....
-
-**Assessed By:** ....
-
-Safety Qualification Assessment
---------------------------------
 
 Step 1: Determine (P): the uncertainty of the Processes applied
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------------------------------------------
 
-.. list-table::
-   :header-rows: 1
-   :widths: 5 50 10 35
+| Apply the process measures to determine (P).
+| The result of a process measure shall have as outcome [HE, PE, NE]
+| - HE: High Evidence
+| - PE: Partly Evidence but Manageable
+| - NE: No Evidence
 
-   * - Id
-     - Indicator for applying process
-     - Result
-     - Rationale for result
+.. list-table:: Determine (P)
+        :header-rows: 1
 
-   * - 1
-     - Are rules, state-of-the art processes applied for the design, implementation and verification?
-     - PE
-     - The project follows standard Rust open-source practices.
-       
-       CI verifications include:
-       
-       * test suite (4 Rust versions: nightly, beta, stable, 1.54)
-       * MSRV check
-       * Documentation generation
-       * Clippy linting strict warnings enforced (-Dwarnings)
-       * Miri UB detection
-       * dependency staleness checks
-       
-       This is a small-size proc-macro so relevant details are in the crate documentation, which includes usage, feature overview, brief detail of macro, APIs and use-cases examples.
+        * - Id
+          - Indicator for applying process
+          - Result
+          - Rationale for result
 
-   * - 2
-     - Are requirements available?
-     - PE
-     - As this is small size procedural macro crate so functional requirements are partially captured in crate documentation as expected macro behaviors (identifier pasting, case modifiers, ``env!`` support, raw mode, replace modifier) with each feature explanation.
-       
-       CHANGELOG entries, and linked GitHub issues for all kind of new development.
+        * - 1
+          - Are rules, state-of-the art processes applied for the design, implementation and verification?
+          - PE
+          - The project follows standard Rust open-source practices.
 
-   * - 3
-     - Are design specifications available?
-     - PE
-     - It is small crate structure with one public interface so it does not required UML/Class diagram but all the relevant details are part of crate document.
+            CI verifications include:
 
-   * - 4
-     - Are specifications for functionalities and properties available (architecture)?
-     - PE
-     - It is small procedural macro so crate documentation contains the partially specifications for functionalities and their properties through feature descriptions, usage examples, and modifier tables.
+            * test suite (4 Rust versions: nightly, beta, stable, 1.54)
+            * MSRV check
+            * Documentation generation
+            * Clippy linting strict warnings enforced (-Dwarnings)
+            * Miri UB detection
+            * dependency staleness checks
+            * CHANGELOG entries for new features and bug fixes in CHANGELOG.md
+            * Maintaining GitHub issues for all kind of new development.
 
-   * - 5
-     - Are configuration specification and data available, if applicable?
-     - HE
-     - Not applicable.
-       
-       The crate does not use any runtime configuration, environment-based settings, or configuration files. So no configuration specification is applicable or needed.
+            This is a small-size proc-macro so relevant details are in the crate documentation, which includes usage, feature overview, brief detail of macro, APIs and use-cases examples.
 
-   * - 6
-     - Are verification measures including tests and reports available?
-     - HE
-     - Comprehensive test suite exists, test files covering unit tests, integration tests (tests).
-       
-       An LLVM-based code coverage report is generated and available at index.html.
+        * - 2
+          - Are requirements available?
+          - PE
+          - As this is small size procedural macro crate so functional requirements are partially captured in crate documentation as expected macro behaviors (identifier pasting, case modifiers, ``env!`` support, raw mode, replace modifier) with each feature explanation.
+            (crate documentation - https://docs.rs/pastey/0.2.1/pastey/)
+
+        * - 3
+          - Are specifications for functionalities and properties available (architecture)?
+          - PE
+          - It is small procedural macro so crate documentation contains the partially specifications for functionalities and their properties through feature descriptions, usage examples, and modifier tables.
+
+        * - 4
+          - Are design specifications available?
+          - PE
+          - It is small crate structure with one public interface so it does not required UML/Class diagram but all the relevant details are part of crate document.
+
+        * - 5
+          - Are configuration specification and data available, if applicable?
+          - HE
+          - Not applicable.
+
+            The crate does not use any runtime configuration, environment-based settings, or configuration files. So no configuration specification is applicable or needed.
+
+        * - 6
+          - Are verification measures including tests and reports available?
+          - HE
+          - Comprehensive test suite exists, test files covering unit tests, integration tests.
+            (test suite - https://github.com/AS1100K/pastey/tree/master/pastey-test-suite)
+
+            An LLVM-based code coverage report is generated and available at index.html.
+
+
+| (P=1) shall be selected when none of the determined process measures indicate PE or NE.
+| (P=2) shall be selected when at least one of the determined process measures indicate PE or NE, but the gaps evaluated are acceptable, means
+|       the risk of systematic faults due to these gaps is sufficiently low or manageable by mitigating the gaps.
+| (P=3) in all other cases.
+|
+
+Pastey crate is determined as **P = 2**
+
 
 Step 2: Determine (C): the uncertainty of finding systematic faults based on the Complexity
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------------------------------------------------------------------------
 
-.. list-table::
-   :header-rows: 1
-   :widths: 5 40 30 10 10 20
+| Apply the complexity measures to determine (C).
+| The result of a complexity measure shall have as outcome [NH, HM, NM]
+| - NH: Not High
+| - HM: High but Manageable
+| - NM: high and Not Manageable
 
-   * - Id
-     - Indicator for high Complexity
-     - Complexity measure Tool
-     - Result
-     - Number
-     - Comment
+.. list-table:: Determine (C)
+    :header-rows: 1
 
-   * - 1
-     - High amount of Lines of Code
-     - Lines of Code (without comments) (generated code is excluded, e.g. ProtoCmpl)
-     - NH
-     - 917
-     - Excluding tests
+    * - Id
+      - Indicator for high Complexity
+      - Complexity measure Tool
+      - Result
+      - Number
 
-   * - 2
-     - Unsafe code used / total unsafe code
-     - LoUC+N: lines of unsafe code with safety note. LoUC: lines of unsafe code, no safety note
-     - NH
-     - 0
-     - No unsafe code
+    * - 1
+      - High amount of Lines of Code
+      - Lines of Code (without comments) (generated code is excluded, e.g. ProtoCmpl)
+      - NH
+      - 917 (Excluding tests)
 
-   * - 3
-     - Test exists / Coverage (Function, Line)
-     - Existing Tests Coverage
-     - NH
-     - Comprehensive test suite with LLVM-based code coverage report available
-     - With this PR https://github.com/AS1100K/pastey/pull/28, code coverage is -
-         * 100% function coverage
-         * 96.5% line coverage (C0) (missing lines are for error handling paths in the code, which are difficult to cover with tests)
-         * 93.2% branch coverage(C1) (missing branches are for error handling paths in the code, which are difficult to cover with tests)
+    * - 2
+      - Unsafe code used / total unsafe code
+      - Count:
+            * LoUC+N: lines of unsafe code with safety note
+            * LoUC  : lines of unsafe code, no safety note
+      - NH
+      - 0 (No unsafe code)
 
-   * - 4
-     - High amount of public function interfaces
-     - Number of public function interfaces
-     - NH
-     - 1
-     - pastey macro has only 1 function
+    * - 3
+      - | Test exists / Coverage (Function, Line)
+        | (maybe better: testability, but how to measure?)
+      - Existing Tests Coverage
+      - NH
+      - Comprehensive test suite with LLVM-based code coverage report available.
+        With this PR https://github.com/AS1100K/pastey/pull/28, code coverage is -
 
-   * - 5
-     - High amount of function parameters
-     - Number of parameters
-     - NH
-     - 1
-     - TokenStream is a only parameter for proc macro
+        * 100% function coverage
+        * 96.5% line coverage (C0) (missing lines are for error handling paths in the code, which are difficult to cover with tests)
+        * 93.2% branch coverage(C1) (missing branches are for error handling paths in the code, which are difficult to cover with tests)
+
+    * - 4
+      - High amount of public function interfaces
+      - Number of public function interfaces
+      - NH
+      - 1 (pastey macro has only 1 function)
+
+    * - 5
+      - High amount of function parameters
+      - Number of parameters
+      - NH
+      - 1 (TokenStream is the only parameter for proc macro)
+
+
+| (C=1) shall be selected when none of the determined complexity measures indicate HM or NM.
+| (C=2) shall be selected when at least one of the determined complexity measures indicate HM or NM, but the gaps evaluated are acceptable, means
+|       the risk of systematic faults due to these gaps is sufficiently low in the context of S-CORE or manageable by mitigating the gaps.
+| (C=3) in all other cases.
+|
+
+Pastey crate is determined as **C = 1**
+
 
 Step 3: Determine (CLAS_OUT): the classification outcome
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+--------------------------------------------------------
+
+| Select CLAS_OUT depending on the determined values of (C) and (P)
 
 .. list-table::
    :header-rows: 1
    :widths: 20 20 20 20
 
-   * - 
-     - C=1
-     - C=2
-     - C=3
+   * -
+     - P=1
+     - P=2
+     - P=3
 
-   * - P=1
+   * - C=1
      - Q
      - Q
      - QR
 
-   * - P=2
+   * - C=2
      - QR
      - QR
      - QR
 
-   * - P=3
+   * - C=3
      - QR
      - QR
      - NQ
 
-**Result: Classification Outcome**
 
-Based on the assessment:
+Pastey crate is classified as **CLAS_OUT= Q**, as it has **P = 2** and **C = 1**.
 
-* P (Processes) = 1
-* C (Complexity) = 2
-* **CLAS_OUT (Classification Outcome) = Q**
-
-**Classification Results:**
-
-* **Q:** Follow the processes for qualification of software components in a safety context.
-* **QR:** Follow the process for pre-existing software architectural elements.
-* **NQ:** Do not use this element in safety context.
+Step 4: Document all results and rationale for choosing (P) and (C) and (CLAS_OUT)
+----------------------------------------------------------------------------------
+| Resuts:
+| - P = 2 (Partly Evidence but Manageable) due to some process measures indicating PE, but the gaps are acceptable and manageable, as the crate is small size procedural macro with comprehensive documentation and testing practices in place.
+| - C = 1 (Not High) as all complexity measures indicate NH.
+| - CLAS_OUT = Q (Qualified) based on the combination of P = 2 and C = 1 according to the classification criteria.
 
 
-Assessment References document:  https://eclipse-score.github.io/score/main/modules/feo/feo/docs/component_classification.html
+Step 5: Based on (CLAS_OUT) select the activities
+-------------------------------------------------
+
+Pastey crate is classified as **CLAS_OUT= Q**. 
+
+| As soon as the change request containing this is in status "Accepted", the module safety plan for the component development is adapted based on the following: (select according to above result)
+| - Q: Follow the processes for qualification of software components in a safety context.
+| - QR: Follow the process for pre-existing software architectural elements
+| - NQ: Do no use this element in safety context
+|
+
+Assessment reference document (template used) : https://eclipse-score.github.io/process_description/main/folder_templates/modules/module_name/component_name/docs/component_classification.html
