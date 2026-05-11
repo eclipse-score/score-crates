@@ -16,7 +16,7 @@ Pastey Crate Component Classification
 ==========================================
 
 .. document:: Pastey Crate Component Classification
-   :id: doc_PASTEY_CRATE_COMP_CLASS
+   :id: doc__pastey_crate_comp_class
    :status: valid
    :safety: ASIL_B
    :security: NO
@@ -72,8 +72,9 @@ Step 1: Determine (P): the uncertainty of the Processes applied
         * - 2
           - Are requirements available?
           - PE
-          - Requirement specification is available in score-crates repository, in the form of AOU requirements, which are traceable to test cases in the test suite.
-            (crate documentation - https://docs.rs/pastey/0.2.1/pastey/)
+          - Requirement specification is available in score-crates repository, in the form of trlc.
+            - it containts the system, feature and component requirements, with traceability between them.
+            (PR - https://github.com/eclipse-score/score-crates/pull/33)
 
         * - 3
           - Are specifications for functionalities and properties available (architecture)?
