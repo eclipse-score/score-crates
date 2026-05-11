@@ -72,9 +72,8 @@ Step 1: Determine (P): the uncertainty of the Processes applied
         * - 2
           - Are requirements available?
           - PE
-          - Requirement specification is available in score-crates repository, in the form of trlc.
-            - it containts the system, feature and component requirements, with traceability between them.
-            (PR - https://github.com/eclipse-score/score-crates/pull/33)
+          - As this is small size procedural macro crate so functional requirements are partially captured in crate documentation as expected macro behaviors (identifier pasting, case modifiers, ``env!`` support, raw mode, replace modifier) with each feature explanation.
+            (crate documentation - https://docs.rs/pastey/0.2.1/pastey/)
 
         * - 3
           - Are specifications for functionalities and properties available (architecture)?
