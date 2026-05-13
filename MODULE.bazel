@@ -181,6 +181,10 @@ crate.spec(
     version = "1.0.4",
 )
 crate.spec(
+    package = "mockall",
+    version = "0.14.0",
+)
+crate.spec(
     features = [
         "fs",
         "mman",
