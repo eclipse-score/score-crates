@@ -373,3 +373,19 @@ crate.from_specs(
     ],
 )
 use_repo(crate, "crate_index")
+
+# TRLC dependency for requirements traceability
+bazel_dep(name = "trlc", version = "0.0.0", dev_dependency = True)
+git_override(
+    module_name = "trlc",
+    commit = "3a71fd56001b95dfbb5270a49449ec0a631cd56c",  #TRLC 2.0.4
+    remote = "https://github.com/bmw-software-engineering/trlc.git",
+)
+
+# Lobster dependency for requirements traceability
+bazel_dep(name = "lobster", version = "0.0.0", dev_dependency = True)
+git_override(
+    module_name = "lobster",
+    commit = "d528fbdec2cd72ff7967b51546fb0bd935810258",
+    remote = "https://github.com/bmw-software-engineering/lobster.git",
+)

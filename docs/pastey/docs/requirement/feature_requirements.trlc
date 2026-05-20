@@ -1,0 +1,52 @@
+/********************************************************************************
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation
+ *
+ * See the NOTICE file(s) distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Apache License Version 2.0 which is available at
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ ********************************************************************************/
+package PasteyFeatReq
+
+import ScoreReq
+
+ScoreReq.FeatReq FEAT_PASTEY_001 {
+    description = "The pastey crate shall provide compile-time identifier synthesis by concatenating one or more tokens specified inside a paste! interpolation block (the [< ... >] syntax), ignoring any whitespace between tokens, and shall support a raw-identifier prefix (# as the first token) to produce a raw identifier (r#ident)"
+    safety = ScoreReq.Asil.B
+    derived_from = [PasteySysReq.ASR_PASTEY_001@1]
+    version = 1
+    note = "Assumption of Use: the invoker shall only use pastey in Rust source positions where an identifier or item is syntactically valid, as the crate emits raw tokens into the surrounding code without additional context checks"
+}
+
+ScoreReq.FeatReq FEAT_PASTEY_002 {
+    description = "The pastey crate shall support case-transformation modifiers (:lower, :upper, :snake, :camel, :upper_camel, :lower_camel, :camel_edge) that convert a synthesized identifier to the casing style associated with the applied modifier"
+    safety = ScoreReq.Asil.B
+    derived_from = [PasteySysReq.ASR_PASTEY_001@1]
+    version = 1
+}
+
+ScoreReq.FeatReq FEAT_PASTEY_003 {
+    description = "The pastey crate shall support a string-replacement modifier (:replace(from, to)) that performs substring replacement on a synthesized identifier value and shall produce a compile error when more than one token is supplied for either argument, when the preceding value is absent, or when the modifier syntax is malformed"
+    safety = ScoreReq.Asil.B
+    derived_from = [PasteySysReq.ASR_PASTEY_001@1]
+    version = 1
+}
+
+ScoreReq.FeatReq FEAT_PASTEY_004 {
+    description = "The pastey crate shall support assembly of documentation strings by concatenating the argument values of all #[doc = ...] attributes present within a single pastey invocation into one documentation string"
+    safety = ScoreReq.Asil.B
+    derived_from = [PasteySysReq.ASR_PASTEY_001@1]
+    version = 1
+}
+
+ScoreReq.FeatReq FEAT_PASTEY_005 {
+    description = "The pastey crate shall support compile-time expansion of build-environment variables via env!(\"VAR_NAME\") inside a paste! interpolation block (the [< ... >] syntax), replacing hyphens in the resolved value with underscores, and shall produce a compile error when the named variable is not defined in the build environment"
+    safety = ScoreReq.Asil.B
+    derived_from = [PasteySysReq.ASR_PASTEY_002@1]
+    version = 1
+    note = "Assumption of Use: the invoker shall ensure that any environment variable referenced via env!(\"VAR_NAME\") inside a paste! interpolation block is defined in the build environment at compile time, since an absent variable causes a compile error that cannot be recovered from at the call site"
+}
