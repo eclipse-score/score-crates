@@ -1,0 +1,39 @@
+/********************************************************************************
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation
+ *
+ * See the NOTICE file(s) distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Apache License Version 2.0 which is available at
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ ********************************************************************************/
+package PasteyAoU
+
+import ScoreReq
+
+ScoreReq.AoU PasteyUsedInValidSyntaxPositions {
+    description = "It shall be ensured that the pastey macro is only invoked in Rust source positions where an identifier or item is syntactically valid."
+    safety = ScoreReq.Asil.B
+    note = "The pastey crate emits raw tokens into the surrounding code without additional context checks. Using it in invalid positions will result in compilation errors or undefined behavior."
+    version = 1
+    mitigates = "InvalidTokenPlacement, CompilationErrors, UndefinedBehavior"
+}
+
+ScoreReq.AoU EnvironmentVariablesDefinedAtCompileTime {
+    description = "It shall be ensured that any environment variable referenced via env!(\"VAR_NAME\") inside a paste! interpolation block is defined in the build environment at compile time."
+    safety = ScoreReq.Asil.B
+    note = "An absent environment variable causes a compile error that cannot be recovered from at the call site, potentially breaking the build process."
+    version = 1
+    mitigates = "CompilationFailure, MissingBuildConfiguration"
+}
+
+ScoreReq.AoU PasteInterpolationSyntaxCorrect {
+    description = "It shall be ensured that all paste! interpolation blocks follow correct syntax including proper token placement, modifier usage, and delimiter matching."
+    safety = ScoreReq.Asil.B
+    note = "Malformed paste! syntax will result in compile-time errors and prevent successful code generation."
+    version = 1
+    mitigates = "SyntaxErrors, MacroExpansionFailure, InvalidCodeGeneration"
+}
