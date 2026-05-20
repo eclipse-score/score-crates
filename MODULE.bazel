@@ -356,6 +356,10 @@ crate.spec(
     package = "tempfile",
     version = "3.20.0",
 )
+crate.spec(
+    package = "pastey",
+    version = "0.2.3",
+)
 crate.from_specs(
     name = "crate_index",
     # This shall not be here but rules_rust 0.61.0 or even 0.67.0 does not correct finds out that when we use out platform it shall append

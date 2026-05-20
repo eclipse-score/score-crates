@@ -27,8 +27,8 @@ Pastey Crate Component Classification
 | Classification of Pastey Crate as a software component in the context of S-CORE.
 |
 | Repository: https://github.com/as1100k/pastey
-| Documentation: https://docs.rs/pastey/0.2.1/pastey/
-| Crate Version: 0.2.1
+| Documentation: https://docs.rs/pastey/0.2.3/pastey/
+| Crate Version: 0.2.3
 | Additional documentation considered:
 | https://crates.io/crates/pastey
 
@@ -73,7 +73,7 @@ Step 1: Determine (P): the uncertainty of the Processes applied
           - Are requirements available?
           - PE
           - As this is small size procedural macro crate so functional requirements are partially captured in crate documentation as expected macro behaviors (identifier pasting, case modifiers, ``env!`` support, raw mode, replace modifier) with each feature explanation.
-            (crate documentation - https://docs.rs/pastey/0.2.1/pastey/)
+            (crate documentation - https://docs.rs/pastey/0.2.3/pastey/)
 
         * - 3
           - Are specifications for functionalities and properties available (architecture)?

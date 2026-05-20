@@ -1,7 +1,7 @@
 # BUILD file to satisfy Bazel package requirements for extensions.bzl
 # This file contains auto-generated aliases from @crate_index
 # Generated aliases for crate_index entries
-# Generated on: Tue May 12 17:17:56 CEST 2026
+# Generated on: Wed May 20 11:24:44 IST 2026
 
 alias(
     name = "adler32",
@@ -228,6 +228,12 @@ alias(
 alias(
     name = "paste",
     actual = "@crate_index//:paste",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "pastey",
+    actual = "@crate_index//:pastey",
     visibility = ["//visibility:public"],
 )
 
