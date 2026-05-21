@@ -13,38 +13,15 @@
 
 load(
     "@score_tooling//bazel/rules/rules_score:rules_score.bzl",
-    "assumed_system_requirements",
-    "component_requirements",
-    "feature_requirements",
+    "architectural_design",
 )
 
-assumed_system_requirements(
-    name = "system_requirements",
-    srcs = [
-        "assumed_system_requirements.trlc",
+architectural_design(
+    name = "pastey_design",
+    static = [
+        "public_api.puml",
+        "static_design.puml",
+        "architectural_design.rst",
     ],
     visibility = ["//visibility:public"],
-)
-
-feature_requirements(
-    name = "feature_requirements",
-    srcs = [
-        "feature_requirements.trlc",
-    ],
-    visibility = ["//visibility:public"],
-    deps = [
-        ":system_requirements",
-    ],
-)
-
-component_requirements(
-    name = "component_requirements",
-    srcs = [
-        "component_requirements.trlc",
-    ],
-    visibility = ["//visibility:public"],
-    deps = [
-        ":system_requirements",
-        ":feature_requirements",
-    ],
 )

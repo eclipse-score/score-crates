@@ -1,0 +1,34 @@
+/********************************************************************************
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation
+ *
+ * See the NOTICE file(s) distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Apache License Version 2.0 which is available at
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ ********************************************************************************/
+package PasteyControlMeasures
+
+import ScoreReq
+
+ScoreReq.ControlMeasure CM_PASTEY_001 {
+    description = "The pastey crate shall emit a compile error when the interpolation block is empty or contains no valid tokens, preventing silent empty-identifier generation."
+    safety = ScoreReq.Asil.B
+    version = 1
+}
+
+ScoreReq.ControlMeasure CM_PASTEY_002 {
+    description = "The pastey crate shall emit a compile error when an unknown or unsupported modifier is encountered inside an interpolation block."
+    safety = ScoreReq.Asil.B
+    version = 1
+}
+
+ScoreReq.AoU CM_PASTEY_AOU_001 {
+    description = "It shall be ensured that the paste! macro is only used in Rust source positions where an identifier is syntactically valid, as pastey emits raw tokens without positional validation."
+    safety = ScoreReq.Asil.B
+    version = 1
+    mitigates = "FM_PASTEY_003"
+}

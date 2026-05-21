@@ -1,0 +1,7 @@
+@startuml static_design
+
+package "pastey" as pastey <<SEooC>> {
+    component "pastey_component" as pastey_component <<component>>
+}
+
+@enduml
