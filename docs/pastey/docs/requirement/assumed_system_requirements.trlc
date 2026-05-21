@@ -21,9 +21,3 @@ ScoreReq.AssumedSystemReq ASR_RUST_CRATE {
     rationale = "The system requires a Rust toolchain with stable language features to enable development of safety-critical software components"
 }
 
-ScoreReq.AssumedSystemReq ASR_RUST_COMPILER {
-    description = "The Rust compiler used to build safety-critical applications shall be safety certified up to ASIL B."
-    safety = ScoreReq.Asil.B
-    version = 1
-    rationale = "Safety-critical software development requires a qualified toolchain to ensure compiler-generated code meets functional safety requirements"
-}
