@@ -1,0 +1,92 @@
+/********************************************************************************
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation
+ *
+ * See the NOTICE file(s) distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Apache License Version 2.0 which is available at
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ ********************************************************************************/
+package PasteyComReq
+
+import ScoreReq
+
+ScoreReq.CompReq REQ_COMP_PASTEY_001 {
+    description = "The pastey component shall collect all tokens inside a paste! interpolation block (the [< ... >] syntax) and shall discard whitespace tokens between them before performing identifier concatenation"
+    safety = ScoreReq.Asil.B
+    derived_from = [PasteyFeatReq.FEAT_PASTEY_001@1]
+    version = 1
+}
+
+ScoreReq.CompReq REQ_COMP_PASTEY_002 {
+    description = "The pastey component shall convert the accumulated identifier string to lowercase when the :lower modifier is present"
+    safety = ScoreReq.Asil.B
+    derived_from = [PasteyFeatReq.FEAT_PASTEY_001@1]
+    version = 1
+}
+
+ScoreReq.CompReq REQ_COMP_PASTEY_003 {
+    description = "The pastey component shall convert the accumulated identifier string to uppercase when the :upper modifier is present"
+    safety = ScoreReq.Asil.B
+    derived_from = [PasteyFeatReq.FEAT_PASTEY_001@1]
+    version = 1
+}
+
+ScoreReq.CompReq REQ_COMP_PASTEY_004 {
+    description = "The pastey component shall convert the accumulated identifier string to snake_case when the :snake modifier is present"
+    safety = ScoreReq.Asil.B
+    derived_from = [PasteyFeatReq.FEAT_PASTEY_001@1]
+    version = 1
+}
+
+ScoreReq.CompReq REQ_COMP_PASTEY_005 {
+    description = "The pastey component shall convert the accumulated identifier string to UpperCamelCase when the :camel or :upper_camel modifier is present"
+    safety = ScoreReq.Asil.B
+    derived_from = [PasteyFeatReq.FEAT_PASTEY_001@1]
+    version = 1
+}
+
+ScoreReq.CompReq REQ_COMP_PASTEY_006 {
+    description = "The pastey component shall convert the accumulated identifier string to lowerCamelCase when the :lower_camel modifier is present"
+    safety = ScoreReq.Asil.B
+    derived_from = [PasteyFeatReq.FEAT_PASTEY_001@1]
+    version = 1
+}
+
+ScoreReq.CompReq REQ_COMP_PASTEY_007 {
+    description = "The pastey component shall convert the accumulated identifier string to UpperCamelCase while preserving edge-case boundaries such as consecutive uppercase letter sequences when the :camel_edge modifier is present"
+    safety = ScoreReq.Asil.B
+    derived_from = [PasteyFeatReq.FEAT_PASTEY_001@1]
+    version = 1
+}
+
+ScoreReq.CompReq REQ_COMP_PASTEY_008 {
+    description = "The pastey component shall accept exactly one token for each of the from and to arguments of the :replace(from, to) modifier and shall emit a compile error when more than one token is supplied for either argument, when the preceding value is absent, or when the modifier syntax is malformed"
+    safety = ScoreReq.Asil.B
+    derived_from = [PasteyFeatReq.FEAT_PASTEY_001@1]
+    version = 1
+}
+
+ScoreReq.CompReq REQ_COMP_PASTEY_009 {
+    description = "If the first token inside a paste! interpolation block (the [< ... >] syntax) is #, the pastey component shall produce a raw identifier (r#ident) from the remaining concatenated tokens; if # appears at any position other than the first, the pastey component shall emit a compile error"
+    safety = ScoreReq.Asil.B
+    derived_from = [PasteyFeatReq.FEAT_PASTEY_001@1]
+    version = 1
+}
+
+ScoreReq.CompReq REQ_COMP_PASTEY_010 {
+    description = "The pastey component shall collect the string values of all #[doc = ...] attribute arguments within a pastey invocation and shall concatenate them in order into a single documentation string"
+    safety = ScoreReq.Asil.B
+    derived_from = [PasteyFeatReq.FEAT_PASTEY_001@1]
+    version = 1
+}
+
+ScoreReq.CompReq REQ_COMP_PASTEY_011 {
+    description = "The pastey component shall look up the named variable in the compile-time environment, shall replace all hyphens in the resolved string with underscores, and shall emit a compile error when the variable is absent from the build environment"
+    safety = ScoreReq.Asil.B
+    derived_from = [PasteyFeatReq.FEAT_PASTEY_001@1]
+    version = 1
+}
