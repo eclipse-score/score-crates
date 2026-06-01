@@ -16,8 +16,9 @@ module(
     compatibility_level = 0,
 )
 
-bazel_dep(name = "platforms", version = "0.0.11")
-bazel_dep(name = "rules_rust", version = "0.61.0")
+bazel_dep(name = "platforms", version = "1.0.0")
+bazel_dep(name = "bazel_skylib", version = "1.9.0")
+bazel_dep(name = "rules_rust", version = "0.68.1-score")
 
 crate = use_extension("@rules_rust//crate_universe:extensions.bzl", "crate")
 crate.spec(
@@ -388,4 +389,13 @@ git_override(
     module_name = "lobster",
     commit = "d528fbdec2cd72ff7967b51546fb0bd935810258",
     remote = "https://github.com/bmw-software-engineering/lobster.git",
+)
+
+bazel_dep(name = "rules_python", version = "1.8.5", dev_dependency = True)
+
+bazel_dep(name = "score_tooling")
+git_override(
+    module_name = "score_tooling",
+    commit = "549c7ee315cfbc27a42247b11cb70c953eac75dc",
+    remote = "https://github.com/eclipse-score/tooling.git",
 )
