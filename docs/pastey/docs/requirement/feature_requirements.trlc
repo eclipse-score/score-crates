@@ -13,10 +13,11 @@
 package PasteyFeatReq
 
 import ScoreReq
+import PasteySysReq
 
 ScoreReq.FeatReq FEAT_PASTEY_001 {
     description = "The pastey crate shall provide compile-time token manipulation capabilities for procedural macro expansion in Rust applications."
     safety = ScoreReq.Asil.B
-    derived_from = [RustCrateSysReq.ASR_RUST_CRATE@1]
+    derived_from = [PasteySysReq.ASR_RUST_CRATE@1]
     version = 1
 }

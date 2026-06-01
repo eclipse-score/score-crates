@@ -13,6 +13,7 @@
 package PasteyComReq
 
 import ScoreReq
+import PasteyFeatReq
 
 ScoreReq.CompReq REQ_COMP_PASTEY_001 {
     description = "The pastey component shall collect all tokens inside a paste! interpolation block (the [< ... >] syntax) and shall discard whitespace tokens between them before performing identifier concatenation"
