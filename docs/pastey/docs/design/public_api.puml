@@ -1,0 +1,7 @@
+@startuml public_api
+
+package "pastey public interface" as pastey_pub {
+    interface "paste!(tokens)" as paste_macro
+}
+
+@enduml
