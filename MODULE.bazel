@@ -399,3 +399,8 @@ git_override(
     commit = "549c7ee315cfbc27a42247b11cb70c953eac75dc",
     remote = "https://github.com/eclipse-score/tooling.git",
 )
+
+register_toolchains(
+    "@score_tooling//bazel/rules/rules_score:sphinx_default_toolchain",
+    dev_dependency = True,
+)
