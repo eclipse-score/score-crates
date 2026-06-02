@@ -18,7 +18,12 @@ load(
 
 component(
     name = "pastey_component",
-    requirements = ["//docs/pastey/docs/requirement:component_requirements"],
-    tests = [],
+    requirements = [
+        "//docs/pastey/docs/requirement:component_requirements",
+        "//docs/pastey/docs/requirement:feature_requirements",
+    ],
+    tests = [
+        "//docs/pastey/tests:pastey_test",
+    ],
     visibility = ["//visibility:public"],
 )

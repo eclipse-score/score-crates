@@ -10,18 +10,18 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
-package PasteyControlMeasures
 
-import ScoreReq
+@startuml pastey_root_causes
 
-ScoreReq.ControlMeasure CM_PASTEY_001 {
-    description = "The pastey crate shall emit a compile error when the interpolation block is empty or contains no valid tokens, preventing silent empty-identifier generation."
-    safety = ScoreReq.Asil.B
-    version = 1
-}
+!include fta_metamodel.puml
 
-ScoreReq.ControlMeasure CM_PASTEY_002 {
-    description = "The pastey crate shall emit a compile error when an unknown or unsupported modifier is encountered inside an interpolation block."
-    safety = ScoreReq.Asil.B
-    version = 1
-}
+$TopEvent("Wrong or missing identifier", "PasteyFailureModes.CompilationErrors")
+
+$OrGate("Gate1", "TopEvent")
+
+$BasicEvent("paste! used in invalid syntax position", "PasteyFailureModes.InvalidTokenPlacement", "Gate1")
+
+$BasicEvent("Compilation error due to empty token stream", "PasteyAoU.CM_PASTEY_001", "Gate1")
+
+$BasicEvent("Unsupported modifier generate compilation error", "PasteyAoU.CM_PASTEY_002", "Gate1")
+@enduml

@@ -1,0 +1,30 @@
+/********************************************************************************
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation
+ *
+ * See the NOTICE file(s) distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Apache License Version 2.0 which is available at
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ ********************************************************************************/
+package PasteyAoU
+
+import ScoreReq
+
+ScoreReq.AoU CM_PASTEY_001 {
+    description = "The pastey crate shall emit a compile error when the interpolation block is empty or contains no valid tokens, preventing silent empty-identifier generation."
+    safety = ScoreReq.Asil.B
+    version = 1
+    mitigates = "CompilationErrors"
+}
+
+ScoreReq.AoU CM_PASTEY_002 {
+    description = "The pastey crate shall emit a compile error when an unknown or unsupported modifier is encountered inside an interpolation block."
+    safety = ScoreReq.Asil.B
+    note = "The pastey crate emits raw tokens into the surrounding code without additional context checks. Using it in invalid positions will result in compilation errors or undefined behavior."
+    version = 1
+    mitigates = "InvalidTokenPlacement"
+}

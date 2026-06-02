@@ -15,8 +15,9 @@ load("@score_tooling//bazel/rules/rules_score:rules_score.bzl", "fmea")
 
 fmea(
     name = "pastey_fmea",
+    arch_design = "//docs/pastey/docs/design:pastey_design",
+    controlmeasures = ["aou.trlc"],
     failuremodes = ["failure_modes.trlc"],
-    controlmeasures = ["control_measures.trlc"],
-    root_causes = ["fta.puml"],
+    root_causes = ["root_cause.puml"],
     visibility = ["//visibility:public"],
 )

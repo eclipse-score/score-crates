@@ -14,22 +14,22 @@ package PasteyFailureModes
 
 import ScoreReq
 
-ScoreReq.FailureMode FM_PASTEY_001 {
+ScoreReq.FailureMode CompilationErrors {
     guideword = ScoreReq.GuideWord.LossOfFunction
     description = "The paste! macro shall fail to synthesize an identifier when the token stream inside the interpolation block is empty or contains only whitespace."
     failureeffect = "Compilation fails with a macro expansion error, preventing the build from succeeding."
     safety = ScoreReq.Asil.B
     version = 1
-    interface = "pastey::paste!"
     potentialcause = "Caller passes an empty or whitespace-only interpolation block to the paste! macro."
+    interface = "pastey_pub.paste_macro"
 }
 
-ScoreReq.FailureMode FM_PASTEY_002 {
+ScoreReq.FailureMode InvalidTokenPlacement {
     guideword = ScoreReq.GuideWord.UnintendedFunction
     description = "The paste! macro shall expand tokens in a syntactically invalid position causing the surrounding Rust code to fail to compile."
     failureeffect = "Build failure due to invalid token placement in generated code."
     safety = ScoreReq.Asil.B
     version = 1
-    interface = "pastey::paste!"
     potentialcause = "Invoker uses paste! in a Rust source position where an identifier is not syntactically valid."
+    interface = "pastey_pub.paste_macro"
 }

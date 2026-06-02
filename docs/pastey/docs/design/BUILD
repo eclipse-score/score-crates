@@ -18,8 +18,10 @@ load(
 
 architectural_design(
     name = "pastey_design",
-    static = [
+    public_api = [
         "public_api.puml",
+    ],
+    static = [
         "static_design.puml",
         "architectural_design.rst",
     ],

@@ -47,7 +47,6 @@ dependable_element(
     integrity_level = "B",
     assumptions_of_use = [":aou"],
     requirements = [
-        "//docs/pastey/docs/requirement:system_requirements",
         "//docs/pastey/docs/requirement:feature_requirements",
     ],
     architectural_design = ["//docs/pastey/docs/design:pastey_design"],
