@@ -230,4 +230,15 @@ Pastey crate is classified as **CLAS_OUT= Q**.
 | - NQ: Do no use this element in safety context
 |
 
+Additional notes:
+Traceability:
+End-to-end traceability has been established using the LOBSTER tool within the score-crates repository. Although unit test results are not currently displayed in the generated reports due to a known limitation in Rust test result parsing (https://github.com/bmw-software-engineering/lobster/issues/589), all necessary traceability links are properly maintained. These include mappings between requirements, design elements, failure modes, control measures, and corresponding tests.
+
+Toolchain Assurance:
+The crate is built and tested using the certified Ferrocene toolchain, which is maintained as part of the score_rust_toolchain repository. This ensures compliance with safety and reliability standards expected for Rust-based development.
+
+Use of Standard Library Components in Pastey:
+The Pastey crate uses certified Rust core library components(https://github.com/AS1100K/pastey/pull/37), with limited usage of std::env and std::panic. These modules are required to support environment variable handling within Pastey macros. Since they are sourced from the same certified toolchain, their usage is considered safe and compliant within the crate.
+
+
 Assessment reference document (template used) : https://eclipse-score.github.io/process_description/main/folder_templates/modules/module_name/component_name/docs/component_classification.html
