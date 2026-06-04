@@ -11,17 +11,14 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-@startuml pastey_root_causes
+@startuml invalid_syntax_position_fta
 
 !include fta_metamodel.puml
 
-$TopEvent("Wrong or missing identifier", "PasteyFailureModes.CompilationErrors")
+$TopEvent("paste! macro expands in syntactically invalid position", "PasteyFailureModes.InvalidTokenPlacement")
 
 $OrGate("Gate1", "TopEvent")
 
-$BasicEvent("paste! used in invalid syntax position", "PasteyFailureModes.InvalidTokenPlacement", "Gate1")
+$BasicEvent("User passes empty interpolation block to paste! macro", "PasteyAoU.PasteyUsedInValidSyntaxPositions", "Gate1")
 
-$BasicEvent("Compilation error due to empty token stream", "PasteyAoU.PasteyRustCompilerCertified", "Gate1")
-
-$BasicEvent("Unsupported modifier generate compilation error", "PasteyAoU.PasteyUsedInValidSyntaxPositions", "Gate1")
 @enduml

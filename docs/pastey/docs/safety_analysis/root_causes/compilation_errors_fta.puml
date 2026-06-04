@@ -10,14 +10,15 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
-package RustCrateSysReq
 
-import ScoreReq
+@startuml compilation_errors_fta
 
-ScoreReq.AssumedSystemReq ASR_RUST_CRATE {
-    description = "The SW-platform shall support implementation of applications in the Rust programming language up to ASIL B."
-    safety = ScoreReq.Asil.B
-    version = 1
-    rationale = "The system requires a Rust toolchain with stable language features to enable development of safety-critical software components"
-}
+!include fta_metamodel.puml
 
+$TopEvent("Macro fails to synthesize identifier compilation error", "PasteyFailureModes.CompilationErrors")
+
+$OrGate("Gate1", "TopEvent")
+
+$BasicEvent("Compilation error due to empty token stream", "PasteyAoU.PasteyRustCompilerCertified", "Gate1")
+
+@enduml

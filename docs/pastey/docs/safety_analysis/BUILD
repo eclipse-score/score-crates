@@ -18,8 +18,11 @@ fmea(
     name = "pastey_fmea",
     arch_design = "//docs/pastey/docs/design:pastey_design",
     controlmeasures = ["aou.trlc"],
-    failuremodes = ["failure_modes.trlc"],
-    root_causes = ["root_cause.puml"],
+    failuremodes = ["failure_modes.trlc",],
+    root_causes = [
+        "root_causes/compilation_errors_fta.puml",
+        "root_causes/invalid_syntax_position_fta.puml",
+    ],
     visibility = ["//visibility:public"],
 )
 
