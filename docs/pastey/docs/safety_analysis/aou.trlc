@@ -14,17 +14,17 @@ package PasteyAoU
 
 import ScoreReq
 
-ScoreReq.AoU CM_PASTEY_001 {
-    description = "The pastey crate shall emit a compile error when the interpolation block is empty or contains no valid tokens, preventing silent empty-identifier generation."
+ScoreReq.AoU PasteyRustCompilerCertified {
+    description = "The Rust compiler used to build the pastey crate shall be safety certified up to ASIL B."
     safety = ScoreReq.Asil.B
     version = 1
-    mitigates = "CompilationErrors"
+    note = "Safety-critical software development requires a qualified toolchain to ensure compiler-generated code meets functional safety requirements"
 }
 
-ScoreReq.AoU CM_PASTEY_002 {
-    description = "The pastey crate shall emit a compile error when an unknown or unsupported modifier is encountered inside an interpolation block."
+ScoreReq.AoU PasteyUsedInValidSyntaxPositions {
+    description = "It shall be ensured that the pastey macro is only invoked in Rust source positions where an identifier or item is syntactically valid."
     safety = ScoreReq.Asil.B
     note = "The pastey crate emits raw tokens into the surrounding code without additional context checks. Using it in invalid positions will result in compilation errors or undefined behavior."
     version = 1
-    mitigates = "InvalidTokenPlacement"
+    mitigates = "InvalidTokenPlacement, CompilationErrors"
 }

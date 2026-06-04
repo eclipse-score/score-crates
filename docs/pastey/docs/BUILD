@@ -11,7 +11,6 @@
 # SPDX-License-Identifier: Apache-2.0
 # *******************************************************************************
 
-load("@trlc//:trlc.bzl", "trlc_requirements")
 load(
     "@score_tooling//bazel/rules/rules_score:rules_score.bzl",
     "assumptions_of_use",
@@ -19,20 +18,9 @@ load(
     "dependability_analysis",
 )
 
-trlc_requirements(
-    name = "aou_trlc",
-    srcs = [
-        "aou.trlc",
-    ],
-    spec = [
-        "@score_tooling//bazel/rules/rules_score/trlc/config:score_requirements_model",
-    ],
-    visibility = ["//visibility:public"],
-)
-
 assumptions_of_use(
     name = "aou",
-    srcs = [":aou_trlc"],
+    srcs = ["//docs/pastey/docs/safety_analysis:aou_trlc"],
     visibility = ["//visibility:public"],
 )
 

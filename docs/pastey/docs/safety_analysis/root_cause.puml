@@ -21,7 +21,7 @@ $OrGate("Gate1", "TopEvent")
 
 $BasicEvent("paste! used in invalid syntax position", "PasteyFailureModes.InvalidTokenPlacement", "Gate1")
 
-$BasicEvent("Compilation error due to empty token stream", "PasteyAoU.CM_PASTEY_001", "Gate1")
+$BasicEvent("Compilation error due to empty token stream", "PasteyAoU.PasteyRustCompilerCertified", "Gate1")
 
-$BasicEvent("Unsupported modifier generate compilation error", "PasteyAoU.CM_PASTEY_002", "Gate1")
+$BasicEvent("Unsupported modifier generate compilation error", "PasteyAoU.PasteyUsedInValidSyntaxPositions", "Gate1")
 @enduml

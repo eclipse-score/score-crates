@@ -15,8 +15,6 @@
 
 use pastey::paste;
 
-
-// REQ_COMP_PASTEY_001 – identifier concatenation via paste!
 paste! {
     struct [<Foo Bar>];
 }
@@ -27,8 +25,6 @@ fn test_identifier_concatenation() {
     let _ = FooBar;
 }
 
-
-// REQ_COMP_PASTEY_002 – :lower modifier
 paste! {
     #[allow(non_upper_case_globals)]
     const [<HELLO_WORLD:lower>]: &str = "hello_world";
@@ -40,8 +36,6 @@ fn test_lower_modifier() {
     assert_eq!(hello_world, "hello_world");
 }
 
-
-// REQ_COMP_PASTEY_003 – :upper modifier
 paste! {
     #[allow(non_snake_case)]
     fn [<get_ value:upper>]() -> u32 { 42 }
@@ -53,8 +47,6 @@ fn test_upper_modifier() {
     assert_eq!(get_VALUE(), 42);
 }
 
-
-// REQ_COMP_PASTEY_004 – :snake modifier
 paste! {
     fn [<MyFunction:snake>]() -> &'static str { "snake_case" }
 }
@@ -65,8 +57,6 @@ fn test_snake_modifier() {
     assert_eq!(my_function(), "snake_case");
 }
 
-
-// REQ_COMP_PASTEY_005 / REQ_COMP_PASTEY_006 – :camel / :upper_camel modifier
 paste! {
     #[allow(non_snake_case)]
     fn [<my_function:camel>]() -> &'static str { "UpperCamelCase" }
@@ -78,8 +68,6 @@ fn test_camel_modifier() {
     assert_eq!(MyFunction(), "UpperCamelCase");
 }
 
-
-// REQ_COMP_PASTEY_006 – :lower_camel modifier
 paste! {
     #[allow(non_snake_case)]
     fn [<MyFunction:lower_camel>]() -> &'static str { "lowerCamelCase" }
@@ -91,8 +79,6 @@ fn test_lower_camel_modifier() {
     assert_eq!(myFunction(), "lowerCamelCase");
 }
 
-
-// REQ_COMP_PASTEY_009 – raw identifier prefix (#)
 paste! {
     fn [<# type>]() -> &'static str { "raw identifier" }
 }

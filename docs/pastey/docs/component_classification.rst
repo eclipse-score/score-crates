@@ -238,7 +238,8 @@ Toolchain Assurance:
 The crate is built and tested using the certified Ferrocene toolchain, which is maintained as part of the score_rust_toolchain repository. This ensures compliance with safety and reliability standards expected for Rust-based development.
 
 Use of Standard Library Components in Pastey:
-The Pastey crate uses certified Rust core library components(https://github.com/AS1100K/pastey/pull/37), with limited usage of std::env and std::panic. These modules are required to support environment variable handling within Pastey macros. Since they are sourced from the same certified toolchain, their usage is considered safe and compliant within the crate.
+The Pastey crate uses certified Rust core library components(https://github.com/AS1100K/pastey/pull/37), with limited usage of std::env, these modules are required to support environment variable handling within Pastey macros. 
+Since they are sourced from the same certified toolchain, and use the same underlying components, their usage is considered safe and compliant within the crate.
 
 
 Assessment reference document (template used) : https://eclipse-score.github.io/process_description/main/folder_templates/modules/module_name/component_name/docs/component_classification.html
