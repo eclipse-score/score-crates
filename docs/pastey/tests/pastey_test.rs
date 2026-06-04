@@ -80,6 +80,27 @@ fn test_lower_camel_modifier() {
 }
 
 paste! {
+    #[allow(non_snake_case)]
+    fn [<my_http_server:camel_edge>]() -> &'static str { "MyHttpServer" }
+}
+
+#[test]
+fn test_camel_edge_modifier() {
+    // lobster-trace: PasteyComReq.REQ_COMP_PASTEY_007
+    assert_eq!(MyHttpServer(), "MyHttpServer");
+}
+
+paste! {
+    fn [<replace_test:replace(test, demo)>]() -> &'static str { "replace_demo" }
+}
+
+#[test]
+fn test_replace_modifier() {
+    // lobster-trace: PasteyComReq.REQ_COMP_PASTEY_008
+    assert_eq!(replace_demo(), "replace_demo");
+}
+
+paste! {
     fn [<# type>]() -> &'static str { "raw identifier" }
 }
 
@@ -87,4 +108,30 @@ paste! {
 fn test_raw_identifier_prefix() {
     // lobster-trace: PasteyComReq.REQ_COMP_PASTEY_009
     assert_eq!(r#type(), "raw identifier");
+}
+
+paste! {
+    /// [<Documentation for >] [<the struct>]
+    struct [<DocumentedStruct>] {
+        field: u32,
+    }
+}
+
+#[test]
+fn test_doc_attribute_concatenation() {
+    // lobster-trace: PasteyComReq.REQ_COMP_PASTEY_010
+    let s = DocumentedStruct { field: 42 };
+    assert_eq!(s.field, 42);
+}
+
+paste! {
+    #[allow(non_snake_case)]
+    fn [<get_PASTEY_VERSION>]() -> &'static str { env!("CARGO_PKG_VERSION") }
+}
+
+#[test]
+fn test_environment_variable_lookup() {
+    // lobster-trace: PasteyComReq.REQ_COMP_PASTEY_011
+    let version = get_PASTEY_VERSION();
+    assert!(!version.is_empty());
 }
