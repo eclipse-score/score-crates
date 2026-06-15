@@ -19,20 +19,5 @@ ScoreReq.AoU PasteyRustCompilerCertified {
     safety = ScoreReq.Asil.B
     version = 1
     note = "Safety-critical software development requires a qualified toolchain to ensure compiler-generated code meets functional safety requirements"
-}
-
-ScoreReq.AoU PasteyNonEmptyTokenStream {
-    description = "It shall be ensured that the pastey macro is only invoked with non-empty, non-whitespace token streams in interpolation blocks."
-    safety = ScoreReq.Asil.B
-    version = 1
-    note = "The pastey macro requires at least one valid token to synthesize an identifier. Empty or whitespace-only interpolation blocks will cause compilation failures."
-    mitigates = "CompilationErrors"
-}
-
-ScoreReq.AoU PasteyUsedInValidSyntaxPositions {
-    description = "It shall be ensured that the pastey macro is only invoked in Rust source positions where an identifier or item is syntactically valid."
-    safety = ScoreReq.Asil.B
-    note = "The pastey crate emits raw tokens into the surrounding code without additional context checks. Using it in invalid positions will result in compilation errors."
-    version = 1
-    mitigates = "InvalidTokenPlacement"
+    mitigates = "UncertifiedRustCompiler"
 }

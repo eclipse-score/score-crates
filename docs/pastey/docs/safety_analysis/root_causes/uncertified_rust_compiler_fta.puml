@@ -8,14 +8,14 @@
 ' https://www.apache.org/licenses/LICENSE-2.0
 '
 ' SPDX-License-Identifier: Apache-2.0
-@startuml invalid_syntax_position_fta
+@startuml uncertified_rust_compiler_fta
 
 !include fta_metamodel.puml
 
-$TopEvent("paste! macro expands in syntactically invalid position", "PasteyFailureModes.InvalidTokenPlacement")
+$TopEvent("pastey built with non-safety-certified Rust compiler", "PasteyFailureModes.UncertifiedRustCompiler")
 
 $OrGate("Gate1", "TopEvent")
 
-$BasicEvent("User invokes paste! in syntactically invalid position", "PasteyAoU.PasteyUsedInValidSyntaxPositions", "Gate1")
+$BasicEvent("Rust compiler toolchain is not qualified to ASIL B", "PasteyAoU.PasteyRustCompilerCertified", "Gate1")
 
 @enduml

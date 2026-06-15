@@ -26,7 +26,7 @@ assumptions_of_use(
 
 dependability_analysis(
     name = "pastey_dependability_analysis",
-    arch_design = "//docs/pastey/docs/design:pastey_design",
+    arch_design = "//docs/pastey/docs/architecture:pastey_design",
     fmea = ["//docs/pastey/docs/safety_analysis:pastey_fmea"],
 )
 
@@ -37,7 +37,7 @@ dependable_element(
     requirements = [
         "//docs/pastey/docs/requirement:feature_requirements",
     ],
-    architectural_design = ["//docs/pastey/docs/design:pastey_design"],
+    architectural_design = ["//docs/pastey/docs/architecture:pastey_design"],
     components = ["//docs/pastey/docs/component:pastey_component"],
     dependability_analysis = [":pastey_dependability_analysis"],
     tests = ["//docs/pastey/tests:pastey_test"],

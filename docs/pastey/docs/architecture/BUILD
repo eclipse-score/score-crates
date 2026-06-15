@@ -23,7 +23,7 @@ architectural_design(
     ],
     static = [
         "static_design.puml",
-        "architectural_design.rst",
+        "index.rst",
     ],
     visibility = ["//visibility:public"],
 )

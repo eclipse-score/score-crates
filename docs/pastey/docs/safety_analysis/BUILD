@@ -16,12 +16,11 @@ load("@trlc//:trlc.bzl", "trlc_requirements")
 
 fmea(
     name = "pastey_fmea",
-    arch_design = "//docs/pastey/docs/design:pastey_design",
+    arch_design = "//docs/pastey/docs/architecture:pastey_design",
     controlmeasures = ["aou.trlc"],
     failuremodes = ["failure_modes.trlc",],
     root_causes = [
-        "root_causes/compilation_errors_fta.puml",
-        "root_causes/invalid_syntax_position_fta.puml",
+        "root_causes/uncertified_rust_compiler_fta.puml",
     ],
     visibility = ["//visibility:public"],
 )
