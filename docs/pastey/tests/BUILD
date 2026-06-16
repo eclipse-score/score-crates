@@ -11,7 +11,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # *******************************************************************************
 
-load("@rules_rust//rust:defs.bzl", "rust_test")
+load("@rules_rust//rust:defs.bzl", "rust_test", "rust_doc_test", "rust_library")
 
 rust_test(
     name = "pastey_test",
@@ -19,5 +19,21 @@ rust_test(
     proc_macro_deps = [
         "@crate_index//:pastey",
     ],
+    visibility = ["//visibility:public"],
+)
+
+# This is require for running doc test
+rust_library(
+    name = "pastey_test_lib",
+    srcs = ["pastey_test.rs"],
+    proc_macro_deps = [
+        "@crate_index//:pastey",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+rust_doc_test(
+    name = "pastey_doc_test",
+    crate = ":pastey_test_lib",
     visibility = ["//visibility:public"],
 )

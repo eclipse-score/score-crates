@@ -12,6 +12,10 @@
  ********************************************************************************/
 
 //! Integration tests demonstrating pastey compile-time token manipulation.
+// This is because test related functions and structures are not used directly in the codebase,
+// but are essential for validating the functionality of the pastey crate.
+// Allowing dead code prevents compiler warnings about unused items while still ensuring that all test cases are present and can be executed.
+#![allow(dead_code)]
 
 use pastey::paste;
 
@@ -135,3 +139,100 @@ fn test_environment_variable_lookup() {
     let version = get_PASTEY_VERSION();
     assert!(!version.is_empty());
 }
+
+// Documentation tests for error cases
+
+/// Verify that empty interpolation blocks cause compilation errors
+///
+/// # lobster-trace: PasteyComReq.REQ_COMP_PASTEY_012
+///
+/// ```compile_fail
+/// use pastey::paste;
+/// 
+/// paste! {
+///     struct [<>];
+/// }
+/// ```
+fn test_empty_token_stream_doc() {}
+
+/// Verify that whitespace-only interpolation blocks cause compilation errors
+///
+/// # lobster-trace: PasteyComReq.REQ_COMP_PASTEY_013
+///
+/// ```compile_fail
+/// use pastey::paste;
+/// 
+/// paste! {
+///     struct [<   >];
+/// }
+/// ```
+fn test_whitespace_only_stream_doc() {}
+
+/// Verify that invalid case modifiers cause compilation errors
+///
+/// # lobster-trace: PasteyComReq.REQ_COMP_PASTEY_014
+///
+/// ```compile_fail
+/// use pastey::paste;
+/// 
+/// paste! {
+///     const [<INVALID:invalid_modifier>]: u32 = 42;
+/// }
+/// ```
+fn test_invalid_modifier_doc() {}
+
+/// Verify that malformed replace modifier syntax causes compilation errors
+///
+/// # lobster-trace: PasteyComReq.REQ_COMP_PASTEY_008
+///
+/// ```compile_fail
+/// use pastey::paste;
+/// 
+/// paste! {
+///     // Missing closing parenthesis
+///     fn [<test:replace(foo, bar>]() {}
+/// }
+/// ```
+fn test_malformed_replace_syntax_doc() {}
+
+/// Verify that # in non-first position causes compilation errors
+///
+/// # lobster-trace: PasteyComReq.REQ_COMP_PASTEY_009
+///
+/// ```compile_fail
+/// use pastey::paste;
+/// 
+/// paste! {
+///     // # should only be at first position
+///     fn [<my # type>]() {}
+/// }
+/// ```
+fn test_hash_non_first_position_doc() {}
+
+/// Verify that missing environment variables cause compilation errors
+///
+/// # lobster-trace: PasteyComReq.REQ_COMP_PASTEY_011
+///
+/// ```compile_fail
+/// use pastey::paste;
+/// 
+/// paste! {
+///     // NON_EXISTENT_VAR doesn't exist in build environment
+///     const VERSION: &str = env!("NON_EXISTENT_BUILD_VAR_THAT_DOES_NOT_EXIST");
+/// }
+/// ```
+fn test_missing_env_var_doc() {}
+
+/// Verify that multiple tokens in replace modifier arguments cause compilation errors
+///
+/// # lobster-trace: PasteyComReq.REQ_COMP_PASTEY_015
+///
+/// ```compile_fail
+/// use pastey::paste;
+/// 
+/// paste! {
+///     // Multiple tokens in 'from' argument
+///     fn [<test:replace(foo bar, baz)>]() {}
+/// }
+/// ```
+fn test_replace_multiple_tokens_doc() {}

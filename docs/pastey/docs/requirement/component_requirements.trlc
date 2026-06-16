@@ -91,3 +91,31 @@ ScoreReq.CompReq REQ_COMP_PASTEY_011 {
     derived_from = [PasteyFeatReq.FEAT_PASTEY_001@1]
     version = 1
 }
+
+ScoreReq.CompReq REQ_COMP_PASTEY_012 {
+    description = "The pastey component shall emit a compile error when an interpolation block is empty (contains no tokens)"
+    safety = ScoreReq.Asil.B
+    derived_from = [PasteyFeatReq.FEAT_PASTEY_001@1]
+    version = 1
+}
+
+ScoreReq.CompReq REQ_COMP_PASTEY_013 {
+    description = "The pastey component shall emit a compile error when an interpolation block contains only whitespace tokens with no valid identifiers"
+    safety = ScoreReq.Asil.B
+    derived_from = [PasteyFeatReq.FEAT_PASTEY_001@1]
+    version = 1
+}
+
+ScoreReq.CompReq REQ_COMP_PASTEY_014 {
+    description = "The pastey component shall emit a compile error when an unknown or unsupported case modifier is specified"
+    safety = ScoreReq.Asil.B
+    derived_from = [PasteyFeatReq.FEAT_PASTEY_001@1]
+    version = 1
+}
+
+ScoreReq.CompReq REQ_COMP_PASTEY_015 {
+    description = "The pastey component shall emit a compile error when the :replace modifier receives more than one token for either the from or to argument"
+    safety = ScoreReq.Asil.B
+    derived_from = [PasteyFeatReq.FEAT_PASTEY_001@1]
+    version = 1
+}
