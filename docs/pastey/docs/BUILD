@@ -11,12 +11,34 @@
 # SPDX-License-Identifier: Apache-2.0
 # *******************************************************************************
 
-load("@trlc//:trlc.bzl", "trlc_requirements")
+load(
+    "@score_tooling//bazel/rules/rules_score:rules_score.bzl",
+    "assumptions_of_use",
+    "dependable_element",
+    "dependability_analysis",
+)
 
-trlc_requirements(
+assumptions_of_use(
     name = "aou",
-    srcs = [
-        "aou.trlc",
-    ],
+    srcs = ["//docs/pastey/docs/safety_analysis:aou_trlc"],
     visibility = ["//visibility:public"],
+)
+
+dependability_analysis(
+    name = "pastey_dependability_analysis",
+    arch_design = "//docs/pastey/docs/architecture:pastey_design",
+    fmea = ["//docs/pastey/docs/safety_analysis:pastey_fmea"],
+)
+
+dependable_element(
+    name = "pastey",
+    integrity_level = "B",
+    assumptions_of_use = [":aou"],
+    requirements = [
+        "//docs/pastey/docs/requirement:feature_requirements",
+    ],
+    architectural_design = ["//docs/pastey/docs/architecture:pastey_design"],
+    components = ["//docs/pastey/docs/component:pastey_component"],
+    dependability_analysis = [":pastey_dependability_analysis"],
+    tests = ["//docs/pastey/tests:pastey_test"],
 )

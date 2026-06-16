@@ -11,40 +11,29 @@
 # SPDX-License-Identifier: Apache-2.0
 # *******************************************************************************
 
-load(
-    "@score_tooling//bazel/rules/rules_score:rules_score.bzl",
-    "assumed_system_requirements",
-    "component_requirements",
-    "feature_requirements",
-)
+load("@rules_rust//rust:defs.bzl", "rust_test", "rust_doc_test", "rust_library")
 
-assumed_system_requirements(
-    name = "system_requirements",
-    srcs = [
-        "assumed_system_requirements.trlc",
+rust_test(
+    name = "pastey_test",
+    srcs = ["pastey_test.rs"],
+    proc_macro_deps = [
+        "@crate_index//:pastey",
     ],
     visibility = ["//visibility:public"],
 )
 
-feature_requirements(
-    name = "feature_requirements",
-    srcs = [
-        "feature_requirements.trlc",
+# This is require for running doc test
+rust_library(
+    name = "pastey_test_lib",
+    srcs = ["pastey_test.rs"],
+    proc_macro_deps = [
+        "@crate_index//:pastey",
     ],
     visibility = ["//visibility:public"],
-    deps = [
-        ":system_requirements",
-    ],
 )
 
-component_requirements(
-    name = "component_requirements",
-    srcs = [
-        "component_requirements.trlc",
-    ],
+rust_doc_test(
+    name = "pastey_doc_test",
+    crate = ":pastey_test_lib",
     visibility = ["//visibility:public"],
-    deps = [
-        ":system_requirements",
-        ":feature_requirements",
-    ],
 )

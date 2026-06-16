@@ -13,38 +13,17 @@
 
 load(
     "@score_tooling//bazel/rules/rules_score:rules_score.bzl",
-    "assumed_system_requirements",
-    "component_requirements",
-    "feature_requirements",
+    "component",
 )
 
-assumed_system_requirements(
-    name = "system_requirements",
-    srcs = [
-        "assumed_system_requirements.trlc",
+component(
+    name = "pastey_component",
+    requirements = [
+        "//docs/pastey/docs/requirement:component_requirements",
+        "//docs/pastey/docs/requirement:feature_requirements",
+    ],
+    tests = [
+        "//docs/pastey/tests:pastey_test",
     ],
     visibility = ["//visibility:public"],
-)
-
-feature_requirements(
-    name = "feature_requirements",
-    srcs = [
-        "feature_requirements.trlc",
-    ],
-    visibility = ["//visibility:public"],
-    deps = [
-        ":system_requirements",
-    ],
-)
-
-component_requirements(
-    name = "component_requirements",
-    srcs = [
-        "component_requirements.trlc",
-    ],
-    visibility = ["//visibility:public"],
-    deps = [
-        ":system_requirements",
-        ":feature_requirements",
-    ],
 )

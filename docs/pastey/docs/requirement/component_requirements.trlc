@@ -13,6 +13,7 @@
 package PasteyComReq
 
 import ScoreReq
+import PasteyFeatReq
 
 ScoreReq.CompReq REQ_COMP_PASTEY_001 {
     description = "The pastey component shall collect all tokens inside a paste! interpolation block (the [< ... >] syntax) and shall discard whitespace tokens between them before performing identifier concatenation"
@@ -86,6 +87,34 @@ ScoreReq.CompReq REQ_COMP_PASTEY_010 {
 
 ScoreReq.CompReq REQ_COMP_PASTEY_011 {
     description = "The pastey component shall look up the named variable in the compile-time environment, shall replace all hyphens in the resolved string with underscores, and shall emit a compile error when the variable is absent from the build environment"
+    safety = ScoreReq.Asil.B
+    derived_from = [PasteyFeatReq.FEAT_PASTEY_001@1]
+    version = 1
+}
+
+ScoreReq.CompReq REQ_COMP_PASTEY_012 {
+    description = "The pastey component shall emit a compile error when an interpolation block is empty (contains no tokens)"
+    safety = ScoreReq.Asil.B
+    derived_from = [PasteyFeatReq.FEAT_PASTEY_001@1]
+    version = 1
+}
+
+ScoreReq.CompReq REQ_COMP_PASTEY_013 {
+    description = "The pastey component shall emit a compile error when an interpolation block contains only whitespace tokens with no valid identifiers"
+    safety = ScoreReq.Asil.B
+    derived_from = [PasteyFeatReq.FEAT_PASTEY_001@1]
+    version = 1
+}
+
+ScoreReq.CompReq REQ_COMP_PASTEY_014 {
+    description = "The pastey component shall emit a compile error when an unknown or unsupported case modifier is specified"
+    safety = ScoreReq.Asil.B
+    derived_from = [PasteyFeatReq.FEAT_PASTEY_001@1]
+    version = 1
+}
+
+ScoreReq.CompReq REQ_COMP_PASTEY_015 {
+    description = "The pastey component shall emit a compile error when the :replace modifier receives more than one token for either the from or to argument"
     safety = ScoreReq.Asil.B
     derived_from = [PasteyFeatReq.FEAT_PASTEY_001@1]
     version = 1
