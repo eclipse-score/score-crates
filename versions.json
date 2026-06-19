@@ -2,5 +2,9 @@
   {
     "version": "main",
     "url": "https://eclipse-score.github.io/score-crates/main/"
+  },
+  {
+    "version": "pr-43",
+    "url": "https://eclipse-score.github.io/score-crates/pr-43/"
   }
 ]
