@@ -153,8 +153,9 @@ Step 2: Determine (C): the uncertainty of finding systematic faults based on the
         With this PR https://github.com/AS1100K/pastey/pull/28, code coverage is -
 
         * 100% function coverage
-        * 100% line coverage 
+        * 100% line coverage
         * 100% branch coverage
+
         (coverage report can be generate by creating a pull request e.g. - https://github.com/AS1100K/pastey/pull/30/checks or by running tests locally with `cargo test` command)
 
     * - 4
