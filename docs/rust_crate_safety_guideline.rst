@@ -13,11 +13,11 @@
    # *******************************************************************************
 
 
-Rust External Crate Qualification Manual
+Rust External Crate Safety Guideline
 =========================================
 
-This document describes the process for qualifying an external Rust crate for use in the
-safety-critical S-CORE Rust codebase. The qualification process ensures that a crate meets
+This document describes the process for accepting an external Rust crate for use in the
+safety-critical S-CORE Rust codebase. Following the safety guideline ensures that a crate meets
 the required safety and quality standards before it is used in safety-critical applications
 or libraries.
 
@@ -42,7 +42,7 @@ Process Overview
      :Step 3 — Address Findings
      <i>coverage · docs · requirements · design · traceability</i>;
 
-     :Step 4 — Final Review & Certification;
+     :Step 4 — Final Review & Approval;
      stop
    else (NQ)
      :Crate cannot be used\nin the safety-critical codebase;
@@ -133,7 +133,7 @@ Step 3: Address Findings
 -------------------------
 
 Based on the review feedback and your own assessment, resolve the identified findings.
-The following categories of findings are common:
+The following categories of findings are common, but not all of those may be needed (this is based on the identified findings.) :
 
 **Coverage**
 
@@ -154,11 +154,12 @@ The following categories of findings are common:
 
 **Requirements**
 
-Requirements must be written in TRLC format and follow the three-level hierarchy below.
+Requirements should follow the three-level hierarchy below.
 Because upstream repositories are typically not suitable for hosting safety artifacts,
 create the requirement files in the ``score-crates`` repository and link them in the report.
 Follow the same crate-specific directory layout as the pastey example, for example
 ``docs/<crate>/docs/requirement/``.
+In the following is shown how to document the requirements using the TRLC approach:
 
 .. uml::
 
@@ -219,9 +220,9 @@ See the `pastey design documentation <https://github.com/eclipse-score/score-cra
    See `score-crates PR #39 <https://github.com/eclipse-score/score-crates/pull/39>`_ as an example.
 
 
-Step 4: Final Review & Certification
+Step 4: Final Review & Approval
 --------------------------------------
 
 Submit the updated pull request with all findings resolved. The SCORE Safety team performs
-a final review and, if all standards are met, certifies the crate for use in the
+a final review and, if all standards are met, approves the crate for use in the
 safety-critical S-CORE Rust codebase.
