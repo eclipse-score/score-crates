@@ -160,6 +160,8 @@ create the requirement files in the ``score-crates`` repository and link them in
 Follow the same crate-specific directory layout as the pastey example, for example
 ``docs/<crate>/docs/requirement/``.
 In the following is shown how to document the requirements using the TRLC approach:
+note: Equivalent is the definition of stakeholder/feature/component requirements as described in :
+need:``gd_guidl__req_engineering``
 
 .. uml::
 
