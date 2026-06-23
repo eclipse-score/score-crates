@@ -3,6 +3,15 @@
 # Generated aliases for crate_index entries
 # Generated on: Wed May 20 11:24:44 IST 2026
 
+load("@score_docs_as_code//:docs.bzl", "docs")
+
+docs(
+    source_dir = "docs",
+    data = [
+        "@score_process//:needs_json",
+    ],
+)
+
 alias(
     name = "adler32",
     actual = "@crate_index//:adler32",
