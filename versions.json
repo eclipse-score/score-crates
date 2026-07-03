@@ -26,5 +26,9 @@
   {
     "version": "pr-50",
     "url": "https://eclipse-score.github.io/score-crates/pr-50/"
+  },
+  {
+    "version": "pr-52",
+    "url": "https://eclipse-score.github.io/score-crates/pr-52/"
   }
 ]
