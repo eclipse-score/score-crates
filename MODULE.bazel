@@ -437,7 +437,7 @@ git_override(
 bazel_dep(name = "rules_python", version = "1.8.5", dev_dependency = True)
 
 bazel_dep(name = "score_docs_as_code", version = "4.5.0")
-bazel_dep(name = "score_process", version = "1.6.0")
+bazel_dep(name = "score_process", version = "2.0.1")
 bazel_dep(name = "score_tooling")
 git_override(
     module_name = "score_tooling",
