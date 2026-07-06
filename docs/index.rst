@@ -19,5 +19,7 @@ S-CORE Crates Documentation
    :maxdepth: 1
 
    rust_crate_safety_guideline
+   safety_mgt/module_safety_plan
+   verification_report/module_verification_report
    pastey/docs/component_classification
    pastey/docs/architecture/index
