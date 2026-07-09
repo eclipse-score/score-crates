@@ -30,14 +30,13 @@ The repository also contains safety-related artifacts for external crates, enabl
    rust_crate_safety_guideline
    safety_mgt/module_safety_plan
    verification_report/module_verification_report
-   pastey/docs/component_classification
-   pastey/docs/architecture/index
+   crates_index
 
 Documentation Structure
 -----------------------
 
-Safety and Management
-~~~~~~~~~~~~~~~~~~~~~
+Safety and Verification
+~~~~~~~~~~~~~~~~~~~~~~~
 
 The :doc:`Rust Crate Safety Guideline <rust_crate_safety_guideline>` provides safety guidelines for safety qualifying Rust crates.
 
@@ -45,8 +44,8 @@ The :doc:`Module Safety Plan <safety_mgt/module_safety_plan>` covers safety mana
 
 The :doc:`Module Verification Report <verification_report/module_verification_report>` provides verification results and analysis guide.
 
-Crates Artifact
-~~~~~~~~~~~~~~~
+Crates
+~~~~~~
 
 pastey
 ^^^^^^
