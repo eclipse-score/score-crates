@@ -86,8 +86,26 @@ alias(
 )
 
 alias(
+    name = "equivalent",
+    actual = "@crate_index//:equivalent",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "foldhash",
+    actual = "@crate_index//:foldhash",
+    visibility = ["//visibility:public"],
+)
+
+alias(
     name = "futures",
     actual = "@crate_index//:futures",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "hashbrown",
+    actual = "@crate_index//:hashbrown",
     visibility = ["//visibility:public"],
 )
 
@@ -178,6 +196,12 @@ alias(
 alias(
     name = "iceoryx2_qnx8",
     actual = "@crate_index//:iceoryx2-qnx8",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "indexmap",
+    actual = "@crate_index//:indexmap",
     visibility = ["//visibility:public"],
 )
 
@@ -320,6 +344,12 @@ alias(
 )
 
 alias(
+    name = "rustversion",
+    actual = "@crate_index//:rustversion",
+    visibility = ["//visibility:public"],
+)
+
+alias(
     name = "sem_safe",
     actual = "@crate_index//:sem_safe",
     visibility = ["//visibility:public"],
@@ -328,6 +358,12 @@ alias(
 alias(
     name = "serde",
     actual = "@crate_index//:serde",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "serde_core",
+    actual = "@crate_index//:serde_core",
     visibility = ["//visibility:public"],
 )
 
