@@ -1,7 +1,8 @@
 # BUILD file to satisfy Bazel package requirements for extensions.bzl
 # This file contains auto-generated aliases from @crate_index
 # Generated aliases for crate_index entries
-# Generated on: Wed May 20 11:24:44 IST 2026
+# Generated on: Mon Jul 20 19:03:26 IST 2026
+
 
 load("@score_docs_as_code//:docs.bzl", "docs")
 
