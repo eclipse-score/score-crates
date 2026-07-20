@@ -41,6 +41,19 @@ EOF
 echo "# Generated on: $(date)" >> "$BUILD_FILE"
 echo "" >> "$BUILD_FILE"
 
+cat >> "$BUILD_FILE" << 'EOF'
+
+load("@score_docs_as_code//:docs.bzl", "docs")
+
+docs(
+    source_dir = "docs",
+    data = [
+        "@score_process//:needs_json",
+    ],
+)
+
+EOF
+
 # Query all targets from @crate_index and store in temp file
 echo "Querying @crate_index targets..."
 bazel query "@crate_index//..." 2>/dev/null > "$tmp_file"
