@@ -2,13 +2,13 @@
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../../../" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Component Architecture &#8212; S-CORE Crates  documentation</title>
+    <title>Verification Report &#8212; S-CORE Crates  documentation</title>
   
   
   
@@ -27,42 +27,42 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=7f76b32a3354e82990f2" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=7f76b32a3354e82990f2" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=7f76b32a3354e82990f2" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=7f76b32a3354e82990f2" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/css/score.css?v=bb63a8e1" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/css/score_needs.css?v=82a1844f" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/css/score_design.css?v=8048e6ee" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-data-viewer/jsonview.bundle.css?v=f6ef2277" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-needs/libs/html/datatables.min.css?v=4b4fd840" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-needs/common_css/need_core.css?v=f5b60a78" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-needs/common_css/need_toggle.css?v=5c6620df" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-needs/common_css/need_style.css?v=92936fa5" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-needs/common_css/needstable.css?v=5e1b6797" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-needs/common_css/need_links.css?v=2150a916" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-needs/modern.css?v=803738c0" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/score.css?v=bb63a8e1" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/score_needs.css?v=82a1844f" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/score_design.css?v=8048e6ee" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-data-viewer/jsonview.bundle.css?v=f6ef2277" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-needs/libs/html/datatables.min.css?v=4b4fd840" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-needs/common_css/need_core.css?v=f5b60a78" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-needs/common_css/need_toggle.css?v=5c6620df" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-needs/common_css/need_style.css?v=92936fa5" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-needs/common_css/needstable.css?v=5e1b6797" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-needs/common_css/need_links.css?v=2150a916" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-needs/modern.css?v=803738c0" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../_static/scripts/fontawesome.js?digest=7f76b32a3354e82990f2"></script>
+  <script defer src="../_static/scripts/fontawesome.js?digest=7f76b32a3354e82990f2"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=7f76b32a3354e82990f2" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=7f76b32a3354e82990f2" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=7f76b32a3354e82990f2" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=7f76b32a3354e82990f2" />
 
-    <script src="../../../_static/jquery.js?v=5d32c60e"></script>
-    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script src="../../../_static/documentation_options.js?v=7f41d439"></script>
-    <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
-    <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
-    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
-    <script src="../../../_static/sphinx-data-viewer/jsonview.bundle.js?v=18cd53c5"></script>
-    <script src="../../../_static/sphinx-data-viewer/jsonview_loader.js?v=f7ff7e7d"></script>
-    <script src="../../../_static/sphinx-needs/libs/html/datatables.min.js?v=8a4aee21"></script>
-    <script src="../../../_static/sphinx-needs/libs/html/datatables_loader.js?v=a2cae175"></script>
-    <script src="../../../_static/sphinx-needs/libs/html/sphinx_needs_collapse.js?v=dca66431"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'pastey/docs/architecture/index';</script>
+    <script src="../_static/jquery.js?v=5d32c60e"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+    <script src="../_static/documentation_options.js?v=7f41d439"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/sphinx-data-viewer/jsonview.bundle.js?v=18cd53c5"></script>
+    <script src="../_static/sphinx-data-viewer/jsonview_loader.js?v=f7ff7e7d"></script>
+    <script src="../_static/sphinx-needs/libs/html/datatables.min.js?v=8a4aee21"></script>
+    <script src="../_static/sphinx-needs/libs/html/datatables_loader.js?v=a2cae175"></script>
+    <script src="../_static/sphinx-needs/libs/html/sphinx_needs_collapse.js?v=dca66431"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'verification_report/module_verification_report';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.17.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://eclipse-score.github.io/score-crates/versions.json';
@@ -71,17 +71,18 @@
             false;
         </script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
-    <link rel="index" title="Index" href="../../../genindex.html" />
-    <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="prev" title="Pastey Crate Component Classification" href="../component_classification.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Components" href="../crates_index.html" />
+    <link rel="prev" title="Safety Plan" href="../safety_mgt/module_safety_plan.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="0.1" />
   
     
-    <script src="../../../_static/searchtools.js"></script>
-    <script src="../../../_static/language_data.js"></script>
-    <script src="../../../searchindex.js"></script>
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
   
   </head>
   <body data-default-mode="">
@@ -99,7 +100,7 @@
   <dialog id="pst-search-dialog">
     
 <form class="bd-search d-flex align-items-center"
-      action="../../../search.html"
+      action="../search.html"
       method="get">
   <i class="fa-solid fa-magnifying-glass"></i>
   <input type="search"
@@ -135,7 +136,7 @@
     
   
 
-<a class="navbar-brand logo" href="../../../index.html">
+<a class="navbar-brand logo" href="../index.html">
   
   
   
@@ -157,28 +158,28 @@
   <ul class="bd-navbar-elements navbar-nav">
     
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../../../rust_crate_safety_guideline.html">
+  <a class="nav-link nav-internal" href="../rust_crate_safety_guideline.html">
     Rust External Crate Safety Guideline
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../../../safety_mgt/module_safety_plan.html">
+  <a class="nav-link nav-internal" href="../safety_mgt/module_safety_plan.html">
     Safety Plan
   </a>
 </li>
 
 
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../../../verification_report/module_verification_report.html">
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
     Verification Report
   </a>
 </li>
 
 
-<li class="nav-item current active">
-  <a class="nav-link nav-internal" href="../../../crates_index.html">
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../crates_index.html">
     Components
   </a>
 </li>
@@ -293,28 +294,28 @@
   <ul class="bd-navbar-elements navbar-nav">
     
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../../../rust_crate_safety_guideline.html">
+  <a class="nav-link nav-internal" href="../rust_crate_safety_guideline.html">
     Rust External Crate Safety Guideline
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../../../safety_mgt/module_safety_plan.html">
+  <a class="nav-link nav-internal" href="../safety_mgt/module_safety_plan.html">
     Safety Plan
   </a>
 </li>
 
 
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../../../verification_report/module_verification_report.html">
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
     Verification Report
   </a>
 </li>
 
 
-<li class="nav-item current active">
-  <a class="nav-link nav-internal" href="../../../crates_index.html">
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../crates_index.html">
     Components
   </a>
 </li>
@@ -389,14 +390,7 @@
 <nav class="bd-docs-nav bd-links"
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
-  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../index.html">Pastey</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../component_classification.html">Pastey Crate Component Classification</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Component Architecture</a></li>
-</ul>
-</details></li>
-</ul>
-</div>
+  <div class="bd-toc-item navbar-nav"></div>
 </nav></div>
     </div>
   
@@ -431,17 +425,11 @@
   <ul class="bd-breadcrumbs">
     
     <li class="breadcrumb-item breadcrumb-home">
-      <a href="../../../index.html" class="nav-link" aria-label="Home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
         <i class="fa-solid fa-home"></i>
       </a>
     </li>
-    
-    <li class="breadcrumb-item"><a href="../../../crates_index.html" class="nav-link">Components</a></li>
-    
-    
-    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Pastey</a></li>
-    
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Component Architecture</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Verification Report</span></li>
   </ul>
 </nav>
 </div>
@@ -458,18 +446,22 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="component-architecture">
-<span id="pastey-architecture-design"></span><h1>Component Architecture<a class="headerlink" href="#component-architecture" title="Link to this heading">#</a></h1>
-<div class="need_container docutils container" id="SNCB-e965e5cc">
-<div class="pst-scrollable-table-container"><table class="need needs_grid_complex needs_layout_score needs_style_none needs_type_document table" id="doc__mod_pastey_architecture">
+  <section id="verification-report">
+<h1>Verification Report<a class="headerlink" href="#verification-report" title="Link to this heading">#</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Document header</p>
+</div>
+<div class="need_container docutils container" id="SNCB-12b1d030">
+<div class="pst-scrollable-table-container"><table class="need needs_grid_complex needs_layout_score needs_style_none needs_type_document table" id="doc__score_crates_verification_report">
 <tbody>
 <tr class="head row-odd"><td class="head_left" colspan="2"><div class="needs_head_left line-block">
-<div class="line"><span><span class="needs_title"><span class="needs_data">Pastey Architecture</span></span></span></div>
+<div class="line"><span><span class="needs_title"><span class="needs_data">score-crates Verification Report</span></span></span></div>
 </div>
 </td>
 <td class="head_center" colspan="2"><div class="needs_head line-block">
-<div class="line"><span><span class="needs_status"><span class="needs_label">status: </span><span class="needs_data">valid</span></span></span></div>
-<div class="line"><span><span class="needs_security"><span class="needs_label">security: </span><span class="needs_data">NO</span></span></span></div>
+<div class="line"><span><span class="needs_status"><span class="needs_label">status: </span><span class="needs_data">draft</span></span></span></div>
+<div class="line"><span><span class="needs_security"><span class="needs_label">security: </span><span class="needs_data">YES</span></span></span></div>
 <div class="line"><span><span class="needs_safety"><span class="needs_label">safety: </span><span class="needs_data">ASIL_B</span></span></span></div>
 </div>
 </td>
@@ -479,10 +471,9 @@
 </td>
 </tr>
 <tr class="meta row-even"><td class="meta" colspan="3"><div class="needs_meta_left line-block">
-<div class="line"><span><span><div class="line"><span class="needs_tags"><span class="needs_label">tags: </span><span class="needs_data_container"><span class="needs_data">architecture</span><span class="needs_spacer">, </span><span class="needs_data">component</span><span class="needs_spacer">, </span><span class="needs_data">rust</span><span class="needs_spacer">, </span><span class="needs_data">proc_macro</span></span></span></div>
-<div class="line"><span class="needs_version"><span class="needs_label">version: </span>0</span></div>
+<div class="line"><span><span><div class="line"><span class="needs_version"><span class="needs_label">version: </span>0</span></div>
 </span></span></div>
-<div class="line"><span><div class="line">realizes: <span class="realizes"><span><a class="external_link reference external" href="https://eclipse-score.github.io/process_description//main/process_areas/architecture_design/architecture_workproducts.html#wp__component_arch">wp__component_arch</a></span></span></div>
+<div class="line"><span><div class="line">realizes: <span class="realizes"><span><a class="external_link reference external" href="https://eclipse-score.github.io/process_description//main/process_areas/verification/verification_workproducts.html#wp__verification_module_ver_report">wp__verification_module_ver_report</a></span></span></div>
 </span></div>
 </div>
 </td>
@@ -491,7 +482,7 @@
 <tr class="content row-odd"><td class="content" colspan="6"></td>
 </tr>
 <tr class="footer row-even"><td class="footer_left" colspan="2"><div class="needs_footer_left line-block">
-<div class="line"><span><span class="needs-id"><a class="reference internal" href="#doc__mod_pastey_architecture" title="doc__mod_pastey_architecture">doc__mod_pastey_architecture</a></span></span></div>
+<div class="line"><span><span class="needs-id"><a class="reference internal" href="#doc__score_crates_verification_report" title="doc__score_crates_verification_report">doc__score_crates_verification_report</a></span></span></div>
 </div>
 </td>
 <td class="footer" colspan="2"><div class="needs_footer line-block">
@@ -504,27 +495,66 @@
 </table>
 </div>
 </div>
-<section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">pastey</span></code> is a Rust procedural macro crate that provides compile-time token
-manipulation and identifier synthesis. It operates entirely at compile time
-within the Rust compiler’s macro expansion phase.</p>
-</section>
-<section id="static-architecture">
-<h2>Static Architecture<a class="headerlink" href="#static-architecture" title="Link to this heading">#</a></h2>
-<p>The pastey crate is single component architecture consisting of a single Rust crate that defines the
-<code class="docutils literal notranslate"><span class="pre">paste!</span></code> macro.</p>
-<p class="plantuml">
-<object data="../../../_images/plantuml-25fdeda04c4003782b982117943d928d5143e8a2.svg" type="image/svg+xml" style="width:219px;height:143px;background:#FFFFFF;"></object></p>
-</section>
-<section id="interfaces">
-<h2>Interfaces<a class="headerlink" href="#interfaces" title="Link to this heading">#</a></h2>
-<p>The pastey crate consists of a single proc-macro entry point that processes
-token streams passed to the <code class="docutils literal notranslate"><span class="pre">paste!</span></code> macro invocation. All processing occurs
-at compile time with no runtime footprint.</p>
-<p class="plantuml">
-<object data="../../../_images/plantuml-dc98e2edb088a53fbd71a2ded4d87050a7f88751.svg" type="image/svg+xml" style="width:210px;height:112px;background:#FFFFFF;"></object></p>
-</section>
+<p>This verification report is based on the <a class="external_link reference external" href="https://eclipse-score.github.io/process_description//main/process_areas/verification/guidance/verification_plan_template.html#gd_temp__verification_plan">gd_temp__verification_plan</a>.
+It covers all the components of the above stated module.</p>
+<p>Verification Report contains:</p>
+<p><strong>1. Verification Coverage</strong></p>
+<dl class="simple">
+<dt><strong>1.1. on Requirements</strong></dt><dd><p><a class="reference external" href="https://github.com/user-attachments/files/28588652/pastey_index_report.html">Traceability and test result report</a></p>
+</dd>
+<dt><strong>1.2. on Architecture</strong></dt><dd><ul class="simple">
+<li><p>List of component architecture tags tested by which test case, passed/failed and completeness verdict
+(this shall be generated by tools and accompanied by progress charts to be usable also for project steering)</p></li>
+<li><p>This is split in a list of QM components tested and a separate list of tests for ASIL rated components.</p></li>
+<li><p>List of component architecture tags (ASIL rated) linked to inspection checklist and verdict (derived from PR export)</p></li>
+</ul>
+</dd>
+<dt><strong>1.3. on Detailed Design</strong></dt><dd><ul class="simple">
+<li><p>List of detailed design tags tested by which test case, passed/failed and completeness verdict
+(this shall be generated by tools and accompanied by progress charts to be usable also for project steering)</p></li>
+<li><p>This is split in a list of QM components tested and a separate list of tests for ASIL rated components.</p></li>
+<li><p>List of detailed design tags (ASIL rated) linked to inspection checklist and verdict (derived from PR export)</p></li>
+<li><p>The lists may also contain other verification methods like “Analysis” - process tbd</p></li>
+</ul>
+</dd>
+<dt><strong>2. DFA Report</strong></dt><dd><ul class="simple">
+<li><p>List of the performed component DFA, pass/fail with open mitigations</p></li>
+</ul>
+</dd>
+<dt><strong>3. Safety Analysis Report</strong></dt><dd><ul class="simple">
+<li><p>List of the performed component Safety Analysis, pass/fail with open mitigations</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>4. Unit Verification Coverage</strong></p>
+<dl class="simple">
+<dt><strong>4.1. Structural Coverage</strong></dt><dd><p><a class="reference external" href="https://github.com/eclipse-score/score-crates/pull/31#issue-4254036938">coverage report</a></p>
+</dd>
+<dt><strong>4.2. Static Code Analysis</strong></dt><dd><ul class="simple">
+<li><p>List of the units with compiler warning numbers and coding rule violation numbers
+(this shall be generated by tools and accompanied by progress charts to be usable also for project steering)</p></li>
+<li><p>List includes a column for the safety rating of each unit.</p></li>
+</ul>
+</dd>
+<dt><strong>4.3. Manual Code Inspection</strong></dt><dd><ul class="simple">
+<li><p>List of components (ASIL rated) linked to inspection checklist and verdict (derived from PR export)</p></li>
+</ul>
+</dd>
+<dt><strong>5. Software component qualification verification report</strong></dt><dd><ul class="simple">
+<li><p>Contains the needed verification results if for some components a qualification of pre-developed SW is performed.</p></li>
+</ul>
+</dd>
+<dt><strong>6. Test results</strong></dt><dd><ul class="simple">
+<li><p>Test result per test case with status passed/failed/not_run</p></li>
+</ul>
+</dd>
+<dt><strong>7. Test logs</strong></dt><dd><ul class="simple">
+<li><p>Test log per test case with status passed/failed/not_run</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Note1:</strong> The verification report is valid for the module version tagged together with the report</p>
+<p><strong>Note2:</strong> All the above lists are generated automatically</p>
 </section>
 
 
@@ -538,13 +568,22 @@ at compile time with no runtime footprint.</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../component_classification.html"
+       href="../safety_mgt/module_safety_plan.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Pastey Crate Component Classification</p>
+        <p class="prev-next-title">Safety Plan</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="../crates_index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Components</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -558,24 +597,10 @@ at compile time with no runtime footprint.</p>
 
 
   <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
-  </div>
-  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#static-architecture">Static Architecture</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interfaces">Interfaces</a></li>
-</ul>
-  </nav></div>
-
-  <div class="sidebar-secondary-item">
 
   
   <div class="tocsection editthispage">
-    <a href="https://github.com/eclipse-score/score-crates/edit/main/docs/pastey/docs/architecture/index.rst">
+    <a href="https://github.com/eclipse-score/score-crates/edit/main/docs/verification_report/module_verification_report.rst">
       <i class="fa-solid fa-pencil"></i>
       
       
@@ -600,8 +625,8 @@ at compile time with no runtime footprint.</p>
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../_static/scripts/bootstrap.js?digest=7f76b32a3354e82990f2"></script>
-<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=7f76b32a3354e82990f2"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=7f76b32a3354e82990f2"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=7f76b32a3354e82990f2"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
