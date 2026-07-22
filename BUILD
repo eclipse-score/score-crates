@@ -1,7 +1,7 @@
 # BUILD file to satisfy Bazel package requirements for extensions.bzl
 # This file contains auto-generated aliases from @crate_index
 # Generated aliases for crate_index entries
-# Generated on: Mon Jul 20 19:03:26 IST 2026
+# Generated on: Wed Jul 22 01:23:39 PM UTC 2026
 
 
 load("@score_docs_as_code//:docs.bzl", "docs")
@@ -64,6 +64,12 @@ alias(
 alias(
     name = "cliclack",
     actual = "@crate_index//:cliclack",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "codespan_reporting",
+    actual = "@crate_index//:codespan-reporting",
     visibility = ["//visibility:public"],
 )
 
@@ -350,6 +356,12 @@ alias(
 )
 
 alias(
+    name = "scratch",
+    actual = "@crate_index//:scratch",
+    visibility = ["//visibility:public"],
+)
+
+alias(
     name = "sem_safe",
     actual = "@crate_index//:sem_safe",
     visibility = ["//visibility:public"],
@@ -448,6 +460,35 @@ alias(
 alias(
     name = "tracing_subscriber",
     actual = "@crate_index//:tracing-subscriber",
+    visibility = ["//visibility:public"],
+)
+
+# ----------------------------------------------------------------------------
+# Vendored CXX (dtolnay/cxx) exports.
+# Re-export the targets from the `@rust_cxx` http_archive so downstream modules
+# can depend on them via `@score_crates//:...`.
+# ----------------------------------------------------------------------------
+alias(
+    name = "cxx",
+    actual = "@rust_cxx//:cxx",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "cxx_cc",
+    actual = "@rust_cxx//:core",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "cxxbridge",
+    actual = "@rust_cxx//:cxxbridge",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "cxx_gen",
+    actual = "@rust_cxx//:cxx-gen",
     visibility = ["//visibility:public"],
 )
 

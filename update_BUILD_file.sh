@@ -62,32 +62,32 @@ bazel query "@crate_index//..." 2>/dev/null > "$tmp_file"
 while read -r target; do
     # Extract the target name after the last ':'
     target_name=$(echo "$target" | sed 's/.*://')
-    
+
     # Skip if target_name is empty or contains unwanted patterns
     if [[ -z "$target_name" || "$target_name" == *"BUILD"* || "$target_name" == *"defs"* || "$target_name" == "srcs" ]]; then
         continue
     fi
-    
+
     # Remove version suffix (everything from the first dash followed by a digit)
     # Example: futures-0.3.31 -> futures, clap-4.5.4 -> clap
     crate_name=$(echo "$target_name" | sed 's/-[0-9].*//')
-    
+
     # Skip if the crate_name is empty after processing
     if [[ -z "$crate_name" ]]; then
         continue
     fi
-    
+
     # Replace dashes with underscores for valid Bazel target names
     bazel_name=$(echo "$crate_name" | tr '-' '_')
-    
+
     # Check if we already processed this crate name
     if grep -q "^$bazel_name$" "$processed_file" 2>/dev/null; then
         continue
     fi
-    
+
     # Add to processed list
     echo "$bazel_name" >> "$processed_file"
-    
+
     # Prefer non-versioned targets if they exist
     preferred_target="$target"
     if [[ "$target_name" == *"-"*[0-9]* ]]; then
@@ -97,7 +97,7 @@ while read -r target; do
             preferred_target="$non_versioned"
         fi
     fi
-    
+
     # Append the alias to BUILD file
     cat >> "$BUILD_FILE" << EOF
 alias(
@@ -107,9 +107,44 @@ alias(
 )
 
 EOF
-    
+
     echo "Added alias: $bazel_name -> $preferred_target"
 done < "$tmp_file"
+
+# Emit the vendored CXX exports. These are not part of @crate_index (they come
+# from the `@rust_cxx` http_archive), so they cannot be discovered by the query
+# above and are emitted here explicitly.
+cat >> "$BUILD_FILE" << 'EOF'
+# ----------------------------------------------------------------------------
+# Vendored CXX (dtolnay/cxx) exports.
+# Re-export the targets from the `@rust_cxx` http_archive so downstream modules
+# can depend on them via `@score_crates//:...`.
+# ----------------------------------------------------------------------------
+alias(
+    name = "cxx",
+    actual = "@rust_cxx//:cxx",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "cxx_cc",
+    actual = "@rust_cxx//:core",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "cxxbridge",
+    actual = "@rust_cxx//:cxxbridge",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "cxx_gen",
+    actual = "@rust_cxx//:cxx-gen",
+    visibility = ["//visibility:public"],
+)
+
+EOF
 
 # Add footer
 echo "# End of generated aliases" >> "$BUILD_FILE"

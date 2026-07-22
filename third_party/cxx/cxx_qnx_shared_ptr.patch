@@ -1,0 +1,19 @@
+--- a/gen/src/builtin/shared_ptr.h
++++ b/gen/src/builtin/shared_ptr.h
+@@ -21,7 +21,15 @@
+ //
+ template <typename T>
+ struct shared_ptr_if_destructible<T, true> : ::std::shared_ptr<T> {
+-  using ::std::shared_ptr<T>::shared_ptr;
++  // Do NOT use `using ::std::shared_ptr<T>::shared_ptr` here.  On QNX 7.x
++  // libc++ the `__nat` sentinel parameter has a default value, which makes
++  // two `shared_ptr` overloads simultaneously viable for a single `T*`
++  // argument and causes an ambiguity that deletes the inherited constructor.
++  // Providing explicit constructors avoids the ambiguity on all platforms.
++  explicit shared_ptr_if_destructible(typename ::std::shared_ptr<T>::element_type *raw)
++      : ::std::shared_ptr<T>(raw) {}
++  shared_ptr_if_destructible() noexcept : ::std::shared_ptr<T>() {}
++  shared_ptr_if_destructible(const ::std::shared_ptr<T> &other) noexcept : ::std::shared_ptr<T>(other) {}
+ };
+ } // namespace
+ } // namespace cxxbridge1
