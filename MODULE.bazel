@@ -443,18 +443,13 @@ crate.from_specs(
 use_repo(crate, "crate_index")
 
 # TRLC dependency for requirements traceability
-bazel_dep(name = "trlc", version = "0.0.0", dev_dependency = True)
-git_override(
-    module_name = "trlc",
-    commit = "3a71fd56001b95dfbb5270a49449ec0a631cd56c",  #TRLC 2.0.4
-    remote = "https://github.com/bmw-software-engineering/trlc.git",
-)
+bazel_dep(name = "trlc", version = "3.0.0", dev_dependency = True)
 
 # Lobster dependency for requirements traceability
-bazel_dep(name = "lobster", version = "0.0.0", dev_dependency = True)
+bazel_dep(name = "lobster", version = "1.0.4", dev_dependency = True)
 git_override(
     module_name = "lobster",
-    commit = "d528fbdec2cd72ff7967b51546fb0bd935810258",
+    commit = "07382c33f95e22992e0f8788c0537ec06877e51f",
     remote = "https://github.com/bmw-software-engineering/lobster.git",
 )
 
@@ -462,12 +457,7 @@ bazel_dep(name = "rules_python", version = "1.8.5", dev_dependency = True)
 
 bazel_dep(name = "score_docs_as_code", version = "4.6.1")
 bazel_dep(name = "score_process", version = "2.0.2")
-bazel_dep(name = "score_tooling")
-git_override(
-    module_name = "score_tooling",
-    commit = "549c7ee315cfbc27a42247b11cb70c953eac75dc",
-    remote = "https://github.com/eclipse-score/tooling.git",
-)
+bazel_dep(name = "score_tooling", version = "1.3.1")
 
 register_toolchains(
     "@score_tooling//bazel/rules/rules_score:sphinx_default_toolchain",
