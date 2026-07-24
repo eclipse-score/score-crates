@@ -13,6 +13,8 @@ docs(
     ],
 )
 
+exports_files(["MODULE.bazel.lock"])
+
 alias(
     name = "adler32",
     actual = "@crate_index//:adler32",
