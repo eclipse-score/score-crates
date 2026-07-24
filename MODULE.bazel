@@ -70,7 +70,16 @@ crate.spec(
 )
 crate.spec(
     package = "libc",
-    version = "0.2.186",
+    # Exact pin (not a caret/minimum requirement): libc versions >= 0.2.187
+    # introduced an io_pkt/io_sock cfg_if split in src/unix/nto/mod.rs that
+    # has no arm for `target_env = "nto80"` (QNX SDP 8), causing
+    # `panic!("Unsupported arch")` at compile time for QNX8 targets whose
+    # rustc still reports `target_os = "nto"` (see rust-lang/libc#5241 and
+    # rust-lang/rust#158449 for the eventual upstream QNX8 target rename
+    # that this crate expects). Keep this an exact pin so a routine
+    # crate_universe re-resolution can't silently pick up a newer, broken
+    # libc release again.
+    version = "=0.2.186",
 )
 crate.spec(
     features = ["derive"],
