@@ -78,5 +78,9 @@
   {
     "version": "pr-68",
     "url": "https://eclipse-score.github.io/score-crates/pr-68/"
+  },
+  {
+    "version": "v0.0.11",
+    "url": "https://eclipse-score.github.io/score-crates/v0.0.11/"
   }
 ]
