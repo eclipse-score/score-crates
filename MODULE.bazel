@@ -192,6 +192,13 @@ crate.spec(
 crate.annotation(
     crate = "iceoryx2-pal-posix-qnx8",
     patches = ["//patches:qnx8_iceoryx2.patch"],
+    crate_features = ["libc_platform"],
+    # libc is an optional dep gated behind `workspace = true` in the
+    # vendored crate's Cargo.toml; since we pull it in via a git crate with
+    # strip_prefix (no workspace root Cargo.toml present), cargo-bazel can't
+    # resolve that version reference, so it silently drops the dep even
+    # with the feature enabled. Wire it in directly instead.
+    deps = ["@crate_index__libc-0.2.186//:libc"],
     repositories = ["crate_index"],
 )
 crate.spec(
