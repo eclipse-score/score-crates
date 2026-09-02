@@ -1,5 +1,5 @@
 {
-  "checksum": "b3987846afd9d77626eb292c5e15da1921775911b0ea5577deb6ddba25dec68f",
+  "checksum": "feb42f1e2e73d0b36795d98238ee456bf9eb3044a210393e19d31b12bb57c776",
   "crates": {
     "adler32 1.2.0": {
       "name": "adler32",
@@ -7137,7 +7137,7 @@
           },
           "strip_prefix": "iceoryx2-bb/derive-macros",
           "patches": [
-            "@@//patches:iceoryx2_bb_derive_macros_readme.patch"
+            "@@score_crates+//patches:iceoryx2_bb_derive_macros_readme.patch"
           ]
         }
       },
@@ -8922,7 +8922,7 @@
           },
           "strip_prefix": "iceoryx2-pal/posix",
           "patches": [
-            "@@//patches:qnx8_iceoryx2.patch"
+            "@@score_crates+//patches:qnx8_iceoryx2.patch"
           ]
         }
       },
@@ -8957,6 +8957,12 @@
         "compile_data_glob": [
           "**"
         ],
+        "crate_features": {
+          "common": [
+            "libc_platform"
+          ],
+          "selects": {}
+        },
         "deps": {
           "common": [
             {
@@ -8986,6 +8992,12 @@
               }
             ]
           }
+        },
+        "extra_deps": {
+          "common": [
+            "@crate_index__libc-0.2.186//:libc"
+          ],
+          "selects": {}
         },
         "edition": "2021",
         "version": "0.7.0"
