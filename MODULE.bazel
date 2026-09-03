@@ -440,15 +440,15 @@ crate.spec(
 crate.from_specs(
     name = "crate_index",
     cargo_lockfile = "//:Cargo.lock",
-    # This shall not be here but rules_rust 0.61.0 or even 0.67.0 does not correct finds out that when we use out platform it shall append
-    # aarch64-unknown-nto-qnx710 or best aarch64-unknown-nto00 which is not fully supported in any rust_rules version for now (even if rustc 1.86.0 already supports it)
     lockfile = "//:Cargo.Bazel.lock",
     supported_platform_triples = [
-        "aarch64-unknown-nto-qnx710",  # This enables also QNX8 becasue OS and CPU for platform matches....
+        "aarch64-unknown-nto-qnx710",
         "x86_64-pc-nto-qnx710",
         "x86_64-unknown-linux-gnu",
         "x86_64-unknown-none",
         "aarch64-unknown-linux-gnu",
+        "aarch64-unknown-nto-qnx800",
+        "x86_64-pc-nto-qnx800",
     ],
 )
 use_repo(crate, "crate_index")
