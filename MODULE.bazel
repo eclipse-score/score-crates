@@ -308,6 +308,15 @@ crate.annotation(
     crate = "protoc-gen-tonic",
     gen_binaries = ["protoc-gen-tonic"],
 )
+
+crate.annotation(
+    crate = "openssl-sys",
+    patch_args = ["-p1"],
+    patches = ["//patches:openssl_sys_build_rs.patch"],
+    deps = ["@@score_openssl+//:openssl_shared"],
+    compile_data = ["@@score_openssl+//:openssl_build_info"],
+)
+
 crate.spec(
     package = "quote",
     version = "1.0",
@@ -437,6 +446,14 @@ crate.spec(
     package = "pastey",
     version = "0.2.3",
 )
+crate.spec(
+    package = "openssl-sys",
+    version = "0.9.104",
+)
+crate.spec(
+    package = "openssl",
+    version = "0.10.68",
+)
 crate.from_specs(
     name = "crate_index",
     cargo_lockfile = "//:Cargo.lock",
@@ -469,6 +486,12 @@ bazel_dep(name = "rules_python", version = "1.8.5", dev_dependency = True)
 bazel_dep(name = "score_docs_as_code", version = "4.6.1")
 bazel_dep(name = "score_process", version = "2.0.2")
 bazel_dep(name = "score_tooling", version = "1.3.1")
+
+bazel_dep(name = "score_openssl", version = "3.6.1")
+local_path_override(
+    module_name = "score_openssl",
+    path = "../inc_security_crypto_valeo_pitch/third_party/score_openssl",
+)
 
 register_toolchains(
     "@score_tooling//bazel/rules/rules_score:sphinx_default_toolchain",

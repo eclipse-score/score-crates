@@ -452,3 +452,21 @@ alias(
 )
 
 # End of generated aliases
+
+alias(
+    name = "openssl",
+    actual = "@crate_index//:openssl",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "openssl_shared",
+    actual = "@score_openssl//:openssl_shared",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "openssl_build_info",
+    actual = "@score_openssl//:openssl_build_info",
+    visibility = ["//visibility:public"],
+)
