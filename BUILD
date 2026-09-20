@@ -460,13 +460,7 @@ alias(
 )
 
 alias(
-    name = "openssl_shared",
-    actual = "@score_openssl//:openssl_shared",
-    visibility = ["//visibility:public"],
-)
-
-alias(
-    name = "openssl_build_info",
-    actual = "@score_openssl//:openssl_build_info",
+    name = "openssl_sys",
+    actual = "@crate_index//:openssl-sys",
     visibility = ["//visibility:public"],
 )

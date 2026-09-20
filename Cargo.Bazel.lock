@@ -1,5 +1,5 @@
 {
-  "checksum": "4a7a3a18c369a3eb88e6f20429b2a76ac6119d6bea549fa4e4c3eae356c713e1",
+  "checksum": "e50099bab71d824eba3dd30e291407b4ab5c3fd7a4de4578e4562c839e0cd676",
   "crates": {
     "adler32 1.2.0": {
       "name": "adler32",
@@ -7232,7 +7232,7 @@
           },
           "strip_prefix": "iceoryx2-bb/derive-macros",
           "patches": [
-            "@@score_crates+//patches:iceoryx2_bb_derive_macros_readme.patch"
+            "@@//patches:iceoryx2_bb_derive_macros_readme.patch"
           ]
         }
       },
@@ -9017,7 +9017,7 @@
           },
           "strip_prefix": "iceoryx2-pal/posix",
           "patches": [
-            "@@score_crates+//patches:qnx8_iceoryx2.patch"
+            "@@//patches:qnx8_iceoryx2.patch"
           ]
         }
       },
@@ -11807,7 +11807,7 @@
             "-p1"
           ],
           "patches": [
-            "@@score_crates+//patches:openssl_sys_build_rs.patch"
+            "@@//patches:openssl_sys_build_rs.patch"
           ]
         }
       },
