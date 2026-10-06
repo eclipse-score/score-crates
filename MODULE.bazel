@@ -164,7 +164,12 @@ crate.spec(
 )
 crate.annotation(
     crate = "iceoryx2-bb-derive-macros-qnx8",
-    patches = ["//patches:iceoryx2_bb_derive_macros_readme.patch"],
+    # The label is hard-coded to the canonical repo name on purpose: the patch labels are part of the
+    # crate_universe digest stored in Cargo.Bazel.lock. "//patches:..." renders as "@@//patches:..." when
+    # score_crates is the root module but "@@score_crates+//patches:..." when it is a dependency, so the
+    # lockfile could only match one of the two. Consumers cannot repin it (rules_rust >= 0.71), so it must
+    # match as a dependency. Note: fetching this crate when score_crates is the root module fails.
+    patches = ["@@score_crates+//patches:iceoryx2_bb_derive_macros_readme.patch"],
     repositories = ["crate_index"],
 )
 crate.spec(
@@ -191,7 +196,8 @@ crate.spec(
 #iceoryx2 does not yet support QNX8 correctly so we patch
 crate.annotation(
     crate = "iceoryx2-pal-posix-qnx8",
-    patches = ["//patches:qnx8_iceoryx2.patch"],
+    # See the note on the iceoryx2-bb-derive-macros-qnx8 annotation: label hard-coded for a stable digest.
+    patches = ["@@score_crates+//patches:qnx8_iceoryx2.patch"],
     repositories = ["crate_index"],
 )
 crate.spec(
