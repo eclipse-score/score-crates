@@ -278,6 +278,18 @@ alias(
 )
 
 alias(
+    name = "openssl",
+    actual = "@crate_index//:openssl",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "openssl_sys",
+    actual = "@crate_index//:openssl-sys",
+    visibility = ["//visibility:public"],
+)
+
+alias(
     name = "parking_lot",
     actual = "@crate_index//:parking_lot",
     visibility = ["//visibility:public"],

@@ -1,0 +1,405 @@
+# *******************************************************************************
+# S-CORE Architecture: Hermetic OpenSSL FFI Synchronization Patch for openssl-sys
+# *******************************************************************************
+#
+# Context & Rationale for Reviewers:
+# ----------------------------------
+# The upstream crates.io `openssl-sys` build script (`build/main.rs`) is designed
+# for standard Cargo workflows and violates Bazel automotive requirements in two
+# critical ways:
+#
+# 1. Non-Hermetic Host Probing:
+#    Upstream scans the build host's filesystem (`/usr/include`, `/usr/lib`) and
+#    runs host `pkg-config`. In sandboxed Bazel builds, this introduces host
+#    leakage, non-deterministic builds, and toolchain conflicts.
+#
+# 2. API Capabilities Contract (The Version Ceiling):
+#    S-CORE compiles pristine OpenSSL 3.6.1 from source (`@score_openssl`). However,
+#    this release of `openssl-sys` (0.9.117) only defines FFI bindings up to OpenSSL
+#    3.5.0 (`ossl350`). Exporting "3.6.1" via `DEP_OPENSSL_VERSION_NUMBER` could cause
+#    downstream crates to invoke 3.6 APIs missing from this crate. Capping the exported
+#    version ensures the crate never advertises APIs beyond its physical bindings.
+#
+# Technical Solution Implemented in this Patch:
+# ---------------------------------------------
+# 1. Sandbox-Safe Build Info Ingestion (Steps 1 & 2):
+#    Reads `openssl_build_info.txt` generated hermetically by `@score_openssl`.
+#    Probes multiple candidate paths to accommodate Bzlmod canonical paths
+#    (`score_openssl+`), standard workspace labels, and local developer overrides.
+#    Extracts the compiled OpenSSL version string and disabled `OPENSSL_NO_*` flags.
+#
+# 2. Fail-Fast Major Version Safety Lock (Steps 3 & 4):
+#    OpenSSL introduces breaking ABI changes between major releases (e.g. 3.x -> 4.x).
+#    The script scans `build/cfgs.rs` to detect the maximum supported major version.
+#    If C++ requests a major version exceeding crate support, it panics immediately
+#    at compile time to prevent memory corruption or runtime segmentation faults.
+#
+# 3. Dynamic Compatibility Ceiling (Steps 5 & 6):
+#    OpenSSL 3.x guarantees strict binary and ABI backwards-compatibility across
+#    all 3.x minor releases (e.g. binaries built for 3.5 run safely against 3.6.1).
+#    The script scans `build/cfgs.rs` dynamically to discover the highest minor version
+#    defined in the crate (e.g. minor 5 for `ossl350`), and caps the minor version
+#    to that ceiling. If capped, patch level is reset to 0. This guarantees a safe FFI
+#    capabilities boundary across crate versions with zero hardcoded version lists.
+#
+# 4. Bitwise Hex Version Calculation (Step 7):
+#    Computes OpenSSL's official 32-bit hex version number using the standard
+#    `0xMNNFF00f` encoding format:
+#      - M   (Major, bits 31..28)
+#      - NN  (Minor, bits 27..20)
+#      - FF  (Fix/Patch, bits 19..12)
+#      - 00f (Status, 'f' representing public release)
+#
+# 5. Delegated Configuration Flag Generation (Steps 8 & 9):
+#    Emits `cargo:rustc-cfg=openssl` so rustc recognizes authentic OpenSSL and
+#    activates `#[cfg(openssl)]` declarations throughout the crate.
+#    Delegates to the crate's internal `cfgs::get()` function using the calculated
+#    version hex, generating the complete set of version cfg flags (`ossl101`..`ossl350`).
+#
+# 6. Disabled Algorithm Gating (Step 11 - Issue #200):
+#    Parses active `OPENSSL_NO_*` flags from C++ compilation and emits matching
+#    `cargo:rustc-cfg=osslconf="OPENSSL_NO_*"` compiler flags. This ensures Rust
+#    does not expose FFI declarations for algorithms disabled in C++ (e.g. SM4, OCSP),
+#    preventing undefined symbol linker errors during LLVM coverage builds.
+#
+# 7. Verification & Downstream Acceptance:
+#    - Builds cleanly in `score-crates` across both `//:openssl` and `//:openssl_sys`.
+#    - Validated end-to-end in `inc_security_crypto`, where all cryptographic unit
+#      tests, daemon IPC, and Rust `cryptoki` provider tests pass against these bindings.
+# *******************************************************************************
+--- a/build/main.rs	2026-10-11 16:40:00.240798477 +0300
++++ b/build/main.rs	2026-10-11 16:40:00.240939361 +0300
+@@ -129,167 +129,180 @@
+ }
+ 
+ fn main() {
+-    println!("cargo:rustc-check-cfg=cfg(osslconf, values(\"OPENSSL_NO_OCB\", \"OPENSSL_NO_SM4\", \"OPENSSL_NO_SEED\", \"OPENSSL_NO_CHACHA\", \"OPENSSL_NO_CAST\", \"OPENSSL_NO_IDEA\", \"OPENSSL_NO_CAMELLIA\", \"OPENSSL_NO_RC4\", \"OPENSSL_NO_BF\", \"OPENSSL_NO_PSK\", \"OPENSSL_NO_DEPRECATED_3_0\", \"OPENSSL_NO_SCRYPT\", \"OPENSSL_NO_SM3\", \"OPENSSL_NO_RMD160\", \"OPENSSL_NO_EC2M\", \"OPENSSL_NO_OCSP\", \"OPENSSL_NO_CMS\", \"OPENSSL_NO_COMP\", \"OPENSSL_NO_SOCK\", \"OPENSSL_NO_STDIO\", \"OPENSSL_NO_EC\", \"OPENSSL_NO_SSL3_METHOD\", \"OPENSSL_NO_KRB5\", \"OPENSSL_NO_TLSEXT\", \"OPENSSL_NO_SRP\", \"OPENSSL_NO_SRTP\", \"OPENSSL_NO_RFC3779\", \"OPENSSL_NO_SHA\", \"OPENSSL_NO_NEXTPROTONEG\", \"OPENSSL_NO_ENGINE\", \"OPENSSL_NO_BUF_FREELISTS\", \"OPENSSL_NO_RC2\"))");
+-
+-    println!("cargo:rustc-check-cfg=cfg(openssl)");
+-    println!("cargo:rustc-check-cfg=cfg(libressl)");
+-    println!("cargo:rustc-check-cfg=cfg(boringssl)");
+-    println!("cargo:rustc-check-cfg=cfg(awslc)");
+-    println!("cargo:rustc-check-cfg=cfg(awslc_pregenerated)");
+-
+-    println!("cargo:rustc-check-cfg=cfg(libressl250)");
+-    println!("cargo:rustc-check-cfg=cfg(libressl251)");
+-    println!("cargo:rustc-check-cfg=cfg(libressl252)");
+-    println!("cargo:rustc-check-cfg=cfg(libressl261)");
+-    println!("cargo:rustc-check-cfg=cfg(libressl270)");
+-    println!("cargo:rustc-check-cfg=cfg(libressl271)");
+-    println!("cargo:rustc-check-cfg=cfg(libressl273)");
+-    println!("cargo:rustc-check-cfg=cfg(libressl280)");
+-    println!("cargo:rustc-check-cfg=cfg(libressl281)");
+-    println!("cargo:rustc-check-cfg=cfg(libressl291)");
+-    println!("cargo:rustc-check-cfg=cfg(libressl310)");
+-    println!("cargo:rustc-check-cfg=cfg(libressl321)");
+-    println!("cargo:rustc-check-cfg=cfg(libressl332)");
+-    println!("cargo:rustc-check-cfg=cfg(libressl340)");
+-    println!("cargo:rustc-check-cfg=cfg(libressl350)");
+-    println!("cargo:rustc-check-cfg=cfg(libressl360)");
+-    println!("cargo:rustc-check-cfg=cfg(libressl361)");
+-    println!("cargo:rustc-check-cfg=cfg(libressl370)");
+-    println!("cargo:rustc-check-cfg=cfg(libressl380)");
+-    println!("cargo:rustc-check-cfg=cfg(libressl381)");
+-    println!("cargo:rustc-check-cfg=cfg(libressl382)");
+-    println!("cargo:rustc-check-cfg=cfg(libressl390)");
+-    println!("cargo:rustc-check-cfg=cfg(libressl400)");
+-    println!("cargo:rustc-check-cfg=cfg(libressl410)");
+-    println!("cargo:rustc-check-cfg=cfg(libressl420)");
+-    println!("cargo:rustc-check-cfg=cfg(libressl430)");
+-
+-    println!("cargo:rustc-check-cfg=cfg(ossl101)");
+-    println!("cargo:rustc-check-cfg=cfg(ossl102)");
+-    println!("cargo:rustc-check-cfg=cfg(ossl102f)");
+-    println!("cargo:rustc-check-cfg=cfg(ossl102h)");
+-    println!("cargo:rustc-check-cfg=cfg(ossl110)");
+-    println!("cargo:rustc-check-cfg=cfg(ossl110f)");
+-    println!("cargo:rustc-check-cfg=cfg(ossl110g)");
+-    println!("cargo:rustc-check-cfg=cfg(ossl110h)");
+-    println!("cargo:rustc-check-cfg=cfg(ossl111)");
+-    println!("cargo:rustc-check-cfg=cfg(ossl111b)");
+-    println!("cargo:rustc-check-cfg=cfg(ossl111c)");
+-    println!("cargo:rustc-check-cfg=cfg(ossl111d)");
+-    println!("cargo:rustc-check-cfg=cfg(ossl300)");
+-    println!("cargo:rustc-check-cfg=cfg(ossl310)");
+-    println!("cargo:rustc-check-cfg=cfg(ossl320)");
+-    println!("cargo:rustc-check-cfg=cfg(ossl330)");
+-    println!("cargo:rustc-check-cfg=cfg(ossl340)");
+-    println!("cargo:rustc-check-cfg=cfg(ossl400)");
+-
+-    check_ssl_kind();
+-
+-    let target = env::var("TARGET").unwrap();
+-
+-    let (lib_dirs, include_dir) = find_openssl(&target);
+-    // rerun-if-changed causes openssl-sys to rebuild if the openssl include
+-    // dir has changed since the last build. However, this causes a rebuild
+-    // every time when vendoring so we disable it.
+-    let potential_path = include_dir.join("openssl");
+-    if potential_path.exists() && !cfg!(feature = "vendored") {
+-        if let Some(printable_include) = potential_path.to_str() {
+-            println!("cargo:rerun-if-changed={printable_include}");
++    // =========================================================================
++    // S-CORE Hermetic Build Script for openssl-sys
++    // =========================================================================
++    // Why this patch is needed:
++    // 1. HERMETICITY: Standard openssl-sys scans the host operating system
++    //    (/usr/include, /usr/lib, pkg-config). In a Bazel automotive build, this
++    //    breaks sandbox isolation and causes non-reproducible builds.
++    // 2. API CAPABILITIES CONTRACT: S-CORE C++ compiles pristine OpenSSL
++    //    3.6.1, but this crates.io release of openssl-sys only defines FFI
++    //    bindings and configuration tables up to OpenSSL 3.5.0. Exporting
++    //    "3.6.1" to downstream crates via DEP_OPENSSL_VERSION_NUMBER could
++    //    trigger calls to 3.6 APIs missing from this crate's bindings.
++    // 3. BACKWARDS COMPATIBILITY: OpenSSL 3.x guarantees strict binary and ABI
++    //    backwards-compatibility across all 3.x minor releases. Therefore,
++    //    capping the Rust FFI view to the maximum minor version supported by
++    //    this crate safely bounds exported metadata to available symbols.
++    // =========================================================================
++
++    // -------------------------------------------------------------------------
++    // Step 1: Read the C++ build information generated by @score_openssl.
++    // -------------------------------------------------------------------------
++    // In Bazel sandboxes, repository paths vary depending on whether the dependency
++    // is consumed via Bzlmod canonical paths (score_openssl+), standard workspace
++    // names (score_openssl), or local developer overrides. We probe each candidate
++    // path and provide a fallback for dry-run linters.
++    let info = if let Ok(path) = std::env::var("OPENSSL_BUILD_INFO_PATH") {
++        std::fs::read_to_string(&path)
++            .expect(&format!("FATAL: Failed to read OpenSSL build info at {path}"))
++    } else {
++        let candidate_paths = [
++            "external/score_openssl/openssl_build_info.txt",
++            "external/score_openssl+/openssl_build_info.txt",
++            "../score_openssl/openssl_build_info.txt",
++        ];
++        candidate_paths.iter()
++            .find_map(|p| std::fs::read_to_string(p).ok())
++            .expect("FATAL: OPENSSL_BUILD_INFO_PATH not set and no candidate paths found")
++    };
++    // Schema of openssl_build_info.txt generated by @score_openssl:
++    // -------------------------------------------------------------
++    // Line 1: OpenSSL version string (e.g. "3.6.1")
++    // Line 2: Comma-separated OPENSSL_NO_* flags (e.g. "OPENSSL_NO_MD2,OPENSSL_NO_RC4")
++    // -------------------------------------------------------------
++    let mut lines = info
++        .lines()
++        .map(|l| l.trim())
++        .filter(|l| !l.is_empty());
++
++    let requested_version = lines
++        .next()
++        .expect("FATAL: Missing OpenSSL version line in build info");
++    let conf_flags = lines.next().unwrap_or_default();
++
++    // -------------------------------------------------------------------------
++    // Step 2: Parse the requested Major, Minor, and Patch versions from C++.
++    // -------------------------------------------------------------------------
++    let req_major: u32 = requested_version.split('.').next().unwrap_or("3").parse().unwrap_or(3);
++    let req_minor: u32 = requested_version.split('.').nth(1).unwrap_or("0").parse().unwrap_or(0);
++    let req_patch: u32 = requested_version.split('.').nth(2).unwrap_or("0").parse().unwrap_or(0);
++
++    // -------------------------------------------------------------------------
++    // Step 3: Programmatically detect the maximum Major version known to this crate.
++    // -------------------------------------------------------------------------
++    // Scans build/cfgs.rs to discover all declared "ossl<M>..." version configurations.
++    let mut max_major: u32 = 1;
++    if let Ok(cfgs_code) = std::fs::read_to_string("build/cfgs.rs") {
++        for line in cfgs_code.lines() {
++            if let Some(idx) = line.find("ossl") {
++                if let Some(major_char) = line[idx+4..].chars().next() {
++                    if let Some(major_val) = major_char.to_digit(10) {
++                        max_major = std::cmp::max(max_major, major_val);
++                    }
++                }
++            }
+         }
+     }
+ 
+-    if !lib_dirs.iter().all(|p| p.exists()) {
+-        panic!("OpenSSL library directory does not exist: {lib_dirs:?}");
+-    }
+-    if !include_dir.exists() {
+-        panic!(
+-            "OpenSSL include directory does not exist: {}",
+-            include_dir.to_string_lossy()
+-        );
+-    }
+-
+-    for lib_dir in lib_dirs.iter() {
+-        println!(
+-            "cargo:rustc-link-search=native={}",
+-            lib_dir.to_string_lossy()
+-        );
+-    }
+-    println!("cargo:include={}", include_dir.to_string_lossy());
+-
+-    let version = postprocess(&[include_dir]);
+-
+-    let libs_env = env("OPENSSL_LIBS");
+-    let libs = match libs_env.as_ref().and_then(|s| s.to_str()) {
+-        Some(v) => {
+-            if v.is_empty() {
+-                vec![]
+-            } else {
+-                v.split(':').collect()
++    // -------------------------------------------------------------------------
++    // Step 4: Fail-fast safety assertion against incompatible Major version jumps.
++    // -------------------------------------------------------------------------
++    // OpenSSL changes major ABI contracts between major releases (e.g. 3.x -> 4.x).
++    // If C++ requests a major version higher than this crate understands, we panic
++    // immediately at compile time to prevent memory corruption or segfaults at runtime.
++    if req_major > max_major {
++        panic!("FATAL ABI MISMATCH: Requested OpenSSL major version ({req_major}) exceeds crate support ({max_major})!");
++    }
++
++    // -------------------------------------------------------------------------
++    // Step 5: Programmatically detect the maximum Minor version for the Major branch.
++    // -------------------------------------------------------------------------
++    // For OpenSSL 3.x, searches for the highest "ossl3<N>0" configuration in cfgs.rs.
++    // We use Option<u32> to distinguish between finding minor version 0 (e.g. OpenSSL 4.0.0)
++    // and finding no matching entries (None).
++    let mut max_minor: Option<u32> = None;
++    let target_prefix = format!("ossl{}", req_major);
++    if let Ok(cfgs_code) = std::fs::read_to_string("build/cfgs.rs") {
++        for line in cfgs_code.lines() {
++            if let Some(idx) = line.find(&target_prefix) {
++                if let Some(minor_char) = line[idx + target_prefix.len()..].chars().next() {
++                    if let Some(minor_val) = minor_char.to_digit(10) {
++                        max_minor = match max_minor {
++                            Some(current) => Some(std::cmp::max(current, minor_val)),
++                            None => Some(minor_val),
++                        };
++                    }
++                }
+             }
+         }
+-        None => match version {
+-            Version::Openssl4xx | Version::Openssl3xx | Version::Openssl11x
+-                if target.contains("windows-msvc") =>
+-            {
+-                vec!["libssl", "libcrypto"]
+-            }
+-            _ => vec!["ssl", "crypto"],
+-        },
+-    };
+-
+-    let kind = determine_mode(&lib_dirs, &libs);
+-    for lib in libs.into_iter() {
+-        println!("cargo:rustc-link-lib={kind}={lib}");
+-    }
+-
+-    // libssl in BoringSSL requires the C++ runtime, and static libraries do
+-    // not carry dependency information. On unix-like platforms, the C++
+-    // runtime and standard library are typically picked up by default via the
+-    // C++ compiler, which has a platform-specific default. (See implementations
+-    // of `GetDefaultCXXStdlibType` in Clang.) Builds may also choose to
+-    // override this and specify their own with `-nostdinc++` and `-nostdlib++`
+-    // flags. Some compilers also provide options like `-stdlib=libc++`.
+-    //
+-    // Typically, such information is carried all the way up the build graph,
+-    // but Cargo is not an integrated cross-language build system, so it cannot
+-    // safely handle any of these situations. As a result, we need to make
+-    // guesses. Getting this wrong may result in symbol conflicts and memory
+-    // errors, but this unsafety is inherent to driving builds with
+-    // externally-built libraries using Cargo.
+-    //
+-    // For now, we guess that the build was made with the defaults. This too is
+-    // difficult because Rust does not expose this information from Clang, but
+-    // try to match the behavior for common platforms. For a more robust option,
+-    // this likely needs to be deferred to the caller with an environment
+-    // variable.
+-    if (version == Version::Boringssl || version == Version::AwsLc)
+-        && kind == "static"
+-        && env::var("CARGO_CFG_UNIX").is_ok()
+-    {
+-        let cpp_lib = match env::var("CARGO_CFG_TARGET_OS").unwrap().as_ref() {
+-            "macos" => "c++",
+-            _ => "stdc++",
+-        };
+-        println!("cargo:rustc-link-lib={cpp_lib}");
+     }
+-
+-    // https://github.com/openssl/openssl/pull/15086
+-    if (version == Version::Openssl3xx || version == Version::Openssl4xx)
+-        && kind == "static"
+-        && (env::var("CARGO_CFG_TARGET_OS").unwrap() == "linux"
+-            || env::var("CARGO_CFG_TARGET_OS").unwrap() == "android")
+-        && env::var("CARGO_CFG_TARGET_POINTER_WIDTH").unwrap() == "32"
+-    {
+-        println!("cargo:rustc-link-lib=atomic");
++    // Safe fallbacks if cfgs.rs could not be read
++    let max_minor = max_minor.unwrap_or_else(|| match req_major {
++        1 => 11, // OpenSSL 1.1.1
++        4 => 0,  // OpenSSL 4.0.0
++        _ => 3,  // OpenSSL 3.3.0
++    });
++
++    // -------------------------------------------------------------------------
++    // Step 6: Apply the Dynamic Compatibility Ceiling.
++    // -------------------------------------------------------------------------
++    // Caps exported minor version to the maximum FFI level supported by this crate
++    // (e.g. C++ is 3.6.1 but crate FFI supports up to 3.5.0), preventing downstream
++    // crates from calling 3.6 APIs missing from this version of openssl-sys.
++    let final_minor = std::cmp::min(req_minor, max_minor);
++    let final_patch = if req_minor > max_minor { 0 } else { req_patch };
++
++    // -------------------------------------------------------------------------
++    // Step 7: Calculate OpenSSL's official 32-bit hex version number.
++    // -------------------------------------------------------------------------
++    // OpenSSL >= 3 uses 0xMNN00PP0; older releases use 0xMNNFFPPS.
++    // Major and minor occupy the same bits in both schemes.
++    // Modern patch releases use bits 11..4 and have no release-status nibble.
++    // Retain the legacy fix/status layout for OpenSSL 1.x.
++    let patch_bits = if req_major >= 3 { final_patch << 4 } else { (final_patch << 12) | 0xf };
++    let version_hex = (req_major << 28) | (final_minor << 20) | patch_bits;
++    
++    // -------------------------------------------------------------------------
++    // Step 8: Emit the fundamental "openssl" cfg flag.
++    // -------------------------------------------------------------------------
++    // CRITICAL: Tells the rustc compiler that the native library is authentic OpenSSL
++    // (not LibreSSL or BoringSSL). Without this, rustc skips all #[cfg(openssl)]
++    // declarations in the crate, resulting in hundreds of missing symbol errors.
++    println!("cargo:rustc-cfg=openssl");
++
++    // -------------------------------------------------------------------------
++    // Step 9: Dynamically emit all version flags via the crate's own cfgs module.
++    // -------------------------------------------------------------------------
++    // Instead of hardcoding static flag lists, we delegate to the crate's native
++    // cfgs::get() function with our calculated version_hex to emit all valid flags
++    // (e.g. "ossl101", "ossl102", "ossl110", "ossl300", "ossl310", "ossl320", "ossl330").
++    for cfg in cfgs::get(Some(version_hex as u64), None) {
++        println!("cargo:rustc-cfg={cfg}");
++    }
++
++    // -------------------------------------------------------------------------
++    // Step 10: Export metadata to dependent crates.
++    // -------------------------------------------------------------------------
++    println!("cargo:version_number={:x}", version_hex);
++
++    // -------------------------------------------------------------------------
++    // Step 11: Gate out disabled features at compile time (Issue #200).
++    // -------------------------------------------------------------------------
++    // Passes the OPENSSL_NO_* flags from C++ compilation so Rust doesn't expose
++    // FFI wrappers for disabled algorithms (e.g. SM4, OCSP), preventing undefined
++    // symbol linker errors during LLVM coverage builds.
++    for flag in conf_flags.split(',') {
++        let flag = flag.trim();
++        if !flag.is_empty() {
++            println!("cargo:rustc-cfg=osslconf=\"{flag}\"");
++        }
+     }
++    println!("cargo:conf={}", conf_flags);
+ 
+-    if kind == "static" && target.contains("windows") {
+-        println!("cargo:rustc-link-lib=dylib=gdi32");
+-        println!("cargo:rustc-link-lib=dylib=user32");
+-        println!("cargo:rustc-link-lib=dylib=crypt32");
+-        println!("cargo:rustc-link-lib=dylib=ws2_32");
+-        println!("cargo:rustc-link-lib=dylib=advapi32");
+-    }
++    // Build script completed successfully, bypass legacy host detection routines.
++    std::process::exit(0);
+ }
+ 
+ fn postprocess(include_dirs: &[PathBuf]) -> Version {
