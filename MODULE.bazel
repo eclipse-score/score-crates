@@ -16,8 +16,8 @@ module(
     compatibility_level = 0,
 )
 
-bazel_dep(name = "platforms", version = "1.0.0")
-bazel_dep(name = "bazel_skylib", version = "1.9.0")
+bazel_dep(name = "platforms", version = "1.1.0")
+bazel_dep(name = "bazel_skylib", version = "1.9.2")
 bazel_dep(name = "rules_rust", version = "0.68.1-score")
 
 bazel_dep(name = "score_toolchains_rust", version = "0.8.0", dev_dependency = True)
@@ -443,6 +443,24 @@ crate.spec(
     package = "pastey",
     version = "0.2.3",
 )
+crate.spec(
+    package = "openssl-sys",
+    version = "0.9.117",
+)
+crate.annotation(
+    build_script_data = ["@@score_openssl+//:openssl_build_info"],
+    build_script_env = {
+        "OPENSSL_BUILD_INFO_PATH": "$(execpath @@score_openssl+//:openssl_build_info)",
+    },
+    crate = "openssl-sys",
+    patch_args = ["-p1"],
+    patches = ["@@score_crates+//patches:openssl_sys_build_rs.patch"],
+    deps = ["@@score_openssl+//:openssl_link"],
+)
+crate.spec(
+    package = "openssl",
+    version = "0.10.81",
+)
 crate.from_specs(
     name = "crate_index",
     cargo_lockfile = "//:Cargo.lock",
@@ -470,11 +488,17 @@ git_override(
     remote = "https://github.com/bmw-software-engineering/lobster.git",
 )
 
-bazel_dep(name = "rules_python", version = "1.8.5", dev_dependency = True)
+bazel_dep(name = "rules_python", version = "1.9.0", dev_dependency = True)
 
 bazel_dep(name = "score_docs_as_code", version = "4.6.1")
 bazel_dep(name = "score_process", version = "2.0.2")
 bazel_dep(name = "score_tooling", version = "1.3.1")
+bazel_dep(name = "score_openssl", version = "0.1.0")
+git_override(
+    module_name = "score_openssl",
+    commit = "040d3b605d2d027d475750f489b3b70b7ad7d1fc",
+    remote = "https://github.com/Valeo-S-CORE-Organization/openssl.git",
+)
 
 register_toolchains(
     "@score_tooling//bazel/rules/rules_score:sphinx_default_toolchain",
