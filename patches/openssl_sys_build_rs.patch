@@ -23,9 +23,8 @@
 # Technical Solution Implemented in this Patch:
 # ---------------------------------------------
 # 1. Sandbox-Safe Build Info Ingestion (Steps 1 & 2):
-#    Reads `openssl_build_info.txt` generated hermetically by `@score_openssl`.
-#    Probes multiple candidate paths to accommodate Bzlmod canonical paths
-#    (`score_openssl+`), standard workspace labels, and local developer overrides.
+#    Reads `openssl_build_info.txt` generated hermetically by `@score_openssl` via
+#    the `OPENSSL_BUILD_INFO_PATH` environment variable set in `crate.annotation`.
 #    Extracts the compiled OpenSSL version string and disabled `OPENSSL_NO_*` flags.
 #
 # 2. Fail-Fast Major Version Safety Lock (Steps 3 & 4):
@@ -67,66 +66,12 @@
 #    - Validated end-to-end in `inc_security_crypto`, where all cryptographic unit
 #      tests, daemon IPC, and Rust `cryptoki` provider tests pass against these bindings.
 # *******************************************************************************
---- a/build/main.rs	2026-10-11 16:40:00.240798477 +0300
-+++ b/build/main.rs	2026-10-11 16:40:00.240939361 +0300
-@@ -129,167 +129,180 @@
- }
+--- a/build/main.rs	2026-10-26 13:28:52.476987246 +0300
++++ b/build/main.rs	2026-10-26 13:28:52.477087961 +0300
+@@ -183,113 +183,177 @@
+     println!("cargo:rustc-check-cfg=cfg(ossl340)");
+     println!("cargo:rustc-check-cfg=cfg(ossl400)");
  
- fn main() {
--    println!("cargo:rustc-check-cfg=cfg(osslconf, values(\"OPENSSL_NO_OCB\", \"OPENSSL_NO_SM4\", \"OPENSSL_NO_SEED\", \"OPENSSL_NO_CHACHA\", \"OPENSSL_NO_CAST\", \"OPENSSL_NO_IDEA\", \"OPENSSL_NO_CAMELLIA\", \"OPENSSL_NO_RC4\", \"OPENSSL_NO_BF\", \"OPENSSL_NO_PSK\", \"OPENSSL_NO_DEPRECATED_3_0\", \"OPENSSL_NO_SCRYPT\", \"OPENSSL_NO_SM3\", \"OPENSSL_NO_RMD160\", \"OPENSSL_NO_EC2M\", \"OPENSSL_NO_OCSP\", \"OPENSSL_NO_CMS\", \"OPENSSL_NO_COMP\", \"OPENSSL_NO_SOCK\", \"OPENSSL_NO_STDIO\", \"OPENSSL_NO_EC\", \"OPENSSL_NO_SSL3_METHOD\", \"OPENSSL_NO_KRB5\", \"OPENSSL_NO_TLSEXT\", \"OPENSSL_NO_SRP\", \"OPENSSL_NO_SRTP\", \"OPENSSL_NO_RFC3779\", \"OPENSSL_NO_SHA\", \"OPENSSL_NO_NEXTPROTONEG\", \"OPENSSL_NO_ENGINE\", \"OPENSSL_NO_BUF_FREELISTS\", \"OPENSSL_NO_RC2\"))");
--
--    println!("cargo:rustc-check-cfg=cfg(openssl)");
--    println!("cargo:rustc-check-cfg=cfg(libressl)");
--    println!("cargo:rustc-check-cfg=cfg(boringssl)");
--    println!("cargo:rustc-check-cfg=cfg(awslc)");
--    println!("cargo:rustc-check-cfg=cfg(awslc_pregenerated)");
--
--    println!("cargo:rustc-check-cfg=cfg(libressl250)");
--    println!("cargo:rustc-check-cfg=cfg(libressl251)");
--    println!("cargo:rustc-check-cfg=cfg(libressl252)");
--    println!("cargo:rustc-check-cfg=cfg(libressl261)");
--    println!("cargo:rustc-check-cfg=cfg(libressl270)");
--    println!("cargo:rustc-check-cfg=cfg(libressl271)");
--    println!("cargo:rustc-check-cfg=cfg(libressl273)");
--    println!("cargo:rustc-check-cfg=cfg(libressl280)");
--    println!("cargo:rustc-check-cfg=cfg(libressl281)");
--    println!("cargo:rustc-check-cfg=cfg(libressl291)");
--    println!("cargo:rustc-check-cfg=cfg(libressl310)");
--    println!("cargo:rustc-check-cfg=cfg(libressl321)");
--    println!("cargo:rustc-check-cfg=cfg(libressl332)");
--    println!("cargo:rustc-check-cfg=cfg(libressl340)");
--    println!("cargo:rustc-check-cfg=cfg(libressl350)");
--    println!("cargo:rustc-check-cfg=cfg(libressl360)");
--    println!("cargo:rustc-check-cfg=cfg(libressl361)");
--    println!("cargo:rustc-check-cfg=cfg(libressl370)");
--    println!("cargo:rustc-check-cfg=cfg(libressl380)");
--    println!("cargo:rustc-check-cfg=cfg(libressl381)");
--    println!("cargo:rustc-check-cfg=cfg(libressl382)");
--    println!("cargo:rustc-check-cfg=cfg(libressl390)");
--    println!("cargo:rustc-check-cfg=cfg(libressl400)");
--    println!("cargo:rustc-check-cfg=cfg(libressl410)");
--    println!("cargo:rustc-check-cfg=cfg(libressl420)");
--    println!("cargo:rustc-check-cfg=cfg(libressl430)");
--
--    println!("cargo:rustc-check-cfg=cfg(ossl101)");
--    println!("cargo:rustc-check-cfg=cfg(ossl102)");
--    println!("cargo:rustc-check-cfg=cfg(ossl102f)");
--    println!("cargo:rustc-check-cfg=cfg(ossl102h)");
--    println!("cargo:rustc-check-cfg=cfg(ossl110)");
--    println!("cargo:rustc-check-cfg=cfg(ossl110f)");
--    println!("cargo:rustc-check-cfg=cfg(ossl110g)");
--    println!("cargo:rustc-check-cfg=cfg(ossl110h)");
--    println!("cargo:rustc-check-cfg=cfg(ossl111)");
--    println!("cargo:rustc-check-cfg=cfg(ossl111b)");
--    println!("cargo:rustc-check-cfg=cfg(ossl111c)");
--    println!("cargo:rustc-check-cfg=cfg(ossl111d)");
--    println!("cargo:rustc-check-cfg=cfg(ossl300)");
--    println!("cargo:rustc-check-cfg=cfg(ossl310)");
--    println!("cargo:rustc-check-cfg=cfg(ossl320)");
--    println!("cargo:rustc-check-cfg=cfg(ossl330)");
--    println!("cargo:rustc-check-cfg=cfg(ossl340)");
--    println!("cargo:rustc-check-cfg=cfg(ossl400)");
--
 -    check_ssl_kind();
 -
 -    let target = env::var("TARGET").unwrap();
@@ -160,23 +105,14 @@
 +    // -------------------------------------------------------------------------
 +    // Step 1: Read the C++ build information generated by @score_openssl.
 +    // -------------------------------------------------------------------------
-+    // In Bazel sandboxes, repository paths vary depending on whether the dependency
-+    // is consumed via Bzlmod canonical paths (score_openssl+), standard workspace
-+    // names (score_openssl), or local developer overrides. We probe each candidate
-+    // path and provide a fallback for dry-run linters.
-+    let info = if let Ok(path) = std::env::var("OPENSSL_BUILD_INFO_PATH") {
-+        std::fs::read_to_string(&path)
-+            .expect(&format!("FATAL: Failed to read OpenSSL build info at {path}"))
-+    } else {
-+        let candidate_paths = [
-+            "external/score_openssl/openssl_build_info.txt",
-+            "external/score_openssl+/openssl_build_info.txt",
-+            "../score_openssl/openssl_build_info.txt",
-+        ];
-+        candidate_paths.iter()
-+            .find_map(|p| std::fs::read_to_string(p).ok())
-+            .expect("FATAL: OPENSSL_BUILD_INFO_PATH not set and no candidate paths found")
-+    };
++    println!("cargo:rerun-if-env-changed=OPENSSL_BUILD_INFO_PATH");
++
++    let build_info_path = std::env::var("OPENSSL_BUILD_INFO_PATH")
++        .expect("FATAL: OPENSSL_BUILD_INFO_PATH environment variable is not set by Bazel");
++
++    let info = std::fs::read_to_string(&build_info_path)
++        .expect(&format!("FATAL: Failed to read OpenSSL build info at {build_info_path}"));
++
 +    // Schema of openssl_build_info.txt generated by @score_openssl:
 +    // -------------------------------------------------------------
 +    // Line 1: OpenSSL version string (e.g. "3.6.1")
@@ -195,22 +131,36 @@
 +    // -------------------------------------------------------------------------
 +    // Step 2: Parse the requested Major, Minor, and Patch versions from C++.
 +    // -------------------------------------------------------------------------
-+    let req_major: u32 = requested_version.split('.').next().unwrap_or("3").parse().unwrap_or(3);
-+    let req_minor: u32 = requested_version.split('.').nth(1).unwrap_or("0").parse().unwrap_or(0);
-+    let req_patch: u32 = requested_version.split('.').nth(2).unwrap_or("0").parse().unwrap_or(0);
++    let mut version_parts = requested_version.split('.');
++    let req_major: u32 = version_parts
++        .next()
++        .expect("FATAL: Missing major version in build info")
++        .parse()
++        .expect("FATAL: Major version is not a valid number");
++    let req_minor: u32 = version_parts
++        .next()
++        .expect("FATAL: Missing minor version in build info")
++        .parse()
++        .expect("FATAL: Minor version is not a valid number");
++    let req_patch: u32 = version_parts
++        .next()
++        .expect("FATAL: Missing patch version in build info")
++        .parse()
++        .expect("FATAL: Patch version is not a valid number");
 +
 +    // -------------------------------------------------------------------------
 +    // Step 3: Programmatically detect the maximum Major version known to this crate.
 +    // -------------------------------------------------------------------------
 +    // Scans build/cfgs.rs to discover all declared "ossl<M>..." version configurations.
++    let cfgs_code = std::fs::read_to_string("build/cfgs.rs")
++        .expect("FATAL: Could not read build/cfgs.rs to determine version limits");
++
 +    let mut max_major: u32 = 1;
-+    if let Ok(cfgs_code) = std::fs::read_to_string("build/cfgs.rs") {
-+        for line in cfgs_code.lines() {
-+            if let Some(idx) = line.find("ossl") {
-+                if let Some(major_char) = line[idx+4..].chars().next() {
-+                    if let Some(major_val) = major_char.to_digit(10) {
-+                        max_major = std::cmp::max(max_major, major_val);
-+                    }
++    for line in cfgs_code.lines() {
++        if let Some(idx) = line.find("ossl") {
++            if let Some(major_char) = line[idx+4..].chars().next() {
++                if let Some(major_val) = major_char.to_digit(10) {
++                    max_major = std::cmp::max(max_major, major_val);
 +                }
 +            }
          }
@@ -257,20 +207,16 @@
 +    // Step 5: Programmatically detect the maximum Minor version for the Major branch.
 +    // -------------------------------------------------------------------------
 +    // For OpenSSL 3.x, searches for the highest "ossl3<N>0" configuration in cfgs.rs.
-+    // We use Option<u32> to distinguish between finding minor version 0 (e.g. OpenSSL 4.0.0)
-+    // and finding no matching entries (None).
 +    let mut max_minor: Option<u32> = None;
 +    let target_prefix = format!("ossl{}", req_major);
-+    if let Ok(cfgs_code) = std::fs::read_to_string("build/cfgs.rs") {
-+        for line in cfgs_code.lines() {
-+            if let Some(idx) = line.find(&target_prefix) {
-+                if let Some(minor_char) = line[idx + target_prefix.len()..].chars().next() {
-+                    if let Some(minor_val) = minor_char.to_digit(10) {
-+                        max_minor = match max_minor {
-+                            Some(current) => Some(std::cmp::max(current, minor_val)),
-+                            None => Some(minor_val),
-+                        };
-+                    }
++    for line in cfgs_code.lines() {
++        if let Some(idx) = line.find(&target_prefix) {
++            if let Some(minor_char) = line[idx + target_prefix.len()..].chars().next() {
++                if let Some(minor_val) = minor_char.to_digit(10) {
++                    max_minor = match max_minor {
++                        Some(current) => Some(std::cmp::max(current, minor_val)),
++                        None => Some(minor_val),
++                    };
 +                }
              }
          }
@@ -287,8 +233,10 @@
 -    let kind = determine_mode(&lib_dirs, &libs);
 -    for lib in libs.into_iter() {
 -        println!("cargo:rustc-link-lib={kind}={lib}");
--    }
--
+     }
++    let max_minor = max_minor
++        .expect("FATAL: Could not find any supported minor version configurations in build/cfgs.rs");
+ 
 -    // libssl in BoringSSL requires the C++ runtime, and static libraries do
 -    // not carry dependency information. On unix-like platforms, the C++
 -    // runtime and standard library are typically picked up by default via the
@@ -318,7 +266,7 @@
 -            _ => "stdc++",
 -        };
 -        println!("cargo:rustc-link-lib={cpp_lib}");
-     }
+-    }
 -
 -    // https://github.com/openssl/openssl/pull/15086
 -    if (version == Version::Openssl3xx || version == Version::Openssl4xx)
@@ -328,13 +276,6 @@
 -        && env::var("CARGO_CFG_TARGET_POINTER_WIDTH").unwrap() == "32"
 -    {
 -        println!("cargo:rustc-link-lib=atomic");
-+    // Safe fallbacks if cfgs.rs could not be read
-+    let max_minor = max_minor.unwrap_or_else(|| match req_major {
-+        1 => 11, // OpenSSL 1.1.1
-+        4 => 0,  // OpenSSL 4.0.0
-+        _ => 3,  // OpenSSL 3.3.0
-+    });
-+
 +    // -------------------------------------------------------------------------
 +    // Step 6: Apply the Dynamic Compatibility Ceiling.
 +    // -------------------------------------------------------------------------
