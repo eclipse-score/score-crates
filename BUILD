@@ -1,7 +1,7 @@
 # BUILD file to satisfy Bazel package requirements for extensions.bzl
 # This file contains auto-generated aliases from @crate_index
 # Generated aliases for crate_index entries
-# Generated on: Mon Jul 20 19:03:26 IST 2026
+# Generated on: Tue Oct 27 14:08:17 EEST 2026
 
 
 load("@score_docs_as_code//:docs.bzl", "docs")
@@ -28,6 +28,12 @@ alias(
 alias(
     name = "argh",
     actual = "@crate_index//:argh",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "argon2",
+    actual = "@crate_index//:argon2",
     visibility = ["//visibility:public"],
 )
 
@@ -76,6 +82,12 @@ alias(
 alias(
     name = "ctrlc",
     actual = "@crate_index//:ctrlc",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "dirs",
+    actual = "@crate_index//:dirs",
     visibility = ["//visibility:public"],
 )
 
@@ -260,6 +272,24 @@ alias(
 )
 
 alias(
+    name = "once_cell",
+    actual = "@crate_index//:once_cell",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "parking_lot",
+    actual = "@crate_index//:parking_lot",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "parsec_client",
+    actual = "@crate_index//:parsec-client",
+    visibility = ["//visibility:public"],
+)
+
+alias(
     name = "paste",
     actual = "@crate_index//:paste",
     visibility = ["//visibility:public"],
@@ -374,6 +404,12 @@ alias(
 )
 
 alias(
+    name = "serial_test",
+    actual = "@crate_index//:serial_test",
+    visibility = ["//visibility:public"],
+)
+
+alias(
     name = "signal_hook",
     actual = "@crate_index//:signal-hook",
     visibility = ["//visibility:public"],
@@ -434,6 +470,12 @@ alias(
 )
 
 alias(
+    name = "toml",
+    actual = "@crate_index//:toml",
+    visibility = ["//visibility:public"],
+)
+
+alias(
     name = "tonic",
     actual = "@crate_index//:tonic",
     visibility = ["//visibility:public"],
@@ -448,6 +490,12 @@ alias(
 alias(
     name = "tracing_subscriber",
     actual = "@crate_index//:tracing-subscriber",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "zeroize",
+    actual = "@crate_index//:zeroize",
     visibility = ["//visibility:public"],
 )
 

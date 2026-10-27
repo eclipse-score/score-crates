@@ -443,6 +443,40 @@ crate.spec(
     package = "pastey",
     version = "0.2.3",
 )
+crate.spec(
+    features = ["std"],
+    package = "argon2",
+    version = "0.5.3",
+)
+crate.spec(
+    package = "dirs",
+    version = "5.0.1",
+)
+crate.spec(
+    package = "once_cell",
+    version = "1.21.4",
+)
+crate.spec(
+    package = "parking_lot",
+    version = "0.12.5",
+)
+crate.spec(
+    package = "parsec-client",
+    version = "0.16.0",
+)
+crate.spec(
+    package = "serial_test",
+    version = "3.5.0",
+)
+crate.spec(
+    package = "toml",
+    version = "0.8.21",
+)
+crate.spec(
+    features = ["derive"],
+    package = "zeroize",
+    version = "1.8.2",
+)
 crate.from_specs(
     name = "crate_index",
     cargo_lockfile = "//:Cargo.lock",
