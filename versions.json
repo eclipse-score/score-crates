@@ -118,5 +118,9 @@
   {
     "version": "pr-79",
     "url": "https://eclipse-score.github.io/score-crates/pr-79/"
+  },
+  {
+    "version": "pr-83",
+    "url": "https://eclipse-score.github.io/score-crates/pr-83/"
   }
 ]
