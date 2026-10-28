@@ -1,5 +1,5 @@
 {
-  "checksum": "c540800220e466d24fae1287187cf69d9c071d12e1ec598fd0d88e671145816a",
+  "checksum": "9f180e6a0ed19f64f0908f166d4b86fdf3f5e3b80fc3288944105806bef30c42",
   "crates": {
     "adler32 1.2.0": {
       "name": "adler32",
@@ -8783,6 +8783,12 @@
         "compile_data_glob_excludes": [
           "**/*.rs"
         ],
+        "data": {
+          "common": [
+            "@@score_crates+//sysroots:aarch64_linux"
+          ],
+          "selects": {}
+        },
         "data_glob": [
           "**"
         ],
@@ -8797,6 +8803,12 @@
               "target": "cc"
             }
           ],
+          "selects": {}
+        },
+        "build_script_env": {
+          "common": {
+            "BINDGEN_EXTRA_CLANG_ARGS_aarch64_unknown_linux_gnu": "--sysroot=$(execpath @@score_crates+//sysroots:aarch64_linux)"
+          },
           "selects": {}
         }
       },
@@ -8997,6 +9009,12 @@
         "compile_data_glob_excludes": [
           "**/*.rs"
         ],
+        "data": {
+          "common": [
+            "@@score_crates+//sysroots:aarch64_linux"
+          ],
+          "selects": {}
+        },
         "data_glob": [
           "**"
         ],
@@ -9011,6 +9029,12 @@
               "target": "cc"
             }
           ],
+          "selects": {}
+        },
+        "build_script_env": {
+          "common": {
+            "BINDGEN_EXTRA_CLANG_ARGS_aarch64_unknown_linux_gnu": "--sysroot=$(execpath @@score_crates+//sysroots:aarch64_linux)"
+          },
           "selects": {}
         }
       },
