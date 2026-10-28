@@ -141,3 +141,21 @@ crate.spec(
 1. **The crate will be available as**:
    - `@score-crates//:tokio` (via local alias)
 
+## Sysroots Rule
+
+Some specific QNX Cargo modules might fail to build when using cross compilation
+toolchains in Linux. The `sysroots/` directory contains a custom rulem contraints and
+label features that can be set from a `.bazelrc` in order to point the compiler to the
+correct toolchain sysroot.
+
+For example: 
+
+```
+build:autosd-crossland --@@score_crates+//sysroots:sysroot_source=@score_autosd_10_cross_toolchain//:all_files
+build:autosd-crossland --@@score_crates+//sysroots:sysroot_strip_prefix=aarch64
+```
+
+The above config exposes AutoSD's cross compilation toolchain sysroot (all files in it) and a prefix, Bazel
+can point the toolchain to the right sysroot location, through the `SYSROOT_DIR` template variable.
+
+It uses an empty value for both by default, to make its usage optional. 

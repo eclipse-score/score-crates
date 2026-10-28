@@ -193,11 +193,36 @@ crate.spec(
     rev = "9f5622f554de48a7a296e1a5a71200b01e35a502",
 )
 
-#iceoryx2 does not yet support QNX8 correctly so we patch
 crate.annotation(
+    # Same cross-sysroot fix as iceoryx2-pal-os-api-qnx8 below: its bindgen
+    # (src/c/posix.h -> pthread headers) otherwise reads x86_64 host /usr/include
+    # and rejects x86-only constructs (regparm, __float128) for the aarch64 target.
+    build_script_data = ["@@score_crates+//sysroots:aarch64_linux"],
+    # Exposes the SYSROOT_DIR make variable computed by //sysroots:aarch64_linux.
+    build_script_toolchains = ["@@score_crates+//sysroots:aarch64_linux"],
+    build_script_env = {
+        # SYSROOT_DIR is exec-root-relative; $${pwd}/ makes it absolute at runtime.
+        "BINDGEN_EXTRA_CLANG_ARGS_aarch64_unknown_linux_gnu": "--sysroot=$${pwd}/$(SYSROOT_DIR)",
+    },
     crate = "iceoryx2-pal-posix-qnx8",
     # See the note on the iceoryx2-bb-derive-macros-qnx8 annotation: label hard-coded for a stable digest.
     patches = ["@@score_crates+//patches:qnx8_iceoryx2.patch"],
+    repositories = ["crate_index"],
+)
+
+# Point iceoryx2-pal-os-api-qnx8's bindgen at the aarch64 cross sysroot so clang
+# reads target headers instead of the x86_64 host /usr/include (fixes the
+# ssize_t(4) != ptr(8) cross error). Hermetic: //sysroots:aarch64_linux brings
+# the sysroot files in as inputs and exposes their root as $(SYSROOT_DIR).
+crate.annotation(
+    build_script_data = ["@@score_crates+//sysroots:aarch64_linux"],
+    # Exposes the SYSROOT_DIR make variable computed by //sysroots:aarch64_linux.
+    build_script_toolchains = ["@@score_crates+//sysroots:aarch64_linux"],
+    build_script_env = {
+        # SYSROOT_DIR is exec-root-relative; $${pwd}/ makes it absolute at runtime.
+        "BINDGEN_EXTRA_CLANG_ARGS_aarch64_unknown_linux_gnu": "--sysroot=$${pwd}/$(SYSROOT_DIR)",
+    },
+    crate = "iceoryx2-pal-os-api-qnx8",
     repositories = ["crate_index"],
 )
 crate.spec(

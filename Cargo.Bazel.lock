@@ -1,5 +1,5 @@
 {
-  "checksum": "c540800220e466d24fae1287187cf69d9c071d12e1ec598fd0d88e671145816a",
+  "checksum": "0c2cb69fdafabd983f7ecb2ee6051fa37fc2e13e5f75cb9642bf65c6e1bd6596",
   "crates": {
     "adler32 1.2.0": {
       "name": "adler32",
@@ -8783,6 +8783,12 @@
         "compile_data_glob_excludes": [
           "**/*.rs"
         ],
+        "data": {
+          "common": [
+            "@@score_crates+//sysroots:aarch64_linux"
+          ],
+          "selects": {}
+        },
         "data_glob": [
           "**"
         ],
@@ -8798,7 +8804,16 @@
             }
           ],
           "selects": {}
-        }
+        },
+        "build_script_env": {
+          "common": {
+            "BINDGEN_EXTRA_CLANG_ARGS_aarch64_unknown_linux_gnu": "--sysroot=$${pwd}/$(SYSROOT_DIR)"
+          },
+          "selects": {}
+        },
+        "toolchains": [
+          "@@score_crates+//sysroots:aarch64_linux"
+        ]
       },
       "license": "MIT OR Apache-2.0",
       "license_ids": [
@@ -8997,6 +9012,12 @@
         "compile_data_glob_excludes": [
           "**/*.rs"
         ],
+        "data": {
+          "common": [
+            "@@score_crates+//sysroots:aarch64_linux"
+          ],
+          "selects": {}
+        },
         "data_glob": [
           "**"
         ],
@@ -9012,7 +9033,16 @@
             }
           ],
           "selects": {}
-        }
+        },
+        "build_script_env": {
+          "common": {
+            "BINDGEN_EXTRA_CLANG_ARGS_aarch64_unknown_linux_gnu": "--sysroot=$${pwd}/$(SYSROOT_DIR)"
+          },
+          "selects": {}
+        },
+        "toolchains": [
+          "@@score_crates+//sysroots:aarch64_linux"
+        ]
       },
       "license": "MIT OR Apache-2.0",
       "license_ids": [
