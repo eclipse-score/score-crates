@@ -86,17 +86,33 @@ use_repo(crate, "crate_index")
 ```
 
 ### 2. BUILD File
-Contains **auto-generated aliases** pointing to `@crate_index` targets:
+Contains **auto-generated aliases** that forward to `@crate_index` via the `@score_crates_index` proxy repo:
 ```starlark
 alias(
     name = "clap",
-    actual = "@crate_index//:clap",
+    actual = "@score_crates_index//:clap",
     visibility = ["//visibility:public"],
 )
 ```
 
 ### 3. Auto-sync Script
-The `update_BUILD_file.sh` script automatically generates aliases for all crates found in `@crate_index`.
+The `update_BUILD_file.sh` script automatically generates aliases for all crates found in `@crate_index`, and the matching `crates.bzl` target list used by `extensions/crate.bzl`.
+
+### 4. Crate repository selection (`extensions/crate.bzl`)
+By default `@score_crates_index` forwards to score_crates' own `@crate_index`. The **root module** can use its own crate repository instead, so that SCore crates and the integrator's crates share one set of crates:
+```starlark
+crate_repo = use_extension("@score_crates//extensions:crate.bzl", "crate_repo")
+crate_repo.use(repo = "@my_crates")
+```
+The selected repository should provide every target listed in `crates.bzl` (same crate names, compatible versions/features, and the patches/annotations from `MODULE.bazel`). The tag is ignored outside the root module.
+
+Crates that are missing in the selected repository are taken from score_crates' own `@crate_index` (`fallback = True`, the default). To fail the build with a list of the missing crates instead:
+```starlark
+crate_repo.use(repo = "@my_crates", fallback = False)
+```
+The fallback repository can be changed with `fallback_repo`; it defaults to `@crate_index`.
+
+Use the fallback with care: a fallback crate pulls its own dependencies from the fallback repository, which can reintroduce duplicate crates if the same dependencies also exist in the selected repository. The check only verifies that a crate exists, not that its version or features match.
 
 ## Usage
 

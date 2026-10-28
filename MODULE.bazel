@@ -459,6 +459,9 @@ crate.from_specs(
 )
 use_repo(crate, "crate_index")
 
+crate_repo = use_extension("//extensions:crate.bzl", "crate_repo")
+use_repo(crate_repo, "score_crates_index")
+
 # TRLC dependency for requirements traceability
 bazel_dep(name = "trlc", version = "3.0.0", dev_dependency = True)
 
