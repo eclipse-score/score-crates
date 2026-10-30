@@ -13,6 +13,8 @@ docs(
     ],
 )
 
+exports_files(["MODULE.bazel.lock"])
+
 alias(
     name = "adler32",
     actual = "@score_crates_index//:adler32",
