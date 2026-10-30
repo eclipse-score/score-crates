@@ -17,7 +17,7 @@ rust_test(
     name = "pastey_test",
     srcs = ["pastey_test.rs"],
     proc_macro_deps = [
-        "@crate_index//:pastey",
+        "//:pastey",
     ],
     visibility = ["//visibility:public"],
 )
@@ -27,7 +27,7 @@ rust_library(
     name = "pastey_test_lib",
     srcs = ["pastey_test.rs"],
     proc_macro_deps = [
-        "@crate_index//:pastey",
+        "//:pastey",
     ],
     visibility = ["//visibility:public"],
 )

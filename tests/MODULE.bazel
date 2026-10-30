@@ -1,0 +1,34 @@
+# *******************************************************************************
+# Copyright (c) 2026 Contributors to the Eclipse Foundation
+#
+# See the NOTICE file(s) distributed with this work for additional
+# information regarding copyright ownership.
+#
+# This program and the accompanying materials are made available under the
+# terms of the Apache License Version 2.0 which is available at
+# https://www.apache.org/licenses/LICENSE-2.0
+#
+# SPDX-License-Identifier: Apache-2.0
+# *******************************************************************************
+
+# Consumer module that exercises the crate_repo extension of score_crates.
+module(name = "score_crates_consumer_tests")
+
+bazel_dep(name = "bazel_skylib", version = "1.9.0")
+bazel_dep(name = "score_crates", version = "0.0.7")
+local_path_override(
+    module_name = "score_crates",
+    path = "..",
+)
+
+# Stand-in for the integrator's own crate repository; it only provides `pastey`.
+fake_crate_repo = use_repo_rule("//:fake_crate_repo.bzl", "fake_crate_repo")
+fake_crate_repo(
+    name = "my_crates",
+    crates = ["pastey"],
+)
+
+crate_repo = use_extension("@score_crates//extensions:crate.bzl", "crate_repo")
+crate_repo.use(
+    repo = "@my_crates",
+)
