@@ -171,7 +171,7 @@ build:autosd-crossland --@@score_crates+//sysroots:sysroot_source=@score_autosd_
 build:autosd-crossland --@@score_crates+//sysroots:sysroot_strip_prefix=aarch64
 ```
 
-The above config exposes AutoSD's cross compilation toolchain sysroot (all files in it) and a prefix, Bazel
-can point the toolchain to the right sysroot location, through the `SYSROOT_DIR` template variable.
+The above config supplies the toolchain files and selects the `aarch64` path component as the sysroot root.
+The rule exposes the complete `--sysroot=...` argument through the `SYSROOT_ARG` Make variable, which the Iceoryx bindgen build scripts consume.
 
-It uses an empty value for both by default, to make its usage optional. 
+`sysroot_source` defaults to an empty filegroup, making the argument empty and sysroot configuration optional. `sysroot_strip_prefix` defaults to `sysroot`.
