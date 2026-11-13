@@ -8,8 +8,8 @@ load("@score_docs_as_code//:docs.bzl", "docs")
 
 docs(
     source_dir = "docs",
-    data = [
-        "@score_process//:needs_json",
+    external_needs = [
+        "@score_process_description//:needs_json_file",
     ],
 )
 

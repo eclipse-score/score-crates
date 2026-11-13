@@ -19,6 +19,7 @@ Verification Report
 
 .. document:: score-crates Verification Report
    :id: doc__score_crates_verification_report
+   :version: 1
    :status: draft
    :safety: ASIL_B
    :security: YES
