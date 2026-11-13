@@ -19,6 +19,7 @@ Component Architecture
 
 .. document:: Pastey Architecture
    :id: doc__mod_pastey_architecture
+   :version: 1
    :status: valid
    :safety: ASIL_B
    :security: NO

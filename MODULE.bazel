@@ -13,15 +13,14 @@
 module(
     name = "score_crates",
     version = "0.0.7",
-    compatibility_level = 0,
 )
 
 bazel_dep(name = "platforms", version = "1.0.0")
 bazel_dep(name = "bazel_skylib", version = "1.9.0")
 bazel_dep(name = "rules_rust", version = "0.68.1-score")
 
-bazel_dep(name = "score_toolchains_rust", version = "0.8.0", dev_dependency = True)
-bazel_dep(name = "score_bazel_cpp_toolchains", version = "0.5.1", dev_dependency = True)
+bazel_dep(name = "score_toolchains_rust", version = "0.10.0", dev_dependency = True)
+bazel_dep(name = "score_bazel_cpp_toolchains", version = "0.5.4", dev_dependency = True)
 
 # Extensions
 gcc = use_extension("@score_bazel_cpp_toolchains//extensions:gcc.bzl", "gcc", dev_dependency = True)
@@ -192,12 +191,38 @@ crate.spec(
     package = "iceoryx2-bb-posix-qnx8",
     rev = "9f5622f554de48a7a296e1a5a71200b01e35a502",
 )
-
-#iceoryx2 does not yet support QNX8 correctly so we patch
 crate.annotation(
+    # Same cross-sysroot fix as iceoryx2-pal-os-api-qnx8 below: its bindgen
+    # (src/c/posix.h -> pthread headers) otherwise reads x86_64 host /usr/include
+    # and rejects x86-only constructs (regparm, __float128) for the aarch64 target.
+    build_script_data = ["@@score_crates+//sysroots:aarch64_linux"],
+    build_script_env = {
+        # SYSROOT_ARG is the complete --sysroot=$${pwd}/<root> argument, or empty
+        # when no sysroot is configured so native builds keep their system headers.
+        "BINDGEN_EXTRA_CLANG_ARGS_aarch64_unknown_linux_gnu": "$(SYSROOT_ARG)",
+    },
+    # Exposes the SYSROOT_ARG make variable computed by //sysroots:aarch64_linux.
+    build_script_toolchains = ["@@score_crates+//sysroots:aarch64_linux"],
     crate = "iceoryx2-pal-posix-qnx8",
     # See the note on the iceoryx2-bb-derive-macros-qnx8 annotation: label hard-coded for a stable digest.
     patches = ["@@score_crates+//patches:qnx8_iceoryx2.patch"],
+    repositories = ["crate_index"],
+)
+
+# Point iceoryx2-pal-os-api-qnx8's bindgen at the aarch64 cross sysroot so clang
+# reads target headers instead of the x86_64 host /usr/include (fixes the
+# ssize_t(4) != ptr(8) cross error). Hermetic: //sysroots:aarch64_linux brings
+# the sysroot files in as inputs and exposes the --sysroot arg as $(SYSROOT_ARG).
+crate.annotation(
+    build_script_data = ["@@score_crates+//sysroots:aarch64_linux"],
+    build_script_env = {
+        # SYSROOT_ARG is the complete --sysroot=$${pwd}/<root> argument, or empty
+        # when no sysroot is configured so native builds keep their system headers.
+        "BINDGEN_EXTRA_CLANG_ARGS_aarch64_unknown_linux_gnu": "$(SYSROOT_ARG)",
+    },
+    # Exposes the SYSROOT_ARG make variable computed by //sysroots:aarch64_linux.
+    build_script_toolchains = ["@@score_crates+//sysroots:aarch64_linux"],
+    crate = "iceoryx2-pal-os-api-qnx8",
     repositories = ["crate_index"],
 )
 crate.spec(
@@ -475,8 +500,10 @@ git_override(
 
 bazel_dep(name = "rules_python", version = "1.8.5", dev_dependency = True)
 
-bazel_dep(name = "score_docs_as_code", version = "4.6.1")
-bazel_dep(name = "score_process", version = "2.0.2")
+# Compatible with 9.0.0, but it also works with 8.7.0.
+# This allows users to gradually upgrade to a newer version.
+bazel_dep(name = "score_docs_as_code", version = "8.7.0")
+bazel_dep(name = "score_process_description", version = "2.2.3")
 bazel_dep(name = "score_tooling", version = "1.3.1")
 
 register_toolchains(
