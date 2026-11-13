@@ -17,6 +17,7 @@ Pastey Crate Component Classification
 
 .. document:: Pastey Crate Component Classification
    :id: doc__pastey_crate_comp_class
+   :version: 1
    :status: valid
    :safety: ASIL_B
    :security: NO

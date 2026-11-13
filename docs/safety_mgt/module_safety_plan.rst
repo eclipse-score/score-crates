@@ -17,6 +17,7 @@ Safety Plan
 
 .. document:: score-crates Safety Plan
   :id: doc__score_crates_safety_plan
+  :version: 1
   :status: draft
   :safety: ASIL_B
   :security: NO
