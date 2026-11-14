@@ -502,7 +502,7 @@ bazel_dep(name = "rules_python", version = "1.8.5", dev_dependency = True)
 
 # Compatible with 9.0.0, but it also works with 8.7.0.
 # This allows users to gradually upgrade to a newer version.
-bazel_dep(name = "score_docs_as_code", version = "8.7.0")
+bazel_dep(name = "score_docs_as_code", version = "9.0.0")
 bazel_dep(name = "score_process_description", version = "2.2.3")
 bazel_dep(name = "score_tooling", version = "1.3.1")
 
