@@ -150,5 +150,9 @@
   {
     "version": "v0.0.15",
     "url": "https://eclipse-score.github.io/score-crates/v0.0.15/"
+  },
+  {
+    "version": "pr-91",
+    "url": "https://eclipse-score.github.io/score-crates/pr-91/"
   }
 ]
