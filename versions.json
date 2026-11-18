@@ -162,5 +162,9 @@
   {
     "version": "pr-89",
     "url": "https://eclipse-score.github.io/score-crates/pr-89/"
+  },
+  {
+    "version": "pr-71",
+    "url": "https://eclipse-score.github.io/score-crates/pr-71/"
   }
 ]
