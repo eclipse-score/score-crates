@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Futures Crate Component Classification &#8212; S-CORE Crates  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=18bd87630a240e9c25be" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=18bd87630a240e9c25be" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/score.css?v=415257cb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/score_needs.css?v=82a1844f" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/score_design.css?v=8048e6ee" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-data-viewer/jsonview.bundle.css?v=f6ef2277" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-needs/libs/html/datatables.min.css?v=4b4fd840" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-needs/common_css/needstable.css?v=5e1b6797" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-needs/common_css/need_core.css?v=f5b60a78" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-needs/common_css/need_style.css?v=92936fa5" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-needs/common_css/need_toggle.css?v=5c6620df" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-needs/common_css/need_links.css?v=2150a916" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-needs/modern.css?v=803738c0" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=18bd87630a240e9c25be"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=18bd87630a240e9c25be" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=18bd87630a240e9c25be" />
+
+    <script src="../../_static/jquery.js?v=5d32c60e"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+    <script src="../../_static/documentation_options.js?v=7f41d439"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../../_static/sphinx-data-viewer/jsonview.bundle.js?v=18cd53c5"></script>
+    <script src="../../_static/sphinx-data-viewer/jsonview_loader.js?v=f7ff7e7d"></script>
+    <script src="../../_static/sphinx-needs/libs/html/datatables.min.js?v=8a4aee21"></script>
+    <script src="../../_static/sphinx-needs/libs/html/datatables_loader.js?v=a2cae175"></script>
+    <script src="../../_static/sphinx-needs/libs/html/sphinx_needs_collapse.js?v=dca66431"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'futures/docs/component_classification';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.23.0';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://eclipse-score.github.io/score-crates/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Pastey" href="../../pastey/index.html" />
+    <link rel="prev" title="Futures" href="../index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="color-scheme" content="light dark"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.1" />
+  
+    
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button type="button" class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Eclipse S-CORE</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../rust_crate_safety_guideline.html">
+    Rust External Crate Safety Guideline
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../safety_mgt/module_safety_plan.html">
+    Safety Plan
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../verification_report/module_verification_report.html">
+    Verification Report
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../crates_index.html">
+    Components
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/eclipse-score" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+      
+        <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-2"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-2"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-2">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button type="button" class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../rust_crate_safety_guideline.html">
+    Rust External Crate Safety Guideline
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../safety_mgt/module_safety_plan.html">
+    Safety Plan
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../verification_report/module_verification_report.html">
+    Verification Report
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../crates_index.html">
+    Components
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/eclipse-score" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+        
+          <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item pst-sidebar-collapse"><button type="button" id="pst-collapse-sidebar-button" aria-expanded="true" aria-controls="pst-primary-sidebar">
+  <svg class="pst-icon" role="img" aria-hidden="true" focusable="false" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+    <path fill="currentColor" d="M3 15.5C2.36232 15.5 1.74874 15.2564 1.28478 14.8189C0.820828 14.3815 0.541576 13.7832 0.504167 13.1467L0.5 13L0.5 3C0.499965 2.36232 0.743605 1.74874 1.18107 1.28478C1.61854 0.820828 2.21676 0.541576 2.85333 0.504167L3 0.5L13 0.5C13.6377 0.499965 14.2513 0.743605 14.7152 1.18107C15.1792 1.61854 15.4584 2.21676 15.4958 2.85333L15.5 3L15.5 13C15.5 13.6377 15.2564 14.2513 14.8189 14.7152C14.3815 15.1792 13.7832 15.4584 13.1467 15.4958L13 15.5L3 15.5ZM3 13.8333L10.5 13.8333L10.5 2.16667L3 2.16667C2.79589 2.16669 2.59889 2.24163 2.44636 2.37726C2.29383 2.5129 2.19638 2.69979 2.1725 2.9025L2.16667 3L2.16667 13C2.16669 13.2041 2.24163 13.4011 2.37726 13.5536C2.5129 13.7062 2.69979 13.8036 2.9025 13.8275L3 13.8333ZM6.65583 10.325L6.5775 10.2558L4.91083 8.58917C4.76735 8.44567 4.68116 8.25476 4.66843 8.05223C4.65569 7.84971 4.71729 7.6495 4.84167 7.48917L4.91083 7.41083L6.5775 5.74417C6.72747 5.59471 6.9287 5.50794 7.14032 5.50148C7.35194 5.49502 7.55809 5.56935 7.7169 5.70937C7.8757 5.8494 7.97525 6.04463 7.99533 6.25539C8.01541 6.46616 7.95451 6.67667 7.825 6.84417L7.75583 6.9225L6.67917 8L7.75583 9.0775C7.89931 9.22099 7.98551 9.41191 7.99824 9.61443C8.01097 9.81695 7.94938 10.0172 7.825 10.1775L7.75583 10.2558C7.61234 10.3993 7.42142 10.4855 7.2189 10.4982C7.01638 10.511 6.81617 10.4494 6.65583 10.325Z"/>
+  </svg>
+  <span class="pst-collapse-sidebar-label">Collapse Sidebar</span>
+  <span class="pst-expand-sidebar-label">Expand Sidebar</span>
+</button></div>
+        <div class="sidebar-primary-item">
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">Futures</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a aria-current="page" class="current reference internal" href="#">Futures Crate Component Classification</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pastey/index.html">Pastey</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../crates_index.html" class="nav-link">Components</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Futures</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Futures Crate Component Classification</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="futures-crate-component-classification">
+<h1>Futures Crate Component Classification<a class="headerlink" href="#futures-crate-component-classification" title="Link to this heading">#</a></h1>
+<div class="need_container docutils container" id="SNCB-eb573060">
+<div class="pst-scrollable-table-container"><table class="need needs_grid_complex needs_layout_score needs_style_none needs_type_document table" id="doc__futures_crate_comp_class">
+<tbody>
+<tr class="head row-odd"><td class="head_left" colspan="2"><div class="needs_head_left line-block">
+<div class="line"><span><span class="needs_title"><span class="needs_data">Futures Crate Component Classification</span></span></span></div>
+</div>
+</td>
+<td class="head_center" colspan="2"><div class="needs_head line-block">
+<div class="line"><span><span class="needs_status"><span class="needs_label">status: </span><span class="needs_data">draft</span></span></span></div>
+<div class="line"><span><span class="needs_security"><span class="needs_label">security: </span><span class="needs_data">NO</span></span></span></div>
+<div class="line"><span><span class="needs_safety"><span class="needs_label">safety: </span><span class="needs_data">ASIL_B</span></span></span></div>
+</div>
+</td>
+<td class="head_right" colspan="2"><div class="needs_head_right line-block">
+<div class="line"><span><span class="needs needs_collapse" id="target__show__meta"><span class="needs collapsed"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-down-circle"><circle cx="12" cy="12" r="10"></circle><polyline points="8 12 12 16 16 12"></polyline><line x1="12" y1="8" x2="12" y2="16"></line></svg></span><span class="needs visible collapse_is_hidden"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right-circle"><circle cx="12" cy="12" r="10"></circle><polyline points="12 16 16 12 12 8"></polyline><line x1="8" y1="12" x2="16" y2="12"></line></svg></span></span></span></div>
+</div>
+</td>
+</tr>
+<tr class="meta row-even"><td class="meta" colspan="3"><div class="needs_meta_left line-block">
+<div class="line"><span><span><div class="line"><span class="needs_tags"><span class="needs_label">tags: </span><span class="needs_data_container"><span class="needs_data">pre-existing</span><span class="needs_spacer">, </span><span class="needs_data">software-component</span><span class="needs_spacer">, </span><span class="needs_data">classification</span><span class="needs_spacer">, </span><span class="needs_data">Rust</span><span class="needs_spacer">, </span><span class="needs_data">async</span></span></span></div>
+<div class="line"><span class="needs_version"><span class="needs_label">version: </span>1</span></div>
+</span></span></div>
+<div class="line"><span><div class="line">realizes: <span class="realizes"><span><a class="external_link reference external" href="https://eclipse-score.github.io/process_description//main/process_areas/safety_management/safety_management_workproducts.html#wp__sw_component_class">wp__sw_component_class</a></span></span></div>
+</span></div>
+</div>
+</td>
+<td class="meta" colspan="3"></td>
+</tr>
+<tr class="content row-odd"><td class="content" colspan="6"></td>
+</tr>
+<tr class="footer row-even"><td class="footer_left" colspan="2"><div class="needs_footer_left line-block">
+<div class="line"><span><span class="needs-id"><a class="reference internal" href="#doc__futures_crate_comp_class" title="doc__futures_crate_comp_class">doc__futures_crate_comp_class</a></span></span></div>
+</div>
+</td>
+<td class="footer" colspan="2"><div class="needs_footer line-block">
+<div class="line"><span><span class="needs_type_name"><span class="needs_data">Generic Document</span></span></span></div>
+</div>
+</td>
+<td class="footer_right" colspan="2"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="line-block">
+<div class="line">Classification of Futures Crate as a software component in the context of S-CORE.</div>
+<div class="line"><br /></div>
+<div class="line">Repository: <a class="github reference external" href="https://github.com/rust-lang/futures-rs">rust-lang/futures-rs</a></div>
+<div class="line">Documentation: <a class="reference external" href="https://docs.rs/futures/0.3.34/futures/">https://docs.rs/futures/0.3.34/futures/</a></div>
+<div class="line">Crate Version: 0.3.34 (<code class="docutils literal notranslate"><span class="pre">futures</span></code> and <code class="docutils literal notranslate"><span class="pre">futures-core</span></code>, as resolved in <code class="docutils literal notranslate"><span class="pre">Cargo.lock</span></code> of this repository)</div>
+<div class="line">Additional documentation considered:</div>
+<div class="line"><a class="reference external" href="https://crates.io/crates/futures">https://crates.io/crates/futures</a></div>
+</div>
+<section id="component-used-from-the-futures-crate">
+<h2>Component used from the futures crate<a class="headerlink" href="#component-used-from-the-futures-crate" title="Link to this heading">#</a></h2>
+<p>Only the following items are used in production code of the Rust COM API. Everything else (<code class="docutils literal notranslate"><span class="pre">executor::block_on</span></code>, <code class="docutils literal notranslate"><span class="pre">channel::oneshot</span></code>, <code class="docutils literal notranslate"><span class="pre">FutureExt</span></code>, <code class="docutils literal notranslate"><span class="pre">StreamExt</span></code>) is used in mock, example and test code only and is out of scope. The classified component is therefore <code class="docutils literal notranslate"><span class="pre">futures-core</span></code>. The COM API imports the used items through the public paths <code class="docutils literal notranslate"><span class="pre">futures::stream::Stream</span></code> and <code class="docutils literal notranslate"><span class="pre">futures::task::AtomicWaker</span></code> (<code class="docutils literal notranslate"><span class="pre">consumer.rs</span></code> of <code class="docutils literal notranslate"><span class="pre">com-api-runtime-lola</span></code>); <code class="docutils literal notranslate"><span class="pre">futures</span></code> and <code class="docutils literal notranslate"><span class="pre">futures-util</span></code> only re-export them from <code class="docutils literal notranslate"><span class="pre">futures-core</span></code>.</p>
+<div class="pst-scrollable-table-container"><table class="table" id="id1">
+<caption><span class="caption-number">Table 5 </span><span class="caption-text">Used items</span><a class="headerlink" href="#id1" title="Link to this table">#</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p>Defined in</p></th>
+<th class="head"><p>Used for</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Stream</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">futures-core</span></code> (<code class="docutils literal notranslate"><span class="pre">src/stream.rs</span></code>)</p></td>
+<td><p>Return type of the public <code class="docutils literal notranslate"><span class="pre">Subscription::to_stream()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">AtomicWaker</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">futures-core</span></code> (<code class="docutils literal notranslate"><span class="pre">src/task/__internal/atomic_waker.rs</span></code>), re-exported as the public and documented <code class="docutils literal notranslate"><span class="pre">futures::task::AtomicWaker</span></code> (through <code class="docutils literal notranslate"><span class="pre">futures-util</span></code>)</p></td>
+<td><p>Wake-up of pending receive and discovery futures</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Context</span></code>, <code class="docutils literal notranslate"><span class="pre">Poll</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">core::task</span></code>, re-exported by <code class="docutils literal notranslate"><span class="pre">futures</span></code></p></td>
+<td><p>No <code class="docutils literal notranslate"><span class="pre">futures</span></code> logic; provided by the Rust <code class="docutils literal notranslate"><span class="pre">core</span></code> library</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="step-1-determine-p-the-uncertainty-of-the-processes-applied">
+<h2>Step 1: Determine (P): the uncertainty of the Processes applied<a class="headerlink" href="#step-1-determine-p-the-uncertainty-of-the-processes-applied" title="Link to this heading">#</a></h2>
+<div class="line-block">
+<div class="line">Apply the process measures to determine (P).</div>
+<div class="line">The result of a process measure shall have as outcome [HE, PE, NE]</div>
+<div class="line">- HE: High Evidence</div>
+<div class="line">- PE: Partly Evidence but Manageable</div>
+<div class="line">- NE: No Evidence</div>
+</div>
+<p>The evidence below is taken from the upstream repository at tag <code class="docutils literal notranslate"><span class="pre">0.3.34</span></code>. The usage of <code class="docutils literal notranslate"><span class="pre">futures</span></code> in the Rust COM API is summarized in the futures dependency review of the eclipse-score/communication repository. The ratings are proposed and are final only after review by the S-CORE Safety team.</p>
+<div class="pst-scrollable-table-container"><table class="table" id="id2">
+<caption><span class="caption-number">Table 6 </span><span class="caption-text">Determine (P)</span><a class="headerlink" href="#id2" title="Link to this table">#</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Id</p></th>
+<th class="head"><p>Indicator for applying process</p></th>
+<th class="head"><p>Result</p></th>
+<th class="head"><p>Rationale for result</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Are rules, state-of-the art processes applied for the design, implementation and verification?</p></td>
+<td><p>PE</p></td>
+<td><p>The project follows standard Rust open-source practices (upstream <code class="docutils literal notranslate"><span class="pre">.github/workflows/ci.yml</span></code> at tag <code class="docutils literal notranslate"><span class="pre">0.3.34</span></code>).</p>
+<p>CI verifications include:</p>
+<ul class="simple">
+<li><p>test suite (<code class="docutils literal notranslate"><span class="pre">cargo</span> <span class="pre">test</span> <span class="pre">--workspace</span> <span class="pre">--all-features</span></code>) on Linux, macOS, Windows and several cross-targets</p></li>
+<li><p>Code Coverage generation with LLVM-based tools is not part of upstream CI (no coverage threshold is required for pull request approval); a report can be generated locally with <code class="docutils literal notranslate"><span class="pre">cargo</span> <span class="pre">+nightly</span> <span class="pre">llvm-cov</span> <span class="pre">--workspace</span> <span class="pre">--all-features</span> <span class="pre">--branch</span></code></p></li>
+<li><p>build checks on stable, beta and nightly</p></li>
+<li><p>MSRV check (1.36 for <code class="docutils literal notranslate"><span class="pre">futures-core</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">no-std</span></code> builds, feature powerset check and minimal-versions build</p></li>
+<li><p>Documentation generation</p></li>
+<li><p>Miri UB detection</p></li>
+<li><p>address, memory and thread sanitizer runs</p></li>
+<li><p>formatting check (<code class="docutils literal notranslate"><span class="pre">cargo</span> <span class="pre">fmt</span> <span class="pre">--check</span></code>)</p></li>
+<li><p>dependency staleness checks (Dependabot)</p></li>
+<li><p>CHANGELOG entries for each release in <code class="docutils literal notranslate"><span class="pre">CHANGELOG.md</span></code></p></li>
+<li><p>Maintaining GitHub issues</p></li>
+</ul>
+<p>Not available: active Clippy job (commented out on the <code class="docutils literal notranslate"><span class="pre">0.3</span></code> branch) and <code class="docutils literal notranslate"><span class="pre">cargo-audit</span></code> / <code class="docutils literal notranslate"><span class="pre">cargo-deny</span></code>.</p>
+<p>All CI jobs passed on the <code class="docutils literal notranslate"><span class="pre">0.3.34</span></code> tag commit (<a class="github reference external" href="https://github.com/rust-lang/futures-rs/actions/runs/31490059232">rust-lang/futures-rs</a>).</p>
+<ul class="simple">
+<li><p>crate documentation: <a class="reference external" href="https://docs.rs/futures/0.3.34/futures/">https://docs.rs/futures/0.3.34/futures/</a></p></li>
+<li><p>documentation of the used component: <a class="reference external" href="https://docs.rs/futures-core/0.3.34/futures_core/">https://docs.rs/futures-core/0.3.34/futures_core/</a></p></li>
+<li><p>source of the used component: <a class="github reference external" href="https://github.com/rust-lang/futures-rs/tree/0.3.34/futures-core/src">rust-lang/futures-rs</a></p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>Are requirements available?</p></td>
+<td><p>PE</p></td>
+<td><p>The functional requirements of the used items are partially captured in the crate documentation (rustdoc) as expected behaviors, with usage guidance for each. No requirements exist in S-CORE form.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Stream</span></code> (<code class="docutils literal notranslate"><span class="pre">futures-core</span></code> <code class="docutils literal notranslate"><span class="pre">src/stream.rs</span></code>): <code class="docutils literal notranslate"><span class="pre">poll_next</span></code> returns <code class="docutils literal notranslate"><span class="pre">Poll::Pending</span></code> when the next value is not ready and the implementation ensures the current task is notified when it may be ready; <code class="docutils literal notranslate"><span class="pre">Poll::Ready(Some(val))</span></code> yields a value; <code class="docutils literal notranslate"><span class="pre">Poll::Ready(None)</span></code> means the stream has terminated and <code class="docutils literal notranslate"><span class="pre">poll_next</span></code> should not be called again. Polling after termination may panic or block, but must never cause undefined behavior. <code class="docutils literal notranslate"><span class="pre">size_hint</span></code> gives bounds on the remaining length; it must not be trusted to omit bounds checks in unsafe code, and the default is <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">None)</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AtomicWaker</span></code> (<code class="docutils literal notranslate"><span class="pre">futures-core</span></code> <code class="docutils literal notranslate"><span class="pre">src/task/__internal/atomic_waker.rs</span></code>): consumers call <code class="docutils literal notranslate"><span class="pre">register</span></code> before checking the result and producers call <code class="docutils literal notranslate"><span class="pre">wake</span></code> after producing it; <code class="docutils literal notranslate"><span class="pre">wake</span></code> before <code class="docutils literal notranslate"><span class="pre">register</span></code> is a no-op; one <code class="docutils literal notranslate"><span class="pre">AtomicWaker</span></code> may be reused for any number of calls. Memory ordering: <code class="docutils literal notranslate"><span class="pre">register</span></code> acquires all memory released by earlier <code class="docutils literal notranslate"><span class="pre">wake</span></code> calls; for concurrent <code class="docutils literal notranslate"><span class="pre">register</span></code> calls (to be avoided) ordering is guaranteed only for the winning call. An example (<code class="docutils literal notranslate"><span class="pre">Flag</span></code>) shows the required check after <code class="docutils literal notranslate"><span class="pre">register</span></code> to avoid lost notifications.</p></li>
+</ul>
+<p>(crate documentation - <a class="reference external" href="https://docs.rs/futures-core/0.3.34/futures_core/stream/trait.Stream.html">https://docs.rs/futures-core/0.3.34/futures_core/stream/trait.Stream.html</a> and <a class="reference external" href="https://docs.rs/futures/0.3.34/futures/task/struct.AtomicWaker.html">https://docs.rs/futures/0.3.34/futures/task/struct.AtomicWaker.html</a>)</p>
+<p>Missing: requirements in S-CORE form (TRLC) for the behavior used by the COM API.</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>Are specifications for functionalities and properties available (architecture)?</p></td>
+<td><p>PE</p></td>
+<td><p>The crate documentation partially specifies the functionality and properties of the used items, through the trait and type descriptions, return-state descriptions and a usage example (checked in <code class="docutils literal notranslate"><span class="pre">futures-core</span></code> 0.3.34):</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Stream</span></code>: the trait is described as the asynchronous version of <code class="docutils literal notranslate"><span class="pre">Iterator</span></code>, modeled after <code class="docutils literal notranslate"><span class="pre">Future</span></code>; the <code class="docutils literal notranslate"><span class="pre">poll_next</span></code> return states, the behavior after termination and the <code class="docutils literal notranslate"><span class="pre">size_hint</span></code> properties are specified (see Id 2).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AtomicWaker</span></code>: the purpose, the <code class="docutils literal notranslate"><span class="pre">register</span></code>/<code class="docutils literal notranslate"><span class="pre">wake</span></code> calling pattern and the memory-ordering guarantees are specified (see Id 2). Comments in the source describe the implementation, which uses a single <code class="docutils literal notranslate"><span class="pre">AtomicUsize</span></code> with <code class="docutils literal notranslate"><span class="pre">REGISTERING</span></code> and <code class="docutils literal notranslate"><span class="pre">WAKING</span></code> bits, the single-producer behavior and the outcome of concurrent <code class="docutils literal notranslate"><span class="pre">register</span></code> calls.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">futures-core</span></code> crate has a README (usage and minimum Rust version 1.36).</p></li>
+</ul>
+<p>The specification is partial: there is no separate specification document.</p>
+<p>Missing: specification in S-CORE form.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>Are design specifications available?</p></td>
+<td><p>PE</p></td>
+<td><p>No UML or class diagram, no architecture or design document in the upstream repository (no <code class="docutils literal notranslate"><span class="pre">docs</span></code> or design directory in the 0.3.34 tree). The design of the used component is documented only in source comments, mainly the description of the <code class="docutils literal notranslate"><span class="pre">AtomicWaker</span></code> state handling (see Id 3). The used component is small (<code class="docutils literal notranslate"><span class="pre">futures-core</span></code>, 306 lines, see Step 2), but its unsafe code needs a design description.</p>
+<p>Missing: static design for the used parts (<code class="docutils literal notranslate"><span class="pre">Stream</span></code>, <code class="docutils literal notranslate"><span class="pre">AtomicWaker</span></code>); to be created in score-crates.</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>Are configuration specification and data available, if applicable?</p></td>
+<td><p>HE</p></td>
+<td><p>Not applicable.</p>
+<p>The used component (<code class="docutils literal notranslate"><span class="pre">futures-core</span></code>) does not use any runtime configuration, environment-based settings or configuration files. So no configuration specification is applicable or needed. Only compile-time Cargo features (<code class="docutils literal notranslate"><span class="pre">std</span></code>, <code class="docutils literal notranslate"><span class="pre">alloc</span></code>, optional <code class="docutils literal notranslate"><span class="pre">portable-atomic</span></code>) select the compiled code.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>Are verification measures including tests and reports available?</p></td>
+<td><p>PE</p></td>
+<td><p>Test suite exists in the upstream repository, with test files covering unit tests and integration tests (62 test files with 235 <code class="docutils literal notranslate"><span class="pre">#[test]</span></code> attributes in <code class="docutils literal notranslate"><span class="pre">futures/tests</span></code>, including <code class="docutils literal notranslate"><span class="pre">task_atomic_waker.rs</span></code> and 13 <code class="docutils literal notranslate"><span class="pre">stream*</span></code> test files; further tests in <code class="docutils literal notranslate"><span class="pre">futures-channel</span></code> and <code class="docutils literal notranslate"><span class="pre">futures-executor</span></code>). The <code class="docutils literal notranslate"><span class="pre">futures-core</span></code> crate has no tests of its own, and the published archives contain no test files.
+(test suite - <a class="github reference external" href="https://github.com/rust-lang/futures-rs/tree/0.3.34/futures/tests">rust-lang/futures-rs</a>)
+(test suite result is available from the CI run on the <code class="docutils literal notranslate"><span class="pre">0.3.34</span></code> tag commit, all 24 jobs passed - <a class="github reference external" href="https://github.com/rust-lang/futures-rs/actions/runs/31490059232">rust-lang/futures-rs</a>, or by running tests locally with <code class="docutils literal notranslate"><span class="pre">cargo</span> <span class="pre">test</span> <span class="pre">--workspace</span> <span class="pre">--all-features</span></code> command)</p>
+<p>An LLVM-based code coverage report is not generated in upstream CI (the pull-request checks contain no coverage job, e.g. - <a class="github reference external" href="https://github.com/rust-lang/futures-rs/pull/3069/checks">rust-lang/futures-rs#checks</a>). It can be generated locally on tag <code class="docutils literal notranslate"><span class="pre">0.3.34</span></code> with <code class="docutils literal notranslate"><span class="pre">cargo</span> <span class="pre">+nightly</span> <span class="pre">llvm-cov</span> <span class="pre">--workspace</span> <span class="pre">--all-features</span> <span class="pre">--branch</span></code>, with 66.7% function coverage, 85.1% line coverage and 64.3% branch coverage of the used <code class="docutils literal notranslate"><span class="pre">AtomicWaker</span></code> (details in Step 2, Id 3).</p>
+<p>Missing: coverage report in CI; 100% coverage of the used items.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="line-block">
+<div class="line">(P=1) shall be selected when none of the determined process measures indicate PE or NE.</div>
+<div class="line">(P=2) shall be selected when at least one of the determined process measures indicate PE or NE, but the gaps evaluated are acceptable, means</div>
+<div class="line-block">
+<div class="line">the risk of systematic faults due to these gaps is sufficiently low or manageable by mitigating the gaps.</div>
+</div>
+<div class="line">(P=3) in all other cases.</div>
+<div class="line"><br /></div>
+</div>
+<p>Futures crate is proposed as <strong>P = 2</strong> (to be confirmed by the Safety team).</p>
+</section>
+<section id="step-2-determine-c-the-uncertainty-of-finding-systematic-faults-based-on-the-complexity">
+<h2>Step 2: Determine (C): the uncertainty of finding systematic faults based on the Complexity<a class="headerlink" href="#step-2-determine-c-the-uncertainty-of-finding-systematic-faults-based-on-the-complexity" title="Link to this heading">#</a></h2>
+<div class="line-block">
+<div class="line">Apply the complexity measures to determine (C).</div>
+<div class="line">The result of a complexity measure shall have as outcome [NH, HM, NM]</div>
+<div class="line">- NH: Not High</div>
+<div class="line">- HM: High but Manageable</div>
+<div class="line">- NM: high and Not Manageable</div>
+</div>
+<p>The numbers below are measured on <code class="docutils literal notranslate"><span class="pre">futures-core</span></code> 0.3.34. Lines of code and unsafe code are counted for the whole crate; public interfaces and parameters are counted for the used items only. Lines of code are non-blank lines in <code class="docutils literal notranslate"><span class="pre">src/**/*.rs</span></code> not starting with <code class="docutils literal notranslate"><span class="pre">//</span></code>. The ratings are proposed and are final only after review by the S-CORE Safety team.</p>
+<div class="pst-scrollable-table-container"><table class="table" id="id3">
+<caption><span class="caption-number">Table 7 </span><span class="caption-text">Determine (C)</span><a class="headerlink" href="#id3" title="Link to this table">#</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Id</p></th>
+<th class="head"><p>Indicator for high Complexity</p></th>
+<th class="head"><p>Complexity measure Tool</p></th>
+<th class="head"><p>Result</p></th>
+<th class="head"><p>Number</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>High amount of Lines of Code</p></td>
+<td><p>Lines of Code (without comments) (generated code is excluded, e.g. ProtoCmpl)</p></td>
+<td><p>NH</p></td>
+<td><p>306 (whole crate)</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>Unsafe code used / total unsafe code</p></td>
+<td><dl class="simple">
+<dt>Count:</dt><dd><ul class="simple">
+<li><p>LoUC+N: lines of unsafe code with safety note</p></li>
+<li><p>LoUC  : lines of unsafe code, no safety note</p></li>
+</ul>
+</dd>
+</dl>
+</td>
+<td><p>HM</p></td>
+<td><p>5 source lines containing <code class="docutils literal notranslate"><span class="pre">unsafe</span></code> in the whole crate, 4 of them in the used items:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">atomic_waker.rs</span></code> (used): two <code class="docutils literal notranslate"><span class="pre">unsafe</span></code> blocks, <code class="docutils literal notranslate"><span class="pre">unsafe</span> <span class="pre">impl</span> <span class="pre">Send</span></code> and <code class="docutils literal notranslate"><span class="pre">unsafe</span> <span class="pre">impl</span> <span class="pre">Sync</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">stream.rs</span></code> (not used): one <code class="docutils literal notranslate"><span class="pre">unsafe</span></code> block in <code class="docutils literal notranslate"><span class="pre">impl</span> <span class="pre">Stream</span> <span class="pre">for</span> <span class="pre">AssertUnwindSafe</span></code> (<code class="docutils literal notranslate"><span class="pre">std</span></code> feature)</p></li>
+<li><p>LoUC+N: 0 (no <code class="docutils literal notranslate"><span class="pre">//</span> <span class="pre">SAFETY:</span></code> notes in <code class="docutils literal notranslate"><span class="pre">futures-core</span></code>)</p></li>
+<li><p>LoUC: 4 in the used items. The two <code class="docutils literal notranslate"><span class="pre">unsafe</span></code> blocks in <code class="docutils literal notranslate"><span class="pre">register</span></code> and <code class="docutils literal notranslate"><span class="pre">take</span></code> are justified only by short comments that the lock is held, and by the module-level description of the locking protocol; <code class="docutils literal notranslate"><span class="pre">unsafe</span> <span class="pre">impl</span> <span class="pre">Send/Sync</span></code> have no comment.</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><div class="line-block">
+<div class="line">Test exists / Coverage (Function, Line)</div>
+<div class="line">(maybe better: testability, but how to measure?)</div>
+</div>
+</td>
+<td><p>Existing Tests Coverage</p></td>
+<td><p>HM</p></td>
+<td><p>Test suite exists upstream with LLVM-based code coverage measured locally on tag <code class="docutils literal notranslate"><span class="pre">0.3.34</span></code> (<code class="docutils literal notranslate"><span class="pre">cargo</span> <span class="pre">+nightly</span> <span class="pre">llvm-cov</span> <span class="pre">--workspace</span> <span class="pre">--all-features</span> <span class="pre">--branch</span></code>). Code coverage of the used <code class="docutils literal notranslate"><span class="pre">AtomicWaker</span></code> (<code class="docutils literal notranslate"><span class="pre">atomic_waker.rs</span></code>) is -</p>
+<ul class="simple">
+<li><p>66.7% function coverage (4/6) (missing functions are <code class="docutils literal notranslate"><span class="pre">Default::default</span></code> and <code class="docutils literal notranslate"><span class="pre">Debug::fmt</span></code>, which are not used by the COM API)</p></li>
+<li><p>85.1% line coverage (C0) (40/47) (missing lines are <code class="docutils literal notranslate"><span class="pre">Default</span></code>, <code class="docutils literal notranslate"><span class="pre">Debug</span></code> and the <code class="docutils literal notranslate"><span class="pre">debug_assert!</span></code> in the losing path of concurrent <code class="docutils literal notranslate"><span class="pre">register</span></code> calls, which the crate documentation says should be avoided)</p></li>
+<li><p>64.3% branch coverage (C1) (9/14) (missing branches are the <code class="docutils literal notranslate"><span class="pre">debug_assert!</span></code> conditions of the same concurrent <code class="docutils literal notranslate"><span class="pre">register</span></code> path and the failing side of a <code class="docutils literal notranslate"><span class="pre">debug_assert!</span></code> in <code class="docutils literal notranslate"><span class="pre">take</span></code>, which is only reached on an invalid internal state)</p></li>
+</ul>
+<p>Whole <code class="docutils literal notranslate"><span class="pre">futures-core</span></code> crate: 40.0% function, 58.1% line coverage; the uncovered code is mainly in <code class="docutils literal notranslate"><span class="pre">FusedStream</span></code>, <code class="docutils literal notranslate"><span class="pre">TryStream</span></code>, <code class="docutils literal notranslate"><span class="pre">FusedFuture</span></code>, <code class="docutils literal notranslate"><span class="pre">TryFuture</span></code> and <code class="docutils literal notranslate"><span class="pre">AssertUnwindSafe</span></code> implementations, which are not used.
+Coverage of the concurrent paths depends on thread timing and may vary between runs.
+(coverage report can be generated by running tests locally with <code class="docutils literal notranslate"><span class="pre">cargo</span> <span class="pre">+nightly</span> <span class="pre">llvm-cov</span> <span class="pre">--workspace</span> <span class="pre">--all-features</span> <span class="pre">--branch</span></code> command; not available in upstream CI)</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>High amount of public function interfaces</p></td>
+<td><p>Number of public function interfaces</p></td>
+<td><p>NH</p></td>
+<td><p>6 for the used items in <code class="docutils literal notranslate"><span class="pre">futures-core</span></code> 0.3.34: <code class="docutils literal notranslate"><span class="pre">Stream::poll_next</span></code>, <code class="docutils literal notranslate"><span class="pre">Stream::size_hint</span></code> (default method), <code class="docutils literal notranslate"><span class="pre">AtomicWaker::new</span></code>, <code class="docutils literal notranslate"><span class="pre">AtomicWaker::register</span></code>, <code class="docutils literal notranslate"><span class="pre">AtomicWaker::wake</span></code>, <code class="docutils literal notranslate"><span class="pre">AtomicWaker::take</span></code>. The COM API calls <code class="docutils literal notranslate"><span class="pre">new</span></code>, <code class="docutils literal notranslate"><span class="pre">register</span></code> and <code class="docutils literal notranslate"><span class="pre">wake</span></code>, and implements <code class="docutils literal notranslate"><span class="pre">poll_next</span></code>. (Other public items of <code class="docutils literal notranslate"><span class="pre">futures-core</span></code>, such as <code class="docutils literal notranslate"><span class="pre">FusedStream</span></code> and <code class="docutils literal notranslate"><span class="pre">TryStream</span></code>, are not used and not counted.)</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>High amount of function parameters</p></td>
+<td><p>Number of parameters</p></td>
+<td><p>NH</p></td>
+<td><p>At most 2 (<code class="docutils literal notranslate"><span class="pre">poll_next(self:</span> <span class="pre">Pin&lt;&amp;mut</span> <span class="pre">Self&gt;,</span> <span class="pre">cx:</span> <span class="pre">&amp;mut</span> <span class="pre">Context&lt;'_&gt;)</span></code>; <code class="docutils literal notranslate"><span class="pre">register(&amp;self,</span> <span class="pre">waker:</span> <span class="pre">&amp;Waker)</span></code>); <code class="docutils literal notranslate"><span class="pre">new</span></code> has none, <code class="docutils literal notranslate"><span class="pre">size_hint</span></code>, <code class="docutils literal notranslate"><span class="pre">wake</span></code> and <code class="docutils literal notranslate"><span class="pre">take</span></code> only take <code class="docutils literal notranslate"><span class="pre">&amp;self</span></code>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Note: <code class="docutils literal notranslate"><span class="pre">futures</span></code> has custom atomic code and manual <code class="docutils literal notranslate"><span class="pre">Send</span></code>/<code class="docutils literal notranslate"><span class="pre">Sync</span></code> implementations in <code class="docutils literal notranslate"><span class="pre">AtomicWaker</span></code>, which requires careful safety analysis during qualification.</p>
+<div class="line-block">
+<div class="line">(C=1) shall be selected when none of the determined complexity measures indicate HM or NM.</div>
+<div class="line">(C=2) shall be selected when at least one of the determined complexity measures indicate HM or NM, but the gaps evaluated are acceptable, means</div>
+<div class="line-block">
+<div class="line">the risk of systematic faults due to these gaps is sufficiently low in the context of S-CORE or manageable by mitigating the gaps.</div>
+</div>
+<div class="line">(C=3) in all other cases.</div>
+<div class="line"><br /></div>
+</div>
+<p>Futures crate is proposed as <strong>C = 2</strong> (to be confirmed by the Safety team).</p>
+</section>
+<section id="step-3-determine-clas-out-the-classification-outcome">
+<h2>Step 3: Determine (CLAS_OUT): the classification outcome<a class="headerlink" href="#step-3-determine-clas-out-the-classification-outcome" title="Link to this heading">#</a></h2>
+<div class="line-block">
+<div class="line">Select CLAS_OUT depending on the determined values of (C) and (P)</div>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"></th>
+<th class="head"><p>P=1</p></th>
+<th class="head"><p>P=2</p></th>
+<th class="head"><p>P=3</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>C=1</p></td>
+<td><p>Q</p></td>
+<td><p>Q</p></td>
+<td><p>QR</p></td>
+</tr>
+<tr class="row-odd"><td><p>C=2</p></td>
+<td><p>QR</p></td>
+<td><p>QR</p></td>
+<td><p>QR</p></td>
+</tr>
+<tr class="row-even"><td><p>C=3</p></td>
+<td><p>QR</p></td>
+<td><p>QR</p></td>
+<td><p>NQ</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Futures crate is proposed as <strong>CLAS_OUT = QR</strong>, as it has <strong>P = 2</strong> and <strong>C = 2</strong> (to be confirmed by the Safety team).</p>
+</section>
+<section id="step-4-document-all-results-and-rationale-for-choosing-p-and-c-and-clas-out">
+<h2>Step 4: Document all results and rationale for choosing (P) and (C) and (CLAS_OUT)<a class="headerlink" href="#step-4-document-all-results-and-rationale-for-choosing-p-and-c-and-clas-out" title="Link to this heading">#</a></h2>
+<div class="line-block">
+<div class="line">Results (proposed, to be confirmed by the Safety team):</div>
+<div class="line">- P = 2 (Partly Evidence but Manageable): indicators 1-4 and 6 show PE and indicator 5 is HE. The gaps are acceptable and manageable, because the used component (<code class="docutils literal notranslate"><span class="pre">futures-core</span></code>) is small and its upstream CI runs tests, Miri and sanitizers, which passed on 0.3.34. The missing CI coverage, requirements and design can be added with reasonable effort (as done for <code class="docutils literal notranslate"><span class="pre">pastey</span></code>, see Additional notes).</div>
+<div class="line">- C = 2 (High but Manageable): lines of code, public interfaces and parameters are NH. The unsafe code in <code class="docutils literal notranslate"><span class="pre">AtomicWaker</span></code> (custom atomics, manual <code class="docutils literal notranslate"><span class="pre">Send</span></code>/<code class="docutils literal notranslate"><span class="pre">Sync</span></code>) is HM, and coverage is below 100% (<code class="docutils literal notranslate"><span class="pre">AtomicWaker</span></code>: 85.1% line, 64.3% branch coverage).</div>
+<div class="line">- CLAS_OUT = QR, from P = 2 and C = 2 according to the classification criteria.</div>
+<div class="line"><br /></div>
+<div class="line">This classification is a proposal and not a qualification or certification claim.</div>
+</div>
+</section>
+<section id="step-5-based-on-clas-out-select-the-activities">
+<h2>Step 5: Based on (CLAS_OUT) select the activities<a class="headerlink" href="#step-5-based-on-clas-out-select-the-activities" title="Link to this heading">#</a></h2>
+<p>Futures crate is proposed as <strong>CLAS_OUT = QR</strong> (to be confirmed by the Safety team).</p>
+<div class="line-block">
+<div class="line">As soon as the change request containing this is in status “Accepted”, the module safety plan for the component development is adapted based on the following: (select according to above result)</div>
+<div class="line">- Q: Follow the processes for qualification of software components in a safety context.</div>
+<div class="line">- QR: Follow the process for pre-existing software architectural elements</div>
+<div class="line">- NQ: Do no use this element in safety context</div>
+<div class="line"><br /></div>
+</div>
+<p>Additional notes:</p>
+<p>Traceability:
+End-to-end traceability is not yet established for the futures crate: no requirements, design, failure modes, control measures or traced tests exist yet. They can be generated in a follow-up in the same way as for <code class="docutils literal notranslate"><span class="pre">pastey</span></code>: next to this document in <code class="docutils literal notranslate"><span class="pre">docs/futures/docs/</span></code>, add <code class="docutils literal notranslate"><span class="pre">requirement/</span></code> (assumed system, feature and component requirements in TRLC), <code class="docutils literal notranslate"><span class="pre">architecture/</span></code> (static design and public API in PlantUML), <code class="docutils literal notranslate"><span class="pre">safety_analysis/</span></code> (AoU and failure modes, for example missed wake-up and stalled stream), <code class="docutils literal notranslate"><span class="pre">component/</span></code> and <code class="docutils literal notranslate"><span class="pre">tests/</span></code>, wired in a <code class="docutils literal notranslate"><span class="pre">BUILD</span></code> file as a <code class="docutils literal notranslate"><span class="pre">dependable_element</span></code> with integrity level B (<code class="docutils literal notranslate"><span class="pre">rules_score</span></code> from <code class="docutils literal notranslate"><span class="pre">score_tooling</span></code>). Traceability is then reported with the LOBSTER tool; unit test results are not currently displayed in the generated reports due to a known limitation in Rust test result parsing (<a class="github reference external" href="https://github.com/bmw-software-engineering/lobster/issues/589">bmw-software-engineering/lobster#589</a>).</p>
+<p>Toolchain Assurance:
+In this repository the crate is built with the Ferrocene toolchain, which is maintained as part of the score_toolchains_rust repository (<code class="docutils literal notranslate"><span class="pre">.bazelrc</span></code>, x86_64 Linux). The upstream tests run with the standard Rust toolchains (nightly, stable, beta and MSRV), not with Ferrocene; running the tests with the Ferrocene toolchain is open.</p>
+<p>Use of Standard Library Components in futures-core:
+The <code class="docutils literal notranslate"><span class="pre">futures-core</span></code> crate is <code class="docutils literal notranslate"><span class="pre">#![no_std]</span></code>. The used items use only Rust core library components (<code class="docutils literal notranslate"><span class="pre">core::task</span></code> for <code class="docutils literal notranslate"><span class="pre">Context</span></code>, <code class="docutils literal notranslate"><span class="pre">Poll</span></code> and <code class="docutils literal notranslate"><span class="pre">Waker</span></code>, <code class="docutils literal notranslate"><span class="pre">core::pin</span></code>, <code class="docutils literal notranslate"><span class="pre">core::cell::UnsafeCell</span></code> and <code class="docutils literal notranslate"><span class="pre">core::sync::atomic</span></code>). With the enabled <code class="docutils literal notranslate"><span class="pre">alloc</span></code> and <code class="docutils literal notranslate"><span class="pre">std</span></code> features, <code class="docutils literal notranslate"><span class="pre">alloc</span></code> is used for the <code class="docutils literal notranslate"><span class="pre">BoxStream</span></code> and <code class="docutils literal notranslate"><span class="pre">BoxFuture</span></code> type aliases and <code class="docutils literal notranslate"><span class="pre">std</span></code> only for the <code class="docutils literal notranslate"><span class="pre">Stream</span></code> and <code class="docutils literal notranslate"><span class="pre">FusedFuture</span></code> implementations for <code class="docutils literal notranslate"><span class="pre">std::panic::AssertUnwindSafe</span></code>; these are not used by the COM API. Since they are sourced from the same Ferrocene toolchain, they use the same underlying components.</p>
+<p>Code Coverage:
+An LLVM-based code coverage report is not generated in upstream CI. Measured locally, coverage of the used <code class="docutils literal notranslate"><span class="pre">AtomicWaker</span></code> is 66.7% function, 85.1% line and 64.3% branch coverage; the missing parts are <code class="docutils literal notranslate"><span class="pre">Default</span></code>, <code class="docutils literal notranslate"><span class="pre">Debug</span></code> and <code class="docutils literal notranslate"><span class="pre">debug_assert!</span></code> checks on concurrent or invalid states (see Step 2, Id 3). To reach 100% coverage, as done for <code class="docutils literal notranslate"><span class="pre">pastey</span></code> with tests (<a class="github reference external" href="https://github.com/AS1100K/pastey/pull/28">AS1100K/pastey#28</a>) and a CI coverage job (<a class="github reference external" href="https://github.com/AS1100K/pastey/pull/30">AS1100K/pastey#30</a>), tests for these paths and a coverage job can be proposed upstream to <code class="docutils literal notranslate"><span class="pre">futures-rs</span></code>, or coverage can be run in score-crates if the <code class="docutils literal notranslate"><span class="pre">0.3</span></code> maintenance branch does not accept it.</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Futures</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../../pastey/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Pastey</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#component-used-from-the-futures-crate">Component used from the futures crate</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-determine-p-the-uncertainty-of-the-processes-applied">Step 1: Determine (P): the uncertainty of the Processes applied</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-determine-c-the-uncertainty-of-finding-systematic-faults-based-on-the-complexity">Step 2: Determine (C): the uncertainty of finding systematic faults based on the Complexity</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-determine-clas-out-the-classification-outcome">Step 3: Determine (CLAS_OUT): the classification outcome</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-document-all-results-and-rationale-for-choosing-p-and-c-and-clas-out">Step 4: Document all results and rationale for choosing (P) and (C) and (CLAS_OUT)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-based-on-clas-out-select-the-activities">Step 5: Based on (CLAS_OUT) select the activities</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  
+  <div class="tocsection editthispage">
+    <a href="https://github.com/eclipse-score/score-crates/edit/main/docs/futures/docs/component_classification.rst">
+      <i class="fa-solid fa-pencil"></i>
+      
+      
+        
+          Edit on GitHub
+        
+      
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=18bd87630a240e9c25be"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=18bd87630a240e9c25be"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.1.
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.23.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
