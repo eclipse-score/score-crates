@@ -18,4 +18,5 @@ Components
 .. toctree::
    :titlesonly:
 
+   futures/index
    pastey/index
