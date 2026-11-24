@@ -178,5 +178,9 @@
   {
     "version": "pr-96",
     "url": "https://eclipse-score.github.io/score-crates/pr-96/"
+  },
+  {
+    "version": "v0.0.16",
+    "url": "https://eclipse-score.github.io/score-crates/v0.0.16/"
   }
 ]
